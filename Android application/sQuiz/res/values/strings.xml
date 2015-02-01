@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">sQuiz</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="sign_up">Sign up</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="example_nelson_mandella">Example: Nelson Mandella</string>
+    <string name="example_nelson_gmail_com">Example: Nelson@gmail.com</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="name">Name</string>
+
+</resources>
