@@ -19,7 +19,7 @@ public class WelcomeActivity extends Activity {
 		
 		setContentView(R.layout.activity_welcome);
 		
-		sp = (Button) findViewById(R.id.Button1);
+		sp = (Button) findViewById(R.id.signup);
 		
 		sp.setOnClickListener(new View.OnClickListener() {
 			
