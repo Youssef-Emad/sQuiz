@@ -332,10 +332,12 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x7f020030
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f020031
 int drawable abc_textfield_search_material 0x7f020032
 int drawable bg4 0x7f020033
-int drawable buttonstyle 0x7f020034
-int drawable edittextstyle 0x7f020035
-int drawable ic_launcher 0x7f020036
-int drawable squiz 0x7f020037
+int drawable btn_normal 0x7f020034
+int drawable btn_pressed 0x7f020035
+int drawable btn_style 0x7f020036
+int drawable edittext_style 0x7f020037
+int drawable ic_launcher 0x7f020038
+int drawable squiz 0x7f020039
 int id LinearLayout1 0x7f09004b
 int id accType 0x7f09003f
 int id action_bar 0x7f090031
