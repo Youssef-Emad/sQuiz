@@ -337,7 +337,18 @@ int drawable btn_pressed 0x7f020035
 int drawable btn_style 0x7f020036
 int drawable edittext_style 0x7f020037
 int drawable ic_launcher 0x7f020038
-int drawable squiz 0x7f020039
+int drawable radio_btn_style 0x7f020039
+int drawable squiz 0x7f02003a
+int drawable squiztheme_btn_radio_off_disabled_focused_holo_light 0x7f02003b
+int drawable squiztheme_btn_radio_off_disabled_holo_light 0x7f02003c
+int drawable squiztheme_btn_radio_off_focused_holo_light 0x7f02003d
+int drawable squiztheme_btn_radio_off_holo_light 0x7f02003e
+int drawable squiztheme_btn_radio_off_pressed_holo_light 0x7f02003f
+int drawable squiztheme_btn_radio_on_disabled_focused_holo_light 0x7f020040
+int drawable squiztheme_btn_radio_on_disabled_holo_light 0x7f020041
+int drawable squiztheme_btn_radio_on_focused_holo_light 0x7f020042
+int drawable squiztheme_btn_radio_on_holo_light 0x7f020043
+int drawable squiztheme_btn_radio_on_pressed_holo_light 0x7f020044
 int id LinearLayout1 0x7f09004b
 int id accType 0x7f09003f
 int id action_bar 0x7f090031
@@ -592,6 +603,7 @@ int style Platform_AppCompat 0x7f0b00c9
 int style Platform_AppCompat_Dialog 0x7f0b00cb
 int style Platform_AppCompat_Light 0x7f0b00ca
 int style Platform_AppCompat_Light_Dialog 0x7f0b00cc
+int style RadioButtonsQuizTheme 0x7f0b00f0
 int style RtlOverlay_Widget_AppCompat_ActionBar_TitleItem 0x7f0b00b4
 int style RtlOverlay_Widget_AppCompat_ActionButton_CloseMode 0x7f0b00b5
 int style RtlOverlay_Widget_AppCompat_ActionButton_Overflow 0x7f0b00b6
@@ -715,8 +727,8 @@ int style Widget_AppCompat_Spinner_DropDown 0x7f0b001b
 int style Widget_AppCompat_Spinner_DropDown_ActionBar 0x7f0b001c
 int style Widget_AppCompat_Toolbar 0x7f0b0034
 int style Widget_AppCompat_Toolbar_Button_Navigation 0x7f0b0035
-int style _sQuizTheme 0x7f0b00f1
-int style sQuizTheme 0x7f0b00f0
+int style _sQuizTheme 0x7f0b00f2
+int style sQuizTheme 0x7f0b00f1
 int[] styleable ActionBar { 0x7f010000, 0x7f010001, 0x7f01002c, 0x7f010055, 0x7f010056, 0x7f010057, 0x7f010058, 0x7f010059, 0x7f01005a, 0x7f01005b, 0x7f01005c, 0x7f01005d, 0x7f01005e, 0x7f01005f, 0x7f010060, 0x7f010061, 0x7f010062, 0x7f010063, 0x7f010064, 0x7f010065, 0x7f010066, 0x7f010067, 0x7f010068, 0x7f010069, 0x7f01006a, 0x7f01006b, 0x7f01006c }
 int styleable ActionBar_background 11
 int styleable ActionBar_backgroundSplit 13
