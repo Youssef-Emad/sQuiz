@@ -12,5 +12,8 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="name">Name</string>
+    <string name="accountType">Select account type</string>
+    <string name="instructor">Instructor</string>
+    <string name="student">Student</string>
 
 </resources>
