@@ -13,10 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="90dp"
+        android:fontFamily="sans-serif-condensed"
+        android:shadowColor="#474753"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="5"
         android:text="@string/squiz"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="70sp"
-        android:textStyle="bold|italic" />
+        android:textSize="60sp"
+        android:textStyle="bold"
+        tools:ignore="UnusedAttribute" />
 
     <EditText
         android:id="@+id/editTextEmail"
