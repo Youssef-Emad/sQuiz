@@ -123,12 +123,13 @@
 
     <Button
         android:id="@+id/submit"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="108dp"
+        style="@style/ButtonsQuizTheme"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_margin="10dp"
-        android:background="@android:color/holo_blue_dark"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/sign_up"
         android:textColor="@android:color/white" />
 

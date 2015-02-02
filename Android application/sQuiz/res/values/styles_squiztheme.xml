@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="ButtonsQuizTheme" parent="@android:style/Widget.ActionButton">
+        <item name="android:background">@drawable/buttonstyle</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="EditTextsQuizTheme" parent="@android:style/Widget.EditText">
+		<item name="android:background">@drawable/edittextstyle</item>
+		<item name="android:minHeight">45dp</item>
+		<item name="android:padding">5dp</item>
+    </style>
+    
+</resources>

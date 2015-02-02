@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="sQuizTheme" parent="@style/_sQuizTheme"/>
+    <style name="_sQuizTheme" parent="Theme.AppCompat.Light">
+        
+       <item name="android:buttonStyle">@style/ButtonsQuizTheme</item>
+       <item name="android:textColorHighlight">#1971b6</item>
+       <item name="android:textColor">#ffffffff</item>
+       <item name="android:editTextStyle">@style/EditTextsQuizTheme</item>
+    </style>
+</resources>
