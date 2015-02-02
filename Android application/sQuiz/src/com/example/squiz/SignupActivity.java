@@ -3,7 +3,6 @@ package com.example.squiz;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.RadioGroup;
 
 public class SignupActivity extends Activity {
 	

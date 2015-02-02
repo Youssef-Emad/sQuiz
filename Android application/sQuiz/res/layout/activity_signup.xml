@@ -22,8 +22,7 @@
                 android:id="@+id/instructor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/instructor"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:text="@string/instructor" />
 
             <RadioButton
                 android:id="@+id/student"
@@ -31,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="@string/student"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 tools:ignore="RtlHardcoded" />
         </RadioGroup>
     </LinearLayout>
@@ -120,16 +118,22 @@
         android:hint="@string/confirm_password"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/submit"
-        style="@style/ButtonsQuizTheme"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_margin="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/sign_up"
-        android:textColor="@android:color/white" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp" >
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/ButtonsQuizTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/sign_up"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 
 </LinearLayout>
