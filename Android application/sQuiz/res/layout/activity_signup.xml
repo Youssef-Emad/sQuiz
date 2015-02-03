@@ -6,33 +6,30 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/accType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
 
-        <RadioGroup
-            android:id="@+id/accType"
+        <RadioButton
+            android:id="@+id/instructor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
+            android:text="@string/instructor" />
 
-            <RadioButton
-                android:id="@+id/instructor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/instructor" />
+        <RadioButton
+            android:id="@+id/student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="@string/student"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-            <RadioButton
-                android:id="@+id/student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="@string/student"
-                tools:ignore="RtlHardcoded" />
-        </RadioGroup>
-    </LinearLayout>
+    </RadioGroup>
 
     <TextView
         android:id="@+id/name"

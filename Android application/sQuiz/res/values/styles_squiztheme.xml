@@ -19,6 +19,7 @@
         <item name="android:button">@drawable/radio_btn_style</item>
         <item name="android:textColor">#ffffffff</item>
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:paddingLeft">3dp</item>
     </style>
     
     
