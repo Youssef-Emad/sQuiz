@@ -1629,18 +1629,20 @@ containing a value of this type.
         public static final int btn_style=0x7f020036;
         public static final int edittext_style=0x7f020037;
         public static final int ic_launcher=0x7f020038;
-        public static final int radio_btn_style=0x7f020039;
-        public static final int squiz=0x7f02003a;
-        public static final int squiztheme_btn_radio_off_disabled_focused_holo_light=0x7f02003b;
-        public static final int squiztheme_btn_radio_off_disabled_holo_light=0x7f02003c;
-        public static final int squiztheme_btn_radio_off_focused_holo_light=0x7f02003d;
-        public static final int squiztheme_btn_radio_off_holo_light=0x7f02003e;
-        public static final int squiztheme_btn_radio_off_pressed_holo_light=0x7f02003f;
-        public static final int squiztheme_btn_radio_on_disabled_focused_holo_light=0x7f020040;
-        public static final int squiztheme_btn_radio_on_disabled_holo_light=0x7f020041;
-        public static final int squiztheme_btn_radio_on_focused_holo_light=0x7f020042;
-        public static final int squiztheme_btn_radio_on_holo_light=0x7f020043;
-        public static final int squiztheme_btn_radio_on_pressed_holo_light=0x7f020044;
+        public static final int radio_btn_checked=0x7f020039;
+        public static final int radio_btn_normal=0x7f02003a;
+        public static final int radio_btn_style=0x7f02003b;
+        public static final int squiz=0x7f02003c;
+        public static final int squiztheme_btn_radio_off_disabled_focused_holo_light=0x7f02003d;
+        public static final int squiztheme_btn_radio_off_disabled_holo_light=0x7f02003e;
+        public static final int squiztheme_btn_radio_off_focused_holo_light=0x7f02003f;
+        public static final int squiztheme_btn_radio_off_holo_light=0x7f020040;
+        public static final int squiztheme_btn_radio_off_pressed_holo_light=0x7f020041;
+        public static final int squiztheme_btn_radio_on_disabled_focused_holo_light=0x7f020042;
+        public static final int squiztheme_btn_radio_on_disabled_holo_light=0x7f020043;
+        public static final int squiztheme_btn_radio_on_focused_holo_light=0x7f020044;
+        public static final int squiztheme_btn_radio_on_holo_light=0x7f020045;
+        public static final int squiztheme_btn_radio_on_pressed_holo_light=0x7f020046;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f09004b;
