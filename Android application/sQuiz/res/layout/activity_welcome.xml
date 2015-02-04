@@ -1,75 +1,74 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout1"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg4"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <ImageView
-        android:id="@+id/logo"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:src="@drawable/squiz"
-        tools:ignore="ContentDescription" />
-    
-   <EditText
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90dp"
+        android:fontFamily="sans-serif-condensed"
+        android:shadowColor="#474753"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="5"
+        android:text="@string/squiz"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        tools:ignore="UnusedAttribute" />
+
+    <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextPassword"
-        android:layout_alignRight="@+id/editTextPassword"
-        android:layout_below="@+id/logo"
-        android:layout_marginTop="81dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="70dp"
         android:ems="10"
         android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        tools:ignore="RtlHardcoded" >
+        android:inputType="textEmailAddress" >
 
         <requestFocus />
     </EditText>
-    
+
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editTextEmail"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        tools:ignore="RtlHardcoded" />
+        android:hint="Password"
+        android:inputType="numberPassword"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/signup"
-        android:layout_alignRight="@+id/signup"
-        android:layout_below="@+id/editTextPassword"
-        android:layout_marginTop="41dp"
-        android:text="@string/login"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
-
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/login" />
+    
     <Button
         android:id="@+id/signup"
+        style="@style/ButtonsQuizTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:text="@string/sign_up"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/sign_up" />
 
-</RelativeLayout>
+</LinearLayout>
