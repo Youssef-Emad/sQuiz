@@ -11,7 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.httpRequest.SignupForm;
+import com.example.models.SignupForm;
 
 public class SignupActivity extends Activity {
 	
@@ -22,35 +22,30 @@ public class SignupActivity extends Activity {
 	Button signUp=(Button)findViewById(R.id.submit);
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_signup);
 		
-		signUp.setOnClickListener(new OnClickListener() {
+		signUp.setOnClickListener(new OnClickListener()
+		{
 			
 			@Override
-			public void onClick(View v) {
-				if(isOnline()){
+			public void onClick(View v)
+			{
+				if(isOnline())
+				{
 					SignupForm form=new SignupForm();
 					//fill form
 					form.setName(name.getText().toString());
 					form.setEmail(email.getText().toString());
 					form.setPassword(password.getText().toString());
-					form.setPassword_confirmation(confirmPassword.getText().toString());
-					
-					
-					
-				}
-					
-				
+					form.setPassword_confirmation(confirmPassword.getText().toString());		
+				}		
 			}
-		});
-		
-		
-		
-		
+		});	
 	}
 	
 	

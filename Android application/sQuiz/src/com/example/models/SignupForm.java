@@ -1,4 +1,4 @@
-package com.example.httpRequest;
+package com.example.models;
 
 public class SignupForm {
 	
