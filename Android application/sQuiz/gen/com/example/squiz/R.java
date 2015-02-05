@@ -1644,12 +1644,14 @@ containing a value of this type.
         public static final int action_bar_spinner=0x7f090002;
         public static final int action_bar_subtitle=0x7f09001f;
         public static final int action_bar_title=0x7f09001e;
+        public static final int action_compose=0x7f090050;
         public static final int action_context_bar=0x7f090032;
         public static final int action_menu_divider=0x7f090005;
         public static final int action_menu_presenter=0x7f090006;
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
+        public static final int action_search=0x7f09004f;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
@@ -1769,6 +1771,9 @@ containing a value of this type.
         public static final int activity_welcome=0x7f030019;
         public static final int support_simple_spinner_dropdown_item=0x7f03001a;
     }
+    public static final class menu {
+        public static final int action_bar_menu=0x7f0c0000;
+    }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
@@ -1827,6 +1832,8 @@ containing a value of this type.
          */
         public static final int abc_toolbar_collapse_description=0x7f0a0004;
         public static final int accountType=0x7f0a001b;
+        public static final int action_add=0x7f0a0020;
+        public static final int action_search=0x7f0a001f;
         public static final int app_name=0x7f0a0010;
         public static final int confirm_password=0x7f0a0019;
         public static final int email=0x7f0a0014;
@@ -1843,6 +1850,7 @@ containing a value of this type.
         public static final int student=0x7f0a001d;
     }
     public static final class style {
+        public static final int ActionBarTextStyle=0x7f0b00f1;
         public static final int ActionBarsQuizTheme=0x7f0b00f0;
         /** 
         Base application theme, dependent on API level. This theme is replaced
@@ -2188,8 +2196,8 @@ containing a value of this type.
          */
         public static final int Widget_AppCompat_Toolbar=0x7f0b0034;
         public static final int Widget_AppCompat_Toolbar_Button_Navigation=0x7f0b0035;
-        public static final int sQuizTheme=0x7f0b00f1;
-        public static final int sQuizThemeActionBar=0x7f0b00f2;
+        public static final int sQuizTheme=0x7f0b00f2;
+        public static final int sQuizThemeActionBar=0x7f0b00f3;
     }
     public static final class styleable {
         /**  ============================================ 
