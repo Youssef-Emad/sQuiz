@@ -1636,6 +1636,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f09004b;
+        public static final int RelativeLayout1=0x7f09004f;
         public static final int accType=0x7f09003f;
         public static final int action_bar=0x7f090031;
         public static final int action_bar_activity_content=0x7f090003;
@@ -1644,14 +1645,14 @@ containing a value of this type.
         public static final int action_bar_spinner=0x7f090002;
         public static final int action_bar_subtitle=0x7f09001f;
         public static final int action_bar_title=0x7f09001e;
-        public static final int action_compose=0x7f090050;
+        public static final int action_compose=0x7f090051;
         public static final int action_context_bar=0x7f090032;
         public static final int action_menu_divider=0x7f090005;
         public static final int action_menu_presenter=0x7f090006;
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_search=0x7f09004f;
+        public static final int action_search=0x7f090050;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
@@ -1766,10 +1767,11 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030014;
         public static final int abc_search_view=0x7f030015;
         public static final int abc_simple_dropdown_hint=0x7f030016;
-        public static final int activity_afterlogininstructor=0x7f030017;
-        public static final int activity_signup=0x7f030018;
-        public static final int activity_welcome=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int activity_signup=0x7f030017;
+        public static final int activity_welcome=0x7f030018;
+        public static final int fragment_groups=0x7f030019;
+        public static final int fragment_quizzes=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
     }
     public static final class menu {
         public static final int action_bar_menu=0x7f0c0000;
