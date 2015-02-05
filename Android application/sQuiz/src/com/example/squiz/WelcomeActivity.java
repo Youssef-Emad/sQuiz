@@ -9,7 +9,8 @@ import android.widget.Button;
 
 public class WelcomeActivity extends Activity {
 	
-	Button sp;
+	Button signUp;
+	Button logIn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +20,20 @@ public class WelcomeActivity extends Activity {
 		
 		setContentView(R.layout.activity_welcome);
 		
-		sp = (Button) findViewById(R.id.signup);
+		signUp = (Button) findViewById(R.id.signup);
+		logIn = (Button) findViewById(R.id.login);
 		
-		sp.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
+		signUp.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				startActivity(new Intent(WelcomeActivity.this, SignupActivity.class));
+			}
+		});
+		
+		logIn.setOnClickListener(new View.OnClickListener() {
+			
+			
+			public void onClick(View v) {
+				startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 			}
 		});
 	}
