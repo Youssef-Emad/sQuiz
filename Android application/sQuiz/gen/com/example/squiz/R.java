@@ -1843,6 +1843,7 @@ containing a value of this type.
         public static final int student=0x7f0a001d;
     }
     public static final class style {
+        public static final int ActionBarsQuizTheme=0x7f0b00f0;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -2187,8 +2188,8 @@ containing a value of this type.
          */
         public static final int Widget_AppCompat_Toolbar=0x7f0b0034;
         public static final int Widget_AppCompat_Toolbar_Button_Navigation=0x7f0b0035;
-        public static final int _sQuizTheme=0x7f0b00f1;
-        public static final int sQuizTheme=0x7f0b00f0;
+        public static final int sQuizTheme=0x7f0b00f1;
+        public static final int sQuizThemeActionBar=0x7f0b00f2;
     }
     public static final class styleable {
         /**  ============================================ 
