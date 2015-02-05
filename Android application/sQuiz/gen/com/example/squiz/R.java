@@ -1633,16 +1633,6 @@ containing a value of this type.
         public static final int radio_btn_normal=0x7f02003a;
         public static final int radio_btn_style=0x7f02003b;
         public static final int squiz=0x7f02003c;
-        public static final int squiztheme_btn_radio_off_disabled_focused_holo_light=0x7f02003d;
-        public static final int squiztheme_btn_radio_off_disabled_holo_light=0x7f02003e;
-        public static final int squiztheme_btn_radio_off_focused_holo_light=0x7f02003f;
-        public static final int squiztheme_btn_radio_off_holo_light=0x7f020040;
-        public static final int squiztheme_btn_radio_off_pressed_holo_light=0x7f020041;
-        public static final int squiztheme_btn_radio_on_disabled_focused_holo_light=0x7f020042;
-        public static final int squiztheme_btn_radio_on_disabled_holo_light=0x7f020043;
-        public static final int squiztheme_btn_radio_on_focused_holo_light=0x7f020044;
-        public static final int squiztheme_btn_radio_on_holo_light=0x7f020045;
-        public static final int squiztheme_btn_radio_on_pressed_holo_light=0x7f020046;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f09004b;
@@ -2023,13 +2013,13 @@ containing a value of this type.
     
          */
         public static final int Base_Widget_AppCompat_Toolbar_Button_Navigation=0x7f0b0090;
-        public static final int ButtonsQuizTheme=0x7f0b00ee;
-        public static final int EditTextsQuizTheme=0x7f0b00ef;
+        public static final int ButtonsQuizTheme=0x7f0b00ed;
+        public static final int EditTextsQuizTheme=0x7f0b00ee;
         public static final int Platform_AppCompat=0x7f0b00c9;
         public static final int Platform_AppCompat_Dialog=0x7f0b00cb;
         public static final int Platform_AppCompat_Light=0x7f0b00ca;
         public static final int Platform_AppCompat_Light_Dialog=0x7f0b00cc;
-        public static final int RadioButtonsQuizTheme=0x7f0b00f0;
+        public static final int RadioButtonsQuizTheme=0x7f0b00ef;
         public static final int RtlOverlay_Widget_AppCompat_ActionBar_TitleItem=0x7f0b00b4;
         public static final int RtlOverlay_Widget_AppCompat_ActionButton_CloseMode=0x7f0b00b5;
         public static final int RtlOverlay_Widget_AppCompat_ActionButton_Overflow=0x7f0b00b6;
@@ -2114,7 +2104,6 @@ containing a value of this type.
         public static final int Theme_AppCompat_Light_DialogWhenLarge=0x7f0b00c0;
         public static final int Theme_AppCompat_Light_NoActionBar=0x7f0b00be;
         public static final int Theme_AppCompat_NoActionBar=0x7f0b00bd;
-        public static final int Theme_Mytheme=0x7f0b00ed;
         public static final int ThemeOverlay_AppCompat=0x7f0b00c4;
         /**  Theme overlay that replaces the normal control color, which by default is the same as the
          secondary text color, with the primary text color. 
@@ -2198,8 +2187,8 @@ containing a value of this type.
          */
         public static final int Widget_AppCompat_Toolbar=0x7f0b0034;
         public static final int Widget_AppCompat_Toolbar_Button_Navigation=0x7f0b0035;
-        public static final int _sQuizTheme=0x7f0b00f2;
-        public static final int sQuizTheme=0x7f0b00f1;
+        public static final int _sQuizTheme=0x7f0b00f1;
+        public static final int sQuizTheme=0x7f0b00f0;
     }
     public static final class styleable {
         /**  ============================================ 
