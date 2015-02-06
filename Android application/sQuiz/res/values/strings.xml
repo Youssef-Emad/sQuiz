@@ -6,7 +6,7 @@
     <string name="sign_up">Sign up</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="login">Login</string>
+    <string name="login">Log In</string>
     <string name="example_nelson_mandella">Example: Nelson Mandella</string>
     <string name="example_nelson_gmail_com">Example: Nelson@gmail.com</string>
     <string name="enter_your_password">Enter your password</string>
@@ -15,5 +15,6 @@
     <string name="accountType">Select account type</string>
     <string name="instructor">Instructor</string>
     <string name="student">Student</string>
+    <string name="squiz">sQuiz</string>
 
 </resources>

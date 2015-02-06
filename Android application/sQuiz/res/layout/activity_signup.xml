@@ -6,36 +6,30 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/accType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
 
-        <RadioGroup
-            android:id="@+id/accType"
+        <RadioButton
+            android:id="@+id/instructor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
+            android:text="@string/instructor" />
 
-            <RadioButton
-                android:id="@+id/instructor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/instructor"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RadioButton
+            android:id="@+id/student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="@string/student"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-            <RadioButton
-                android:id="@+id/student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="@string/student"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                tools:ignore="RtlHardcoded" />
-        </RadioGroup>
-    </LinearLayout>
+    </RadioGroup>
 
     <TextView
         android:id="@+id/name"
@@ -121,15 +115,22 @@
         android:hint="@string/confirm_password"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/submit"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="108dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_margin="10dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="@string/sign_up"
-        android:textColor="@android:color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp" >
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/ButtonsQuizTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/sign_up"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 
 </LinearLayout>
