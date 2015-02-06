@@ -16,5 +16,7 @@
     <string name="instructor">Instructor</string>
     <string name="student">Student</string>
     <string name="squiz">sQuiz</string>
+    <string name="action_search">Search</string>
+    <string name="action_add">Add</string>
 
 </resources>
