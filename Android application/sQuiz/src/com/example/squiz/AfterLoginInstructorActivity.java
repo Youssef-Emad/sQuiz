@@ -1,5 +1,9 @@
 package com.example.squiz;
 
+import com.example.tabs.GroupFragment;
+import com.example.tabs.QuizzFragment;
+import com.example.tabs.TabListener;
+
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.os.Bundle;
