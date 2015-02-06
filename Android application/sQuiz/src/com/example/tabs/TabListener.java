@@ -1,4 +1,4 @@
-package com.example.squiz;
+package com.example.tabs;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
