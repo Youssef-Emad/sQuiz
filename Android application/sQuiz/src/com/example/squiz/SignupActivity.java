@@ -1,5 +1,7 @@
 package com.example.squiz;
 
+import java.util.regex.Pattern;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -27,6 +29,9 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
+	private static final String EMAIL_PATTERN = 
+			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +53,23 @@ public class SignupActivity extends Activity {
 			public void onClick(View v) {
 				if(isOnline()){
 					SignupForm form=new SignupForm();
-					//fill form
-					form.setName(name.getText().toString());
-					form.setEmail(email.getText().toString());
+					
+					String nameField=name.getText().toString();
+					if(isAlpha(nameField)) //check if the Name is only letters 
+						form.setName(nameField); //populate form
+				
+						
+					
+					String emailField=email.getText().toString();
+					if(isEmail(emailField))  
+						form.setEmail(emailField);
+					
 					form.setPassword(password.getText().toString());
 					form.setPassword_confirmation(confirmPassword.getText().toString());
-					
-					try {
-						submitForm(form);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					submitForm(form);
 				}
 				else
-					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_LONG).show();
 			}
 		}); 
 	}
@@ -87,6 +95,15 @@ public class SignupActivity extends Activity {
 				
 			}
 		});
+	}
+	
+	//checks if a string contains only letters
+	private boolean isAlpha(String string){
+		return Pattern.matches("[a-zA-Z]+", string);
+	}
+	//checks if a string is an email
+	private boolean isEmail(String string){
+		return Pattern.matches(EMAIL_PATTERN, string);
 	}
 	
 	
