@@ -51,34 +51,64 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				if(isOnline()){
-					SignupForm form=new SignupForm();
-					
+				if(isOnline()){	
 					String nameField=name.getText().toString();
-					if(isAlpha(nameField)) //check if the Name is only letters 
-						form.setName(nameField); //populate form
-				
-						
-					
 					String emailField=email.getText().toString();
-					if(isEmail(emailField))  
-						form.setEmail(emailField);
+					String passField =password.getText().toString();
+					String confirmPassField=confirmPassword.getText().toString();
 					
-					form.setPassword(password.getText().toString());
-					form.setPassword_confirmation(confirmPassword.getText().toString());
-					submitForm(form);
+					try {
+						 SignupForm form=populateForm(nameField, emailField, passField,confirmPassField);
+						 submitForm(form);
+					} catch (Exception e) {
+						Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+					}
+					
 				}
 				else
 					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_LONG).show();
+			}
+
+			private SignupForm populateForm(String nameField,
+					String emailField, String passField, String confirmPassField) throws Exception {
+				SignupForm form =new SignupForm();
+				if(!nameField.matches("")){
+					if(isAlpha(nameField))       //check if the Name is only letters 
+					form.setName(nameField); //populate form
+					else 
+					throw new Exception("Your name should contain only letters");
+				}
+				else 
+					throw new Exception("Please fill in missing Data");
+				if(!emailField.matches("")){
+					if(isValidEmail(emailField))  
+					form.setEmail(emailField);
+					else
+					throw new Exception("invalid Email format");
+				}
+				else
+					throw new Exception("Please fill in missing Data");
+				if(!passField.matches("")){
+					if(passField.equals(confirmPassField)){
+						form.setPassword(passField);
+						form.setPassword_confirmation(confirmPassField);
+					}
+					else
+					throw new Exception("Please re-enter your password");
+				}
+				else 
+					throw new Exception("Please fill in missing Data");
+				
+				return form;
 			}
 		}); 
 	}
 	private void submitForm(SignupForm form){
 		 
 		RestAdapter adapter = new RestAdapter.Builder()
-							.setEndpoint(ENDPOINT)
-					.setLogLevel(RestAdapter.LogLevel.FULL)
-					.build();
+							 .setEndpoint(ENDPOINT)
+							 .setLogLevel(RestAdapter.LogLevel.FULL)
+							 .build();
      		SignUpApi signUpApi = adapter.create(SignUpApi.class);
 		signUpApi.sendStudentForm(form,new Callback<Integer>() {
 			
@@ -102,7 +132,7 @@ public class SignupActivity extends Activity {
 		return Pattern.matches("[a-zA-Z]+", string);
 	}
 	//checks if a string is an email
-	private boolean isEmail(String string){
+	private boolean isValidEmail(String string){
 		return Pattern.matches(EMAIL_PATTERN, string);
 	}
 	
