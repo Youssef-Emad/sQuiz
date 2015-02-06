@@ -1,5 +1,7 @@
 class Api::GroupsController < ApplicationController
 
+acts_as_token_authentication_handler_for Instructor
+
 respond_to :json
 
 def Create
@@ -36,35 +38,41 @@ end
 
 def Destroy
 
-  
-    group = Group.find(params[:id])
-    if current_instructor == group.instructor
-    group.destroy 
-    render status: 200,
-           json: { success: true,
-                   info: "Group Destroyed"
+    group = Group.find(params[:group][:id])
+    if(group!=nil)
+      if (current_instructor == group.instructor)
+        group.destroy 
+        render status: 200,
+               json: { success: true,
+                       info: "Group Destroyed"
                       }
 
 
-     else
+      else
      
- render json: {
-    error: "You must be an instructor to Destroy a group",
-    status: 400
-  } , status: 400
+       render json: {error: "You must be the group's instructor to destroy it",
+                     status: 400
+                    } , status: 400
+
+
+      end
+
+    else
+
+        render json: {error: "Group not found",
+                     status: 400
+                     } , status: 400
 
 
 
 
-
+    end      
 end
-end
-
 
 
 def Group_params
     params.require(:group).permit(:name)
-  end	
+end	
 
 
 
