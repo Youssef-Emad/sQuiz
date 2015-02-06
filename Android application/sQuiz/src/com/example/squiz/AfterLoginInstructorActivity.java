@@ -1,20 +1,19 @@
 package com.example.squiz;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+
 import com.example.tabs.GroupFragment;
 import com.example.tabs.QuizzFragment;
 import com.example.tabs.TabListener;
 
-import android.app.ActionBar.Tab;
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.view.Menu;
-import android.view.MenuInflater;
-
 
 @SuppressWarnings("deprecation")
 public class AfterLoginInstructorActivity extends Activity {
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
