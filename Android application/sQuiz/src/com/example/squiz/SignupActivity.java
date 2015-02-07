@@ -1,7 +1,5 @@
 package com.example.squiz;
 
-import java.util.regex.Pattern;
-
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -29,7 +27,7 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
-	private static final String EMAIL_PATTERN = 
+	public static final String EMAIL_PATTERN = 
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
@@ -58,7 +56,8 @@ public class SignupActivity extends Activity {
 					String confirmPassField=confirmPassword.getText().toString();
 					
 					try {
-						 SignupForm form=populateForm(nameField, emailField, passField,confirmPassField);
+						 SignupForm form=new SignupForm();
+						 form.populateForm(nameField, emailField, passField,confirmPassField);
 						 submitForm(form);
 					} catch (Exception e) {
 						Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -69,38 +68,7 @@ public class SignupActivity extends Activity {
 					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_LONG).show();
 			}
 
-			private SignupForm populateForm(String nameField,
-					String emailField, String passField, String confirmPassField) throws Exception {
-				SignupForm form =new SignupForm();
-				if(!nameField.matches("")){
-					if(isAlpha(nameField))       //check if the Name is only letters 
-					form.setName(nameField); //populate form
-					else 
-					throw new Exception("Your name should contain only letters");
-				}
-				else 
-					throw new Exception("Please fill in missing Data");
-				if(!emailField.matches("")){
-					if(isValidEmail(emailField))  
-					form.setEmail(emailField);
-					else
-					throw new Exception("invalid Email format");
-				}
-				else
-					throw new Exception("Please fill in missing Data");
-				if(!passField.matches("")){
-					if(passField.equals(confirmPassField)){
-						form.setPassword(passField);
-						form.setPassword_confirmation(confirmPassField);
-					}
-					else
-					throw new Exception("Please re-enter your password");
-				}
-				else 
-					throw new Exception("Please fill in missing Data");
-				
-				return form;
-			}
+			
 		}); 
 	}
 	private void submitForm(SignupForm form){
@@ -125,18 +93,7 @@ public class SignupActivity extends Activity {
 				
 			}
 		});
-	}
-	
-	//checks if a string contains only letters
-	private boolean isAlpha(String string){
-		return Pattern.matches("[a-zA-Z]+", string);
-	}
-	//checks if a string is an email
-	private boolean isValidEmail(String string){
-		return Pattern.matches(EMAIL_PATTERN, string);
-	}
-	
-	
+	}	
 	private boolean isOnline() {
 		ConnectivityManager cm= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netActivity=cm.getActiveNetworkInfo();
