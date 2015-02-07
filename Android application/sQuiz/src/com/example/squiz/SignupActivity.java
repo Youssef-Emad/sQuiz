@@ -27,6 +27,9 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
+	public static final String EMAIL_PATTERN = 
+			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,31 +49,34 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				if(isOnline()){
-					SignupForm form=new SignupForm();
-					//fill form
-					form.setName(name.getText().toString());
-					form.setEmail(email.getText().toString());
-					form.setPassword(password.getText().toString());
-					form.setPassword_confirmation(confirmPassword.getText().toString());
+				if(isOnline()){	
+					String nameField=name.getText().toString();
+					String emailField=email.getText().toString();
+					String passField =password.getText().toString();
+					String confirmPassField=confirmPassword.getText().toString();
 					
 					try {
-						submitForm(form);
+						 SignupForm form=new SignupForm();
+						 form.populateForm(nameField, emailField, passField,confirmPassField);
+						 submitForm(form);
 					} catch (Exception e) {
-						e.printStackTrace();
+						Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
+					
 				}
 				else
-					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_LONG).show();
 			}
+
+			
 		}); 
 	}
 	private void submitForm(SignupForm form){
 		 
 		RestAdapter adapter = new RestAdapter.Builder()
-							.setEndpoint(ENDPOINT)
-					.setLogLevel(RestAdapter.LogLevel.FULL)
-					.build();
+							 .setEndpoint(ENDPOINT)
+							 .setLogLevel(RestAdapter.LogLevel.FULL)
+							 .build();
      		SignUpApi signUpApi = adapter.create(SignUpApi.class);
 		signUpApi.sendStudentForm(form,new Callback<Integer>() {
 			
@@ -87,9 +93,7 @@ public class SignupActivity extends Activity {
 				
 			}
 		});
-	}
-	
-	
+	}	
 	private boolean isOnline() {
 		ConnectivityManager cm= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netActivity=cm.getActiveNetworkInfo();
