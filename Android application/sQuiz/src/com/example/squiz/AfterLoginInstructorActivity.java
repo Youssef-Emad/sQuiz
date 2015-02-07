@@ -5,9 +5,13 @@ import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.tabs.TabsPagerAdapter;
 
@@ -59,7 +63,12 @@ public class AfterLoginInstructorActivity extends FragmentActivity implements Ac
 	    inflater.inflate(R.menu.action_bar_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
