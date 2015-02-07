@@ -4,11 +4,11 @@ acts_as_token_authentication_handler_for Instructor
 
 respond_to :json
 
-def Create
+def create
 
   if instructor_signed_in?
 	
-	 group = Group.Create(Group_params)
+	 group = Group.create(group_params)
    group.instructor = current_instructor
    if group.save
 
@@ -36,7 +36,7 @@ render json: {
 end
 
 
-def Destroy
+def destroy
 
     group = Group.find(params[:group][:id])
     if(group!=nil)
@@ -69,8 +69,9 @@ def Destroy
     end      
 end
 
+private
 
-def Group_params
+def group_params
     params.require(:group).permit(:name)
 end	
 
