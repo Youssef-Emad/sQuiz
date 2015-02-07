@@ -7,6 +7,9 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -26,7 +29,7 @@
         <activity android:name=".SignupActivity" >
         </activity>
         
-        <activity android:name=".AfterLoginInstructorActivity" >
+        <activity android:name=".AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
     </application>
 

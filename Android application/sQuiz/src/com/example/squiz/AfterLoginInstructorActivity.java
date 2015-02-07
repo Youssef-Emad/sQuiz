@@ -1,14 +1,90 @@
 package com.example.squiz;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import com.example.tabs.TabsPagerAdapter;
 
 
-public class AfterLoginInstructorActivity extends ActionBarActivity {
+@SuppressWarnings("deprecation")
+public class AfterLoginInstructorActivity extends FragmentActivity implements ActionBar.TabListener {
+	private ViewPager viewPager;
+	private ActionBar actionBar;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_afterlogininstructor);
+		
+		setContentView(R.layout.activity_afterlogin);
+		actionBar = getActionBar();
+		
+		actionBar.setTitle("sQuiz me!");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
+		
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.addTab(actionBar.newTab().setText("Groups").setTabListener(this));
+		actionBar.addTab(actionBar.newTab().setText("Quizzes").setTabListener(this));
+		
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
+
+	}
+	
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.action_bar_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		viewPager.setCurrentItem(tab.getPosition());
+	}
+
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		
+	}
+
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		
 	}
 	
 }
