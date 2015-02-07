@@ -8,7 +8,7 @@ public class SignupForm {
 	private String email;
 	private String name;
 	private String password;
-	private String password_confirmation;
+	private transient String password_confirmation;
 	
 	public SignupForm(){}
 	
@@ -43,10 +43,10 @@ public class SignupForm {
 	private void setName(String name)throws Exception {
 		
 		if(!name.matches("")){
-			if(validator.isAlpha(name))       //check if the Name is only letters 
-			this.name=name; //populate form
+			if(validator.isAlpha(name))       //check if the Name is only letters
+				this.name=name.trim();		  //populate form
 			else 
-			throw new Exception("Your name should contain only letters");
+				throw new Exception("Your name should contain only letters");
 		}
 		else 
 			throw new Exception("Please fill in missing Data");
