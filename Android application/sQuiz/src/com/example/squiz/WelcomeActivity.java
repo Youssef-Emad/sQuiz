@@ -26,7 +26,7 @@ public class WelcomeActivity extends Activity {
 	private LoginForm user;
 	
 	public static final String ENDPOINT = 
-			"http://services.hanselandpetal.com";
+			"https://sQuiz.herokuapp.com/api";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
