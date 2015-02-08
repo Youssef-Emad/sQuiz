@@ -24,7 +24,7 @@ public class LoginForm {
 
 			if(!email.matches("")){
 				if(validator.isValidEmail(email))  
-					this.email = email;
+					this.email = email; // VigenereCipher(email, "squiz");
 				else
 					throw new Exception("invalid Email format") ;
 			}
@@ -33,9 +33,21 @@ public class LoginForm {
 			}
 
 		if(!password.matches(""))	
-			this.password = password;
+			this.password = password; // VigenereCipher(password, "squiz");
 		else
 			throw new Exception("Please enter password");
 
 		}
+		
+		/*private String VigenereCipher(String text, final String key) {
+		        String res = "";
+		        text = text.toUpperCase();
+		        for (int i = 0, j = 0; i < text.length(); i++) {
+		            char c = text.charAt(i);
+		            if (c < 'A' || c > 'Z') continue;
+		            res += (char)((c + key.charAt(j) - 2 * 'A') % 26 + 'A');
+		            j = ++j % key.length();
+		        }
+		        return res.toLowerCase();
+		    }*/
 }
