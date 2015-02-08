@@ -68,6 +68,7 @@ class Api::GroupsController < ApplicationController
 
 
 
+
   def create
 
   if instructor_signed_in?
@@ -159,7 +160,6 @@ def my_create_group_function
             end
 
 end  
-
 
 
 

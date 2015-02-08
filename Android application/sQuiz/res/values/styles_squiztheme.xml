@@ -21,5 +21,14 @@
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:paddingLeft">3dp</item>
     </style>
+    
+    <style name="ActionBarsQuizTheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/bg4</item>
+        <item name="android:titleTextStyle">@style/ActionBarTextStyle</item>
+    </style>
+    
+    <style name="ActionBarTextStyle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#ffffffff</item>
+    </style>
 
 </resources>
