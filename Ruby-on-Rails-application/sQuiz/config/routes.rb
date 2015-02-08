@@ -18,6 +18,6 @@ Rails.application.routes.draw do
 
     post 'groups/create'=>'groups#create'
     delete 'groups/delete'=>'groups#destroy'
-
   end
+
 end
