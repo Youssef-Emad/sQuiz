@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,7 +40,10 @@ public class GroupFragment extends ListFragment {
 	private void alert(final String selectedGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
-	    builder.setTitle(R.string.dialog_title)
+		LayoutInflater inflater = (LayoutInflater) getActivity().getLayoutInflater();
+		View customTitleView = inflater.inflate(R.layout.dialog_title_view, null);
+		
+	    builder.setTitle(R.string.dialog_title).setCustomTitle(customTitleView)
 	           .setItems(R.array.items, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();

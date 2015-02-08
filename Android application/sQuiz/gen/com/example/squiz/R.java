@@ -1775,9 +1775,10 @@ containing a value of this type.
         public static final int activity_groupdetails=0x7f030018;
         public static final int activity_signup=0x7f030019;
         public static final int activity_welcome=0x7f03001a;
-        public static final int fragment_groups=0x7f03001b;
-        public static final int fragment_quizzes=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int dialog_title_view=0x7f03001b;
+        public static final int fragment_groups=0x7f03001c;
+        public static final int fragment_quizzes=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
         public static final int action_bar_menu=0x7f0d0000;
@@ -1858,6 +1859,7 @@ containing a value of this type.
         public static final int sign_up=0x7f0a0012;
         public static final int squiz=0x7f0a001e;
         public static final int student=0x7f0a001d;
+        public static final int view=0x7f0a0023;
     }
     public static final class style {
         public static final int ActionBarTextStyle=0x7f0b00f1;
