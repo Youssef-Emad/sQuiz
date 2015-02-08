@@ -49,32 +49,35 @@ public class WelcomeActivity extends Activity {
 			}
 		});
 
-		logIn.setOnClickListener(new View.OnClickListener() {	
+		
+		
+		logIn.setOnClickListener(new View.OnClickListener() {
+			
 			public void onClick(View v) {
 
 				if(isOnline()){
 					
-					
 					Email = (EditText) getText(R.id.email);
 					Password = (EditText) getText(R.id.password);
-					user.setEmail(Email.toString());
-					user.setPassword(Password.toString());
-					sendData(user);
+					String email = Email.getText().toString();
+					String password = Password.getText().toString();
 					
-					logIn.setOnClickListener(new View.OnClickListener() {
+					try{
 						
+						user.populateForm(email, password);
+						sendData(user);
+						startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 						
-						public void onClick(View v) {
-							startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
-						}
-					});
+					}catch(Exception e){
+						
+						Toast.makeText(WelcomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+					}
+					
 				}
 				else{
-					
 					Toast.makeText(WelcomeActivity.this, "the network is not available", Toast.LENGTH_SHORT).show();
 				}
 			}		
-
 		});
 
 
@@ -98,9 +101,9 @@ public class WelcomeActivity extends Activity {
 
 
 	LoginAPI task = restAdapter.create(LoginAPI.class); //retrofit createapi
-	task.login(user ,new Callback<Integer>() {
+	task.login(user ,new Callback<String>() {
 	        @Override
-	        public void success(Integer arg0, Response arg1) {
+	        public void success(String arg0, Response arg1) {
 	        	
 	        	Toast.makeText(WelcomeActivity.this, "welcome", Toast.LENGTH_SHORT).show();
 

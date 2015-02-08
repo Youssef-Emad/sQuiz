@@ -11,5 +11,5 @@ import retrofit.http.POST;
 public interface LoginAPI {
 	
 	@POST("/login")
-		public void login( @Body LoginForm user ,Callback<Integer> callback);
+		public void login( @Body LoginForm user ,Callback<String> callback);
 }
