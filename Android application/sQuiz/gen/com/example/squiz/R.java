@@ -1849,6 +1849,7 @@ containing a value of this type.
         public static final int login=0x7f0a0015;
         public static final int name=0x7f0a001a;
         public static final int password=0x7f0a0013;
+        public static final int quizzes=0x7f0a0021;
         public static final int sign_up=0x7f0a0012;
         public static final int squiz=0x7f0a001e;
         public static final int student=0x7f0a001d;
