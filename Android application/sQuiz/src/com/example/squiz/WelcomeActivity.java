@@ -21,8 +21,7 @@ import android.widget.Toast;
 
 public class WelcomeActivity extends Activity {
 	
-	Button signUp;
-	
+	 Button signUp;
 	 Button logIn;
 	 EditText Email;
 	 EditText Password;
@@ -57,15 +56,15 @@ public class WelcomeActivity extends Activity {
 
 				if(isOnline()){
 					
-					Email = (EditText) getText(R.id.email);
-					Password = (EditText) getText(R.id.password);
+					Email = (EditText) findViewById(R.id.editTextEmail);
+					Password = (EditText) findViewById(R.id.editTextPassword);
 					String email = Email.getText().toString();
 					String password = Password.getText().toString();
 					
 					try{
-						
+						user=new LoginForm();
 						user.populateForm(email, password);
-						sendData(user);
+						//sendData(user);
 						startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 						
 					}catch(Exception e){
