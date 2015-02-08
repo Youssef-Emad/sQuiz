@@ -2,39 +2,58 @@ package com.example.squiz;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import com.example.tabs.GroupFragment;
-import com.example.tabs.QuizzFragment;
-import com.example.tabs.TabListener;
+import com.example.tabs.TabsPagerAdapter;
 
 
 @SuppressWarnings("deprecation")
-public class AfterLoginInstructorActivity extends Activity {
+public class AfterLoginInstructorActivity extends FragmentActivity implements ActionBar.TabListener {
+	private ViewPager viewPager;
+	private ActionBar actionBar;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
-		android.app.ActionBar actionBar = getActionBar();
+		setContentView(R.layout.activity_afterlogin);
+		actionBar = getActionBar();
 		
 		actionBar.setTitle("sQuiz me!");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
-	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
+		
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.addTab(actionBar.newTab().setText("Groups").setTabListener(this));
+		actionBar.addTab(actionBar.newTab().setText("Quizzes").setTabListener(this));
+		
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-	    Tab tab = actionBar.newTab()
-	                       .setText("Groups")
-	                       .setTabListener(new TabListener<GroupFragment>(
-	                               this, "groups", GroupFragment.class));
-	    actionBar.addTab(tab);
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				
+			}
 
-	    tab = actionBar.newTab()
-	                   .setText("Quizzes")
-	                   .setTabListener(new TabListener<QuizzFragment>(
-	                           this, "quizzes", QuizzFragment.class));
-	    actionBar.addTab(tab);
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
 
 	}
 	
@@ -43,6 +62,29 @@ public class AfterLoginInstructorActivity extends Activity {
 		MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.action_bar_menu, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		viewPager.setCurrentItem(tab.getPosition());
+	}
+
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		
+	}
+
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		
 	}
 	
 }

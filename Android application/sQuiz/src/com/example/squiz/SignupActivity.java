@@ -14,19 +14,21 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.Models.SignupForm;
 import com.example.httpRequest.SignUpApi;
 
 public class SignupActivity extends Activity {
-	 
+	private RadioGroup accType;
 	private EditText name;
 	private EditText email;
 	private EditText password;
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,36 +48,46 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				if(isOnline()){
-					SignupForm form=new SignupForm();
-					//fill form
-					form.setName(name.getText().toString());
-					form.setEmail(email.getText().toString());
-					form.setPassword(password.getText().toString());
-					form.setPassword_confirmation(confirmPassword.getText().toString());
+				if(isOnline()){	
+					String nameField=name.getText().toString();
+					String emailField=email.getText().toString();
+					String passField =password.getText().toString();
+					String confirmPassField=confirmPassword.getText().toString();
+				
 					
 					try {
-						submitForm(form);
+						 SignupForm form=new SignupForm();
+						 form.populateForm(nameField, emailField, passField,confirmPassField);
+						 submitForm(form);
 					} catch (Exception e) {
-						e.printStackTrace();
+						Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
+					
 				}
 				else
-					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SignupActivity.this, "Error connecting to internet", Toast.LENGTH_LONG).show();
 			}
+
+			
 		}); 
 	}
 	private void submitForm(SignupForm form){
-		 
+
 		RestAdapter adapter = new RestAdapter.Builder()
-							.setEndpoint(ENDPOINT)
-					.setLogLevel(RestAdapter.LogLevel.FULL)
-					.build();
+							 .setEndpoint(ENDPOINT)
+							 .setLogLevel(RestAdapter.LogLevel.FULL)
+							 .build();
      		SignUpApi signUpApi = adapter.create(SignUpApi.class);
-		signUpApi.sendStudentForm(form,new Callback<Integer>() {
+     		//check if student or instructor
+     		 accType=(RadioGroup)findViewById(R.id.accType);
+   		 int radioButton = accType.getCheckedRadioButtonId();
+   		 
+   		 if(radioButton==R.id.student){
+   			 
+   			 signUpApi.sendStudentForm(form,new Callback<String>() {
 			
 			@Override
-			public void success(Integer arg0, Response arg1) {
+			public void success(String arg0, Response arg1) {
 
 				Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				
@@ -83,13 +95,28 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void failure(RetrofitError arg0) {
-				Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();
-				
+				Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();		
 			}
 		});
-	}
-	
-	
+   		 } 		 
+   		 else if(radioButton==R.id.instructor){
+   			 signUpApi.sendInstructorForm(form, new Callback<String>() {
+
+				@Override
+				public void failure(RetrofitError arg0) {
+					Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();
+					
+				}
+
+				@Override
+				public void success(String arg0, Response arg1) {
+					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
+				}
+			});
+   		 }
+   		 else
+   			 Toast.makeText(SignupActivity.this, "Please choose account type",Toast.LENGTH_SHORT).show();
+	}	
 	private boolean isOnline() {
 		ConnectivityManager cm= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netActivity=cm.getActiveNetworkInfo();
