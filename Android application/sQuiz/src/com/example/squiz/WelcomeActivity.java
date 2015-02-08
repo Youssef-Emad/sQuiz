@@ -9,6 +9,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -20,10 +21,12 @@ import android.widget.Toast;
 
 public class WelcomeActivity extends Activity {
 	
-	private Button logIn;
-	private EditText Email;
-	private EditText Password;
-	private LoginForm user;
+	Button signUp;
+	
+	 Button logIn;
+	 EditText Email;
+	 EditText Password;
+	 LoginForm user;
 	
 	public static final String ENDPOINT = 
 			"https://sQuiz.herokuapp.com/api";
@@ -37,21 +40,37 @@ public class WelcomeActivity extends Activity {
 		
 		setContentView(R.layout.activity_welcome);
 		
+		signUp = (Button) findViewById(R.id.signup);
+		logIn = (Button) findViewById(R.id.login);
 		
+		signUp.setOnClickListener(new View.OnClickListener() {	
+			public void onClick(View v) {
+				startActivity(new Intent(WelcomeActivity.this, SignupActivity.class));
+			}
+		});
 
 		logIn.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 
 				if(isOnline()){
-
-					logIn = (Button) findViewById(R.id.login);
+					
+					
 					Email = (EditText) getText(R.id.email);
 					Password = (EditText) getText(R.id.password);
 					user.setEmail(Email.toString());
 					user.setPassword(Password.toString());
 					sendData(user);
+					
+					logIn.setOnClickListener(new View.OnClickListener() {
+						
+						
+						public void onClick(View v) {
+							startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
+						}
+					});
 				}
 				else{
+					
 					Toast.makeText(WelcomeActivity.this, "the network is not available", Toast.LENGTH_SHORT).show();
 				}
 			}		
