@@ -13,7 +13,7 @@ module Api
 			if (current_student.quizzes.exists?(:id => params[:id]))
 				quiz = current_student.quizzes.find(params[:id])
 				questions = quiz.questions
-				render json: {success:true, data:{:quiz => quiz, :questions => questions, info:{}} }, status: 200
+				render json: { success:true, data:{:quiz => quiz, :questions => questions, info:{}} }, status: 200
 			else
 				render json: { success: false, data:{}, info:"Quiz is not found"}, status: 404
 			end
@@ -28,7 +28,7 @@ module Api
 			if (current_instructor.quizzes.exists?(:id => params[:id]))
 				quiz = current_instructor.quizzes.find(params[:id])
 				questions = quiz.questions
-				render json: {success:true, data:{:quiz => quiz, :questions => questions, info:{}} }, status: 200
+				render json: { success:true, data:{:quiz => quiz, :questions => questions, info:{}} }, status: 200
 			else
 				render json: { success: false, data:{}, info:"Quiz is not found"}, status: 404
 			end
