@@ -6,6 +6,7 @@ public class Quiz {
 	private int duration;
 	private int no_of_MCQ;
 	private int no_of_rearrangeQ;
+	private int instrutor_id;
 	
 	
 	public String getName() {
@@ -37,6 +38,12 @@ public class Quiz {
 	}
 	public void setNo_of_rearrangeQ(int no_of_rearrangeQ) {
 		this.no_of_rearrangeQ = no_of_rearrangeQ;
+	}
+	public int getInstrutor_id() {
+		return instrutor_id;
+	}
+	public void setInstrutor_id(int instrutor_id) {
+		this.instrutor_id = instrutor_id;
 	}
 	
 
