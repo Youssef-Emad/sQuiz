@@ -24,10 +24,14 @@ Rails.application.routes.draw do
       post 'instructors/signup' => 'instructors_registrations#create', as: 'instructor_register'
       post 'instructors/signin' => 'instructors_create#create', as: 'instructor_login'
       delete 'instructors/signout' => 'instructors_destroy#destroy', as: 'instructor_logout'
+
     end
     
     post 'groups/student/add' => 'groups#add'
     post 'groups/student/remove' => 'groups#remove'
+    post 'groups/create'=>'groups#create'
+    delete 'groups/delete'=>'groups#destroy'
+
   end
 
 end
