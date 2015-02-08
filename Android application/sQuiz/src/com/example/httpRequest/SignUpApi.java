@@ -11,8 +11,8 @@ import com.example.Models.SignupForm;
 
 public interface SignUpApi {
 	@POST("/students/signup")
-	public void sendStudentForm(@Body SignupForm form ,Callback<String> callback);
+	public void sendStudentForm(@Body StudentFormContainer form ,Callback<String> callback);
 	
 	@POST("/instructors/signup")
-	public void sendInstructorForm(@Body SignupForm form,Callback<String> callback);	
+	public void sendInstructorForm(@Body StudentFormContainer form,Callback<String> callback);	
 }

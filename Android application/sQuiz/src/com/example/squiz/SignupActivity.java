@@ -16,8 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import com.example.Models.SignupForm;
 import com.example.httpRequest.SignUpApi;
+import com.example.httpRequest.StudentFormContainer;
 
 public class SignupActivity extends Activity {
 	private RadioGroup accType;
@@ -57,7 +59,9 @@ public class SignupActivity extends Activity {
 					try {
 						 SignupForm form=new SignupForm();
 						 form.populateForm(nameField, emailField, passField,confirmPassField);
-						 submitForm(form);
+						 StudentFormContainer container= new StudentFormContainer();
+						 container.setForm(form);
+						 submitForm(container);
 					} catch (Exception e) {
 						Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
@@ -70,7 +74,7 @@ public class SignupActivity extends Activity {
 			
 		}); 
 	}
-	private void submitForm(SignupForm form){
+	private void submitForm(StudentFormContainer form){
 
 		RestAdapter adapter = new RestAdapter.Builder()
 							 .setEndpoint(ENDPOINT)
@@ -87,7 +91,6 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void success(String arg0, Response arg1) {
-
 				Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				
 			}
