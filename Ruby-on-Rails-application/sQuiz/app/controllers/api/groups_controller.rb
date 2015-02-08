@@ -71,16 +71,26 @@ class Api::GroupsController < ApplicationController
 
   def create
 
-  if instructor_signed_in?
+
+   tempgroups = Group.where(name:params[:group][:name])
+   found = 0
+
     
-   if(Group.find_by_name(params[:group][:name])==nil) 
+   if(tempgroups.size==0) 
     my_create_group_function
-   else
-       if(Group.find_by_name(params[:group][:name]).instructor != current_instructor )
+   else   
+     tempgroups.each do|tg|
+     if(tg.instructor==current_instructor)
+        found =1
+     else 
+     end
+     end
+
+     if(found ==0 )
             
        my_create_group_function 
 
-       else
+      else
 
        render status: 400,
             json: { success: false,
@@ -89,22 +99,15 @@ class Api::GroupsController < ApplicationController
 
        end 
     end   
-
-  else
-
-render json: {
-       error: "You must be an instructor to create a group",
-       status: 400
-  } ,  status: 400
-     
-  end                   
+                 
 
 end
 
 
 def destroy
 
-    group = Group.find_by_name(params[:group][:name])
+    group = Group.where(:name => params[:group][:name]).where(:instructor => current_instructor).first
+    
     if(group!=nil)
       if (current_instructor == group.instructor)
         group.destroy 
@@ -160,8 +163,5 @@ def my_create_group_function
             end
 
 end  
-
-
-
 
 end
