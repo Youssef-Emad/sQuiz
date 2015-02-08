@@ -2,11 +2,11 @@ package com.example.httpRequest;
 
 import com.example.Models.SignupForm;
 
-public class StudentFormContainer extends FormContainer {
-	private SignupForm student;
+public class InstructorFormContainer extends FormContainer {
+	private SignupForm instructor;
 	@Override 
 	public void setForm(SignupForm form){
-		student=form;
+		instructor=form;
 	}
 }
 	
