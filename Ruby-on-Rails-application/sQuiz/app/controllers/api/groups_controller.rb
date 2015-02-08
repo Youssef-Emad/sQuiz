@@ -69,39 +69,28 @@ class Api::GroupsController < ApplicationController
 
 
 
-  def create
+ def create
 
 
-   tempgroups = Group.where(name:params[:group][:name])
-   found = 0
+   tempgroup = Group.where(name:params[:group][:name]).where(instructor: current_instructor).first
+  
 
     
-   if(tempgroups.size==0) 
+   if(tempgroup == nil) 
     my_create_group_function
-   else   
-     tempgroups.each do|tg|
-     if(tg.instructor==current_instructor)
-        found =1
-     else 
-     end
-     end
-
-     if(found ==0 )
-            
-       my_create_group_function 
-
-      else
-
-       render status: 400,
+   else  
+    render status: 400,
             json: { success: false,
                     info: "You Can't make another group with the same name ",
                    }
-
-       end 
-    end   
+    
+   end 
+     
                  
 
 end
+
+
 
 
 def destroy
@@ -109,26 +98,15 @@ def destroy
     group = Group.where(:name => params[:group][:name]).where(:instructor => current_instructor).first
     
     if(group!=nil)
-      if (current_instructor == group.instructor)
         group.destroy 
         render status: 200,
                json: { success: true,
                        info: "Group Destroyed"
                       }
 
-
-      else
-     
-       render json: {error: "You must be the group's instructor to destroy it",
-                     status: 400
-                    } , status: 400
-
-
-      end
-
     else
 
-        render json: {error: "Group not found",
+        render json: {error: "Couldn't find a group with that name created by you",
                      status: 400
                      } , status: 400
 
