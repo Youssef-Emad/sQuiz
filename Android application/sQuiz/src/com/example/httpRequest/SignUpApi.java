@@ -10,9 +10,9 @@ import com.example.Models.SignupForm;
 
 
 public interface SignUpApi {
-	@POST("/students/registrations")
+	@POST("/students/signup")
 	public void sendStudentForm(@Body SignupForm form ,Callback<String> callback);
 	
-	@POST("/instructors/registrations")
+	@POST("/instructors/signup")
 	public void sendInstructorForm(@Body SignupForm form,Callback<String> callback);	
 }
