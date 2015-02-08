@@ -19,6 +19,6 @@
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
     <string name="quizzes">Quizzes</string>
-    <string name="dialog_title">Choose:</string>
+    <string name="dialog_title">View</string>
 
 </resources>
