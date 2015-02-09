@@ -21,5 +21,8 @@
     <string name="quizzes">Quizzes</string>
     <string name="dialog_title">View</string>
     <string name="view">View</string>
+    <string name="enter_group_name">Enter group name</string>
+    <string name="example_my_group">Example: My Group</string>
+    <string name="action_delete">Delete</string>
 
 </resources>
