@@ -39,6 +39,9 @@ public class QuizzFragment extends ListFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.action_add) {
+			quizzes.add("Quizz 7omos");
+		}
 		return super.onOptionsItemSelected(item);
 	}
 

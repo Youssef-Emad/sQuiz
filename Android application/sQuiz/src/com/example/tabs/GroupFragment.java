@@ -2,9 +2,7 @@ package com.example.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,23 +14,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-
 import com.example.squiz.GroupDetailsActivity;
 import com.example.squiz.R;
 
 public class GroupFragment extends ListFragment {
-	public List<String> groups;
+	private List<String> groups;
+	private ArrayAdapter<String> ListAdapter;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
+		
 		groups = new ArrayList<String>();
+		ListAdapter = new ArrayAdapter<String>(getActivity(), 
+				android.R.layout.simple_list_item_multiple_choice, groups);
+		
 		groups.add("Group 1");
 		groups.add("Group 2");
 		groups.add("Group 3");
 		groups.add("Group 4");
-		setListAdapter(new ArrayAdapter<String>(getActivity(), 
-				android.R.layout.simple_list_item_1, groups));
+		setListAdapter(ListAdapter);
 		return inflater.inflate(R.layout.fragment_groups, container, false);
 	}
 	
@@ -41,13 +43,10 @@ public class GroupFragment extends ListFragment {
 		alert(groups.get(position));
 	}
 	
-	public void alert(final String selectedGroup) {
+	private void alert(final String selectedGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
-		LayoutInflater inflater = (LayoutInflater) getActivity().getLayoutInflater();
-		View customTitleView = inflater.inflate(R.layout.dialog_title_view, null);
-		
-	    builder.setTitle(R.string.dialog_title).setCustomTitle(customTitleView)
+	    builder.setTitle(R.string.dialog_title)
 	           .setItems(R.array.items, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
@@ -67,6 +66,31 @@ public class GroupFragment extends ListFragment {
 	    alertDialog.show();
 	}
 	
+	private void alertCustom() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle("Enter group name: ");
+		LayoutInflater inflater = LayoutInflater.from(getActivity());
+		View v = inflater.inflate(R.layout.activity_oncreategroup, null);
+		final EditText et = (EditText) v.findViewById(R.id.group_name);
+		builder.setView(v);
+		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				groups.add(et.getText().toString());
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.action_bar_menu, menu);
@@ -77,7 +101,7 @@ public class GroupFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
-			alert("7oms");
+			alertCustom();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
