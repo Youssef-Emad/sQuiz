@@ -18,7 +18,10 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.Models.SignupForm;
+import com.example.httpRequest.FormContainer;
+import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
+import com.example.httpRequest.StudentFormContainer;
 
 public class SignupActivity extends Activity {
 	private RadioGroup accType;
@@ -42,7 +45,8 @@ public class SignupActivity extends Activity {
 		 password=(EditText) findViewById(R.id.editTextPassword);
 		 confirmPassword=(EditText) findViewById(R.id.editTextConfirmPassword);
 		 signUp=(Button) findViewById(R.id.submit);
-		
+		 accType=(RadioGroup)findViewById(R.id.accType);
+	   		
 		
 	  signUp.setOnClickListener(new OnClickListener() {
 			
@@ -53,12 +57,23 @@ public class SignupActivity extends Activity {
 					String emailField=email.getText().toString();
 					String passField =password.getText().toString();
 					String confirmPassField=confirmPassword.getText().toString();
-				
+					int radioButton = accType.getCheckedRadioButtonId();
+			   		 
 					
 					try {
 						 SignupForm form=new SignupForm();
-						 form.populateForm(nameField, emailField, passField,confirmPassField);
-						 submitForm(form);
+						 form.populateForm(nameField, emailField, passField,confirmPassField,radioButton);
+						if(form.getAccType()==R.id.student){
+						 StudentFormContainer container= new StudentFormContainer();
+						 container.setForm(form);
+						 submitForm(container);
+						 }
+						 else if (form.getAccType()==R.id.instructor){
+							 InstructorFormContainer  container = new InstructorFormContainer();
+							 container.setForm(form);
+						    submitForm(container);
+						 }   
+						 
 					} catch (Exception e) {
 						Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
@@ -71,7 +86,7 @@ public class SignupActivity extends Activity {
 			
 		}); 
 	}
-	private void submitForm(SignupForm form){
+	private void submitForm(FormContainer form){
 
 		RestAdapter adapter = new RestAdapter.Builder()
 							 .setEndpoint(ENDPOINT)
@@ -79,16 +94,12 @@ public class SignupActivity extends Activity {
 							 .build();
      		SignUpApi signUpApi = adapter.create(SignUpApi.class);
      		//check if student or instructor
-     		 accType=(RadioGroup)findViewById(R.id.accType);
-   		 int radioButton = accType.getCheckedRadioButtonId();
-   		 
-   		 if(radioButton==R.id.student){
-   			 
+     		 
+   		 if(form instanceof StudentFormContainer){
    			 signUpApi.sendStudentForm(form,new Callback<String>() {
 			
 			@Override
 			public void success(String arg0, Response arg1) {
-
 				Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				
 			}
@@ -99,7 +110,7 @@ public class SignupActivity extends Activity {
 			}
 		});
    		 } 		 
-   		 else if(radioButton==R.id.instructor){
+   		 else if(form instanceof InstructorFormContainer){
    			 signUpApi.sendInstructorForm(form, new Callback<String>() {
 
 				@Override
@@ -114,8 +125,7 @@ public class SignupActivity extends Activity {
 				}
 			});
    		 }
-   		 else
-   			 Toast.makeText(SignupActivity.this, "Please choose account type",Toast.LENGTH_SHORT).show();
+   		 
 	}	
 	private boolean isOnline() {
 		ConnectivityManager cm= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

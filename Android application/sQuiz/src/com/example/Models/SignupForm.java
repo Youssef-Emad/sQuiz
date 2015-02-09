@@ -1,10 +1,13 @@
 package com.example.Models;
 
+import android.widget.Toast;
+
 import com.example.Helpers.validator;
+import com.example.squiz.SignupActivity;
 
 public class SignupForm {
 	
-	
+	private transient int accType;
 	private String email;
 	private String name;
 	private String password;
@@ -13,12 +16,13 @@ public class SignupForm {
 	public SignupForm(){}
 	
 	public SignupForm populateForm(String nameField,
-			String emailField, String passField, String confirmPassField)throws Exception {
+			String emailField, String passField, String confirmPassField,int type)throws Exception {
 		
 		this.setName(nameField);
 		this.setEmail(emailField);
 		this.setPassword(passField);
 		this.setPassword_confirmation(confirmPassField);
+		this.setAccType(type);
 		return this;
 	}
 	
@@ -78,5 +82,16 @@ public class SignupForm {
 		else 
 			throw new Exception("Please confirm your password");
 		
+	}
+
+	public int getAccType() {
+		return accType;
+	}
+
+	public void setAccType(int accType)throws Exception {
+		if(accType==-1)
+  			 throw new Exception("please choose account type");
+		else
+			this.accType = accType;
 	}
 }

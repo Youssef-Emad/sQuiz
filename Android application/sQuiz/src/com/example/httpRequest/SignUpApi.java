@@ -6,13 +6,11 @@ import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.POST;
 
-import com.example.Models.SignupForm;
-
 
 public interface SignUpApi {
-	@POST("/students/registrations")
-	public void sendStudentForm(@Body SignupForm form ,Callback<String> callback);
+	@POST("/students/signup")
+	public void sendStudentForm(@Body FormContainer form ,Callback<String> callback);
 	
-	@POST("/instructors/registrations")
-	public void sendInstructorForm(@Body SignupForm form,Callback<String> callback);	
+	@POST("/instructors/signup")
+	public void sendInstructorForm(@Body FormContainer form,Callback<String> callback);	
 }
