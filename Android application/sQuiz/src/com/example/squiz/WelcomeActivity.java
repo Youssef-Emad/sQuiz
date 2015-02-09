@@ -64,8 +64,7 @@ public class WelcomeActivity extends Activity {
 					try{
 						user=new LoginForm();
 						user.populateForm(email, password);
-						//sendData(user);
-						startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
+						sendData(user);
 						
 					}catch(Exception e){
 						
@@ -101,12 +100,14 @@ public class WelcomeActivity extends Activity {
 	task.login(user ,new Callback<JsonObject>() {
 	        @Override
 	        public void success(JsonObject arg0, Response arg1) {
+	        	
+	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 	        	Toast.makeText(WelcomeActivity.this, "welcome", Toast.LENGTH_SHORT).show();
 	        }
 
 	        @Override
 	        public void failure(RetrofitError retrofitError) {
-	            retrofitError.printStackTrace();
+	            
 	            Toast.makeText(WelcomeActivity.this, "failed", Toast.LENGTH_SHORT).show();
 	        }
 	    });

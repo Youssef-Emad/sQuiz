@@ -22,6 +22,7 @@ import com.example.httpRequest.FormContainer;
 import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
 import com.example.httpRequest.StudentFormContainer;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class SignupActivity extends Activity {
@@ -32,6 +33,7 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
+	private String authToken=new String();
 	
 	
 	@Override
@@ -101,13 +103,24 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void success(JsonObject arg0, Response arg1) {
-				Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
+				if(arg0.get("success").toString().equals("true")){
+				 authToken=arg0.get("auth_token").toString();
+				}
+				Toast.makeText(SignupActivity.this, authToken, Toast.LENGTH_SHORT).show();
 				
 			}
 			
 			@Override
 			public void failure(RetrofitError arg0) {
-				Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();		
+				try {
+					JsonObject obj=(JsonObject) arg0.getBody();
+					String text=obj.get("info").toString() + "-";
+							text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
+					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();
+				} catch (Exception e) {
+					
+					Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
+				}	
 			}
 		});
    		 } 		 
@@ -116,7 +129,15 @@ public class SignupActivity extends Activity {
 
 				@Override
 				public void failure(RetrofitError arg0) {
-					Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();
+					try {
+						JsonObject obj=(JsonObject) arg0.getBody();
+						String text=obj.get("info").toString() + "-";
+								text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
+						Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();
+					} catch (Exception e) {
+						
+						Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
+					}	
 					
 				}
 
