@@ -96,7 +96,7 @@ public class SignupActivity extends Activity {
      		//check if student or instructor
      		 
    		 if(form instanceof StudentFormContainer){
-   			 signUpApi.sendStudentForm(form,new Callback<String>() {
+   			 signUpApi.sendForm("students",form,new Callback<String>() {
 			
 			@Override
 			public void success(String arg0, Response arg1) {
@@ -111,7 +111,7 @@ public class SignupActivity extends Activity {
 		});
    		 } 		 
    		 else if(form instanceof InstructorFormContainer){
-   			 signUpApi.sendInstructorForm(form, new Callback<String>() {
+   			 signUpApi.sendForm("instructors",form, new Callback<String>() {
 
 				@Override
 				public void failure(RetrofitError arg0) {
