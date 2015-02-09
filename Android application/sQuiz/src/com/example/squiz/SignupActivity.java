@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -22,7 +23,6 @@ import com.example.httpRequest.FormContainer;
 import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
 import com.example.httpRequest.StudentFormContainer;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class SignupActivity extends Activity {
@@ -34,6 +34,7 @@ public class SignupActivity extends Activity {
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
 	private String authToken=new String();
+	private ProgressBar pb;
 	
 	
 	@Override
@@ -49,6 +50,9 @@ public class SignupActivity extends Activity {
 		 confirmPassword=(EditText) findViewById(R.id.editTextConfirmPassword);
 		 signUp=(Button) findViewById(R.id.submit);
 		 accType=(RadioGroup)findViewById(R.id.accType);
+		 pb=(ProgressBar) findViewById(R.id.progressBar1);
+		 pb.setVisibility(View.INVISIBLE);
+		 
 	   		
 		
 	  signUp.setOnClickListener(new OnClickListener() {
@@ -69,11 +73,13 @@ public class SignupActivity extends Activity {
 						if(form.getAccType()==R.id.student){
 						 StudentFormContainer container= new StudentFormContainer();
 						 container.setForm(form);
+						 pb.setVisibility(View.VISIBLE);
 						 submitForm(container);
 						 }
 						 else if (form.getAccType()==R.id.instructor){
 							 InstructorFormContainer  container = new InstructorFormContainer();
 							 container.setForm(form);
+							 pb.setVisibility(View.VISIBLE);
 						    submitForm(container);
 						 }   
 						 
@@ -103,9 +109,11 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void success(JsonObject arg0, Response arg1) {
+				 pb.setVisibility(View.INVISIBLE);
 				if(arg0.get("success").toString().equals("true")){
 				 authToken=arg0.get("auth_token").toString();
 				}
+				
 				Toast.makeText(SignupActivity.this, authToken, Toast.LENGTH_SHORT).show();
 				
 			}
@@ -113,6 +121,7 @@ public class SignupActivity extends Activity {
 			@Override
 			public void failure(RetrofitError arg0) {
 				try {
+					 pb.setVisibility(View.INVISIBLE);
 					JsonObject obj=(JsonObject) arg0.getBody();
 					String text=obj.get("info").toString() + "-";
 							text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
@@ -130,6 +139,7 @@ public class SignupActivity extends Activity {
 				@Override
 				public void failure(RetrofitError arg0) {
 					try {
+						 pb.setVisibility(View.INVISIBLE);
 						JsonObject obj=(JsonObject) arg0.getBody();
 						String text=obj.get("info").toString() + "-";
 								text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
@@ -143,6 +153,7 @@ public class SignupActivity extends Activity {
 
 				@Override
 				public void success(JsonObject arg0, Response arg1) {
+					 pb.setVisibility(View.INVISIBLE);
 					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				}
 			});

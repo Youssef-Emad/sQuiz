@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.Models.LoginForm;
@@ -27,6 +28,7 @@ public class WelcomeActivity extends Activity {
 	 EditText Email;
 	 EditText Password;
 	 LoginForm user;
+	 ProgressBar pb ;
 	
 	public static final String ENDPOINT = 
 			"https://sQuiz.herokuapp.com/api";
@@ -42,7 +44,9 @@ public class WelcomeActivity extends Activity {
 		
 		signUp = (Button) findViewById(R.id.signup);
 		logIn = (Button) findViewById(R.id.login);
-		
+		pb = (ProgressBar) findViewById(R.id.progressBar1);
+		pb.setVisibility(View.INVISIBLE);
+    	
 		signUp.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				startActivity(new Intent(WelcomeActivity.this, SignupActivity.class));
@@ -64,6 +68,7 @@ public class WelcomeActivity extends Activity {
 					try{
 						user=new LoginForm();
 						user.populateForm(email, password);
+						pb.setVisibility(View.VISIBLE);
 						sendData(user);
 						
 					}catch(Exception e){
@@ -101,14 +106,14 @@ public class WelcomeActivity extends Activity {
 	        @Override
 	        public void success(JsonObject arg0, Response arg1) {
 	        	
-	        	
+	        	pb.setVisibility(View.INVISIBLE);
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 	        	Toast.makeText(WelcomeActivity.this, "welcome", Toast.LENGTH_SHORT).show();
 	        }
 
 	        @Override
 	        public void failure(RetrofitError retrofitError) {
-	            
+	        	pb.setVisibility(View.INVISIBLE);
 	            Toast.makeText(WelcomeActivity.this, "Your Email or Password is incorrect", Toast.LENGTH_SHORT).show();
 	        }
 	    });
