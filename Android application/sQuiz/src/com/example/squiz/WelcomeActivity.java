@@ -1,8 +1,5 @@
 package com.example.squiz;
 
-import com.example.Models.LoginForm;
-import com.example.httpRequest.LoginAPI;
-
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -18,6 +15,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.Models.LoginForm;
+import com.example.httpRequest.LoginAPI;
+import com.google.gson.JsonObject;
 
 public class WelcomeActivity extends Activity {
 	
@@ -54,18 +55,16 @@ public class WelcomeActivity extends Activity {
 			
 			public void onClick(View v) {
 
-				if(isOnline()){
-					
+				if(isOnline()){	
 					Email = (EditText) findViewById(R.id.editTextEmail);
 					Password = (EditText) findViewById(R.id.editTextPassword);
 					String email = Email.getText().toString();
 					String password = Password.getText().toString();
 					
 					try{
-						//user=new LoginForm();
-						//user.populateForm(email, password);
-						//sendData(user);
-						startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
+						user=new LoginForm();
+						user.populateForm(email, password);
+						sendData(user);
 						
 					}catch(Exception e){
 						
@@ -78,8 +77,6 @@ public class WelcomeActivity extends Activity {
 				}
 			}		
 		});
-
-
 	}
 	protected boolean isOnline() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -99,19 +96,20 @@ public class WelcomeActivity extends Activity {
 	    .build();
 
 
-	LoginAPI task = restAdapter.create(LoginAPI.class); //retrofit createapi
-	task.login(user ,new Callback<String>() {
+	LoginAPI task = restAdapter.create(LoginAPI.class); //retrofit create api
+	task.login(user ,new Callback<JsonObject>() {
 	        @Override
-	        public void success(String arg0, Response arg1) {
+	        public void success(JsonObject arg0, Response arg1) {
 	        	
+	        	
+	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 	        	Toast.makeText(WelcomeActivity.this, "welcome", Toast.LENGTH_SHORT).show();
-
 	        }
 
 	        @Override
 	        public void failure(RetrofitError retrofitError) {
-	            retrofitError.printStackTrace();
-	            Toast.makeText(WelcomeActivity.this, "failed", Toast.LENGTH_SHORT).show();
+	            
+	            Toast.makeText(WelcomeActivity.this, "Your Email or Password is incorrect", Toast.LENGTH_SHORT).show();
 	        }
 	    });
 	}

@@ -5,12 +5,12 @@ package com.example.httpRequest;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.POST;
+import retrofit.http.Path;
+
+import com.google.gson.JsonObject;
 
 
 public interface SignUpApi {
-	@POST("/students/signup")
-	public void sendStudentForm(@Body FormContainer form ,Callback<String> callback);
-	
-	@POST("/instructors/signup")
-	public void sendInstructorForm(@Body FormContainer form,Callback<String> callback);	
+	@POST("/{type}/signup")
+	public void sendForm(@Path("type") String type, @Body FormContainer form ,Callback<JsonObject> callback);	
 }
