@@ -27,10 +27,12 @@ import com.example.squiz.R;
 public class GroupFragment extends ListFragment {
 	private List<String> groups;
 	private ArrayAdapter<String> ListAdapter;
+	private List<String> itemsToDelete;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
 		groups = new ArrayList<String>();
+		itemsToDelete = new ArrayList<String>();
 		ListAdapter = new ArrayAdapter<String>(getActivity(), 
 				R.layout.custom_list_item, groups);
 		
@@ -62,7 +64,14 @@ public class GroupFragment extends ListFragment {
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				return false;
+				switch (item.getItemId()) {
+	            case R.id.action_delete:
+	                deleteSelectedItems();
+	                mode.finish(); // Action picked, so close the CAB
+	                return true;
+	            default:
+	                return false;
+				}
 			}
 
 			@Override
@@ -73,13 +82,20 @@ public class GroupFragment extends ListFragment {
 			@Override
 			public void onItemCheckedStateChanged(ActionMode mode,
 					int position, long id, boolean checked) {
-				
+				if (checked) 
+					itemsToDelete.add(groups.get(position));
+				else
+					itemsToDelete.remove(groups.get(position));
 			}
 			
 		});
 		super.onActivityCreated(savedInstanceState);
 	}
 	
+	private void deleteSelectedItems() {
+		for (String s : itemsToDelete)
+			groups.remove(s);
+	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		alert(groups.get(position));
