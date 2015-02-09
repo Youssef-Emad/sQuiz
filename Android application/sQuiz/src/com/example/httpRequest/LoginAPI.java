@@ -11,6 +11,6 @@ import com.google.gson.JsonObject;
 
 public interface LoginAPI {
 	
-	@POST("/login")
+	@POST("/signin")
 		public void login( @Body LoginForm user ,Callback<JsonObject> callback);
 }

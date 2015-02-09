@@ -101,6 +101,7 @@ public class WelcomeActivity extends Activity {
 	        @Override
 	        public void success(JsonObject arg0, Response arg1) {
 	        	
+	        	
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 	        	Toast.makeText(WelcomeActivity.this, "welcome", Toast.LENGTH_SHORT).show();
 	        }
@@ -108,7 +109,7 @@ public class WelcomeActivity extends Activity {
 	        @Override
 	        public void failure(RetrofitError retrofitError) {
 	            
-	            Toast.makeText(WelcomeActivity.this, "failed", Toast.LENGTH_SHORT).show();
+	            Toast.makeText(WelcomeActivity.this, "Your Email or Password is incorrect", Toast.LENGTH_SHORT).show();
 	        }
 	    });
 	}
