@@ -31,6 +31,9 @@
         
         <activity android:name=".AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
+        
+        <activity android:name=".GroupDetailsActivity" android:theme="@style/sQuizThemeActionBar">
+        </activity>
     </application>
 
 </manifest>

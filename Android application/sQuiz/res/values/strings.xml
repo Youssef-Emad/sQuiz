@@ -18,5 +18,8 @@
     <string name="squiz">sQuiz</string>
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
+    <string name="quizzes">Quizzes</string>
+    <string name="dialog_title">View</string>
+    <string name="view">View</string>
 
 </resources>
