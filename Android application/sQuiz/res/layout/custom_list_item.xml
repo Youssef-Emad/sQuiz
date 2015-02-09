@@ -6,4 +6,5 @@
     android:paddingLeft="10dp"
     android:gravity="center_vertical"
     android:textColor="#FFFFFFFF"
+    android:background="@drawable/selector_delete"
 />

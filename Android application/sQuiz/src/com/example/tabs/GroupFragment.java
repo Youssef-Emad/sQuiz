@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -42,7 +44,39 @@ public class GroupFragment extends ListFragment {
 	
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		registerForContextMenu(getListView());
+		ListView listView = getListView();
+		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+
+			@Override
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				MenuInflater inflater = mode.getMenuInflater();
+		        inflater.inflate(R.menu.context_menu, menu);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				
+			}
+
+			@Override
+			public void onItemCheckedStateChanged(ActionMode mode,
+					int position, long id, boolean checked) {
+				
+			}
+			
+		});
 		super.onActivityCreated(savedInstanceState);
 	}
 	
