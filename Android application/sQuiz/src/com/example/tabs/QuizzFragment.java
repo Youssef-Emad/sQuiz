@@ -6,6 +6,9 @@ import java.util.List;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,6 +19,7 @@ public class QuizzFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
 		quizzes = new ArrayList<>();
 		quizzes.add("Quiz 1");
 		quizzes.add("Quiz 2");
@@ -24,6 +28,18 @@ public class QuizzFragment extends ListFragment {
 		setListAdapter(new ArrayAdapter<String>(getActivity(), 
 				android.R.layout.simple_list_item_1, quizzes));
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.action_bar_menu, menu);
+		getActivity().getActionBar().setTitle("Quizzes");
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return super.onOptionsItemSelected(item);
 	}
 
 }

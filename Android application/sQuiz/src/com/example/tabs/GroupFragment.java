@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -19,9 +22,10 @@ import com.example.squiz.GroupDetailsActivity;
 import com.example.squiz.R;
 
 public class GroupFragment extends ListFragment {
-	private List<String> groups;
+	public List<String> groups;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
 		groups = new ArrayList<String>();
 		groups.add("Group 1");
 		groups.add("Group 2");
@@ -37,7 +41,7 @@ public class GroupFragment extends ListFragment {
 		alert(groups.get(position));
 	}
 	
-	private void alert(final String selectedGroup) {
+	public void alert(final String selectedGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
 		LayoutInflater inflater = (LayoutInflater) getActivity().getLayoutInflater();
@@ -61,5 +65,21 @@ public class GroupFragment extends ListFragment {
 	           });
 	    AlertDialog alertDialog = builder.create();
 	    alertDialog.show();
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.action_bar_menu, menu);
+		getActivity().getActionBar().setTitle("Groups");
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.action_add) {
+			alert("7oms");
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
