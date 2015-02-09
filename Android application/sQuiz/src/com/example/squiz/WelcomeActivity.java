@@ -62,8 +62,8 @@ public class WelcomeActivity extends Activity {
 					String password = Password.getText().toString();
 					
 					try{
-						user=new LoginForm();
-						user.populateForm(email, password);
+						//user=new LoginForm();
+						//user.populateForm(email, password);
 						//sendData(user);
 						startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 						
