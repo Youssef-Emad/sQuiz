@@ -22,6 +22,7 @@ import com.example.httpRequest.FormContainer;
 import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
 import com.example.httpRequest.StudentFormContainer;
+import com.google.gson.JsonObject;
 
 public class SignupActivity extends Activity {
 	private RadioGroup accType;
@@ -96,10 +97,10 @@ public class SignupActivity extends Activity {
      		//check if student or instructor
      		 
    		 if(form instanceof StudentFormContainer){
-   			 signUpApi.sendForm("students",form,new Callback<String>() {
+   			 signUpApi.sendForm("students",form,new Callback<JsonObject>() {
 			
 			@Override
-			public void success(String arg0, Response arg1) {
+			public void success(JsonObject arg0, Response arg1) {
 				Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				
 			}
@@ -111,7 +112,7 @@ public class SignupActivity extends Activity {
 		});
    		 } 		 
    		 else if(form instanceof InstructorFormContainer){
-   			 signUpApi.sendForm("instructors",form, new Callback<String>() {
+   			 signUpApi.sendForm("instructors",form, new Callback<JsonObject>() {
 
 				@Override
 				public void failure(RetrofitError arg0) {
@@ -120,7 +121,7 @@ public class SignupActivity extends Activity {
 				}
 
 				@Override
-				public void success(String arg0, Response arg1) {
+				public void success(JsonObject arg0, Response arg1) {
 					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				}
 			});
