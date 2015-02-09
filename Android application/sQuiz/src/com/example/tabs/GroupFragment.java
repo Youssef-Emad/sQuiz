@@ -6,13 +6,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,10 +28,9 @@ public class GroupFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		
 		groups = new ArrayList<String>();
 		ListAdapter = new ArrayAdapter<String>(getActivity(), 
-				android.R.layout.simple_list_item_multiple_choice, groups);
+				R.layout.custom_list_item, groups);
 		
 		groups.add("Group 1");
 		groups.add("Group 2");
@@ -36,6 +38,12 @@ public class GroupFragment extends ListFragment {
 		groups.add("Group 4");
 		setListAdapter(ListAdapter);
 		return inflater.inflate(R.layout.fragment_groups, container, false);
+	}
+	
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		registerForContextMenu(getListView());
+		super.onActivityCreated(savedInstanceState);
 	}
 	
 	@Override
@@ -105,5 +113,13 @@ public class GroupFragment extends ListFragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getActivity().getMenuInflater();
+	    inflater.inflate(R.menu.context_menu, menu);
 	}
 }

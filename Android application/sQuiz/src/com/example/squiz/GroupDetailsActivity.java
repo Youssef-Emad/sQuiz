@@ -40,7 +40,8 @@ public class GroupDetailsActivity extends ListActivity {
 			}
 		}
 		
-		setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list));
+		setListAdapter(new ArrayAdapter<>(this, 
+				R.layout.custom_list_item, list));
 	}
 	
 	@Override

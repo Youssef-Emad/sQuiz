@@ -26,7 +26,7 @@ public class QuizzFragment extends ListFragment {
 		quizzes.add("Quiz 3");
 		quizzes.add("Quiz 4");
 		setListAdapter(new ArrayAdapter<String>(getActivity(), 
-				android.R.layout.simple_list_item_1, quizzes));
+				R.layout.custom_list_item, quizzes));
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
 	}
 	
@@ -39,9 +39,6 @@ public class QuizzFragment extends ListFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.action_add) {
-			quizzes.add("Quizz 7omos");
-		}
 		return super.onOptionsItemSelected(item);
 	}
 
