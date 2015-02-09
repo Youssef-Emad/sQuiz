@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.example.httpRequest.FormContainer;
 import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
 import com.example.httpRequest.StudentFormContainer;
+import com.google.gson.JsonObject;
 
 public class SignupActivity extends Activity {
 	private RadioGroup accType;
@@ -31,6 +33,8 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
+	private String authToken=new String();
+	private ProgressBar pb;
 	
 	
 	@Override
@@ -46,6 +50,9 @@ public class SignupActivity extends Activity {
 		 confirmPassword=(EditText) findViewById(R.id.editTextConfirmPassword);
 		 signUp=(Button) findViewById(R.id.submit);
 		 accType=(RadioGroup)findViewById(R.id.accType);
+		 pb=(ProgressBar) findViewById(R.id.progressBar1);
+		 pb.setVisibility(View.INVISIBLE);
+		 
 	   		
 		
 	  signUp.setOnClickListener(new OnClickListener() {
@@ -66,11 +73,13 @@ public class SignupActivity extends Activity {
 						if(form.getAccType()==R.id.student){
 						 StudentFormContainer container= new StudentFormContainer();
 						 container.setForm(form);
+						 pb.setVisibility(View.VISIBLE);
 						 submitForm(container);
 						 }
 						 else if (form.getAccType()==R.id.instructor){
 							 InstructorFormContainer  container = new InstructorFormContainer();
 							 container.setForm(form);
+							 pb.setVisibility(View.VISIBLE);
 						    submitForm(container);
 						 }   
 						 
@@ -96,31 +105,55 @@ public class SignupActivity extends Activity {
      		//check if student or instructor
      		 
    		 if(form instanceof StudentFormContainer){
-   			 signUpApi.sendStudentForm(form,new Callback<String>() {
+   			 signUpApi.sendForm("students",form,new Callback<JsonObject>() {
 			
 			@Override
-			public void success(String arg0, Response arg1) {
-				Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
+			public void success(JsonObject arg0, Response arg1) {
+				 pb.setVisibility(View.INVISIBLE);
+				if(arg0.get("success").toString().equals("true")){
+				 authToken=arg0.get("auth_token").toString();
+				}
+				
+				Toast.makeText(SignupActivity.this, authToken, Toast.LENGTH_SHORT).show();
 				
 			}
 			
 			@Override
 			public void failure(RetrofitError arg0) {
-				Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();		
+				try {
+					 pb.setVisibility(View.INVISIBLE);
+					JsonObject obj=(JsonObject) arg0.getBody();
+					String text=obj.get("info").toString() + "-";
+							text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
+					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();
+				} catch (Exception e) {
+					
+					Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
+				}	
 			}
 		});
    		 } 		 
    		 else if(form instanceof InstructorFormContainer){
-   			 signUpApi.sendInstructorForm(form, new Callback<String>() {
+   			 signUpApi.sendForm("instructors",form, new Callback<JsonObject>() {
 
 				@Override
 				public void failure(RetrofitError arg0) {
-					Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();
+					try {
+						 pb.setVisibility(View.INVISIBLE);
+						JsonObject obj=(JsonObject) arg0.getBody();
+						String text=obj.get("info").toString() + "-";
+								text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
+						Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();
+					} catch (Exception e) {
+						
+						Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
+					}	
 					
 				}
 
 				@Override
-				public void success(String arg0, Response arg1) {
+				public void success(JsonObject arg0, Response arg1) {
+					 pb.setVisibility(View.INVISIBLE);
 					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
 				}
 			});
