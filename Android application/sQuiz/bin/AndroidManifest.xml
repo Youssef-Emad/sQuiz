@@ -38,6 +38,9 @@
         <activity android:name=".QuizzesInGroupActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
+        <activity android:name=".QuizFormActivity" android:theme="@style/sQuizTheme">
+        </activity>
+        
         <activity android:name=".QuizDetailsActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         

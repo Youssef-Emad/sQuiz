@@ -2,7 +2,6 @@ package com.example.squiz;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ListActivity;

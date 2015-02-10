@@ -12,17 +12,16 @@ public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
 	}
 
 	@Override
-	public android.support.v4.app.Fragment getItem(int i) {
+	public Fragment getItem(int i) {
 		Fragment fragment = new QuestionFragment();
 		Bundle args = new Bundle();
-		args.putInt(QuestionFragment.ARG_QUESTION, i + 1); // Our object is just an integer :-P
+		args.putInt(QuestionFragment.ARG_QUESTION, i + 1);
 		fragment.setArguments(args);
 		return fragment;
 	}
 
 	@Override
 	public int getCount() {
-		// For this contrived example, we have a 100-object collection.
 		return 100;
 	}
 

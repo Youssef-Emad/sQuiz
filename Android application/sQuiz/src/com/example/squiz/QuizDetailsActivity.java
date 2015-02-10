@@ -13,14 +13,14 @@ public class QuizDetailsActivity extends FragmentActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quizz_details);
+        setContentView(R.layout.activity_quiz_details);
         questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager());
 
         final ActionBar actionBar = getActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (ViewPager) findViewById(R.id.questions_pager);
         mViewPager.setAdapter(questionPagerAdapter);
     }
 }

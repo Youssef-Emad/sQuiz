@@ -16,7 +16,7 @@ public class QuestionFragment extends Fragment {
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_question, container, false);
         Bundle args = getArguments();
-        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
+        ((TextView) rootView.findViewById(R.id.textView)).setText(
                 Integer.toString(args.getInt(ARG_QUESTION)));
         return rootView;
     }
