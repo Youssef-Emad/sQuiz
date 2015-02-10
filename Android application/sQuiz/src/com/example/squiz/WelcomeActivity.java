@@ -108,8 +108,7 @@ public class WelcomeActivity extends Activity {
 	        	
 	        	pb.setVisibility(View.INVISIBLE);
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
-	        	Toast.makeText(WelcomeActivity.this, "welcome", Toast.LENGTH_SHORT).show();
-	        }
+	        	}
 
 	        @Override
 	        public void failure(RetrofitError retrofitError) {

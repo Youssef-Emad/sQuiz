@@ -6,9 +6,12 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -35,7 +38,7 @@ public class SignupActivity extends Activity {
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
 	private String authToken=new String();
 	private ProgressBar pb;
-	
+	private SharedPreferences settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,8 @@ public class SignupActivity extends Activity {
 		 accType=(RadioGroup)findViewById(R.id.accType);
 		 pb=(ProgressBar) findViewById(R.id.progressBar1);
 		 pb.setVisibility(View.INVISIBLE);
-		 
+		 settings= PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
+		 	
 	   		
 		
 	  signUp.setOnClickListener(new OnClickListener() {
@@ -112,9 +116,12 @@ public class SignupActivity extends Activity {
 				 pb.setVisibility(View.INVISIBLE);
 				if(arg0.get("success").toString().equals("true")){
 				 authToken=arg0.get("auth_token").toString();
+				 SharedPreferences.Editor editor = settings.edit();		
+				 editor.putString("authToken", authToken);
+				 editor.commit();
 				}
 				
-				Toast.makeText(SignupActivity.this, authToken, Toast.LENGTH_SHORT).show();
+				Toast.makeText(SignupActivity.this, "signup Complete", Toast.LENGTH_SHORT).show();
 				
 			}
 			
@@ -139,7 +146,7 @@ public class SignupActivity extends Activity {
 				@Override
 				public void failure(RetrofitError arg0) {
 					try {
-						 pb.setVisibility(View.INVISIBLE);
+						pb.setVisibility(View.INVISIBLE);
 						JsonObject obj=(JsonObject) arg0.getBody();
 						String text=obj.get("info").toString() + "-";
 								text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
@@ -155,6 +162,8 @@ public class SignupActivity extends Activity {
 				public void success(JsonObject arg0, Response arg1) {
 					 pb.setVisibility(View.INVISIBLE);
 					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
+					startActivity(new Intent(SignupActivity.this, AfterLoginInstructorActivity.class));
+		        	
 				}
 			});
    		 }
