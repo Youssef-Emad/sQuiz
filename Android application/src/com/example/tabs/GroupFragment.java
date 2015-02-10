@@ -21,7 +21,7 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import com.example.squiz.GroupDetailsActivity;
+import com.example.squiz.StudentsInGroupActivity;
 import com.example.squiz.R;
 
 public class GroupFragment extends ListFragment {
@@ -108,15 +108,14 @@ public class GroupFragment extends ListFragment {
 	           .setItems(R.array.items, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
-                       intent.setClass(getActivity(), GroupDetailsActivity.class);
                        intent.putExtra("Group", selectedGroup);
-	            	   if (which == 0) {
-	                       intent.putExtra("Choice", "Quizzes");
+	            	   if (which == 1) {
+	            		   intent.setClass(getActivity(), StudentsInGroupActivity.class);
 	                       startActivity(intent);
 	            	   }
 	            	   else {
-	            		   intent.putExtra("Choice", "Students");
-	            		   startActivity(intent);
+	            		   /*intent.setClass(getActivity(), QuizzesInGroupActivity.class);
+	            		   startActivity(intent);*/
 	            	   }
 	               }
 	           });
