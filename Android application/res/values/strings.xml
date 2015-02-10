@@ -25,5 +25,15 @@
     <string name="example_my_group">Example: My Group</string>
     <string name="action_delete">Delete</string>
     <string name="example_add_student">Example: student@example.com</string>
+    <string name="number_of_re_arrangement_questions">Number of Re-arrangement questions</string>
+    <string name="example_5">Example: 5</string>
+    <string name="quiz_name">Quiz name</string>
+    <string name="example_design_patterns">Example: Design patterns</string>
+    <string name="subject">Subject</string>
+    <string name="example_software_engineering">Example: Software engineering</string>
+    <string name="number_of_multiple_choice_questions">Number of Multiple choice questions</string>
+    <string name="duration">Duration</string>
+    <string name="example_15">Example: 15</string>
+    <string name="next">Next</string>
 
 </resources>
