@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
+	
+	private int numberOfQuestions;
 
-	public QuestionsPagerAdapter(FragmentManager fm) {
+	public QuestionsPagerAdapter(FragmentManager fm, int numberOfQuestions) {
 		super(fm);
+		this.numberOfQuestions = numberOfQuestions;
 	}
 
 	@Override
@@ -22,7 +25,7 @@ public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 100;
+		return numberOfQuestions;
 	}
 
 	@Override
