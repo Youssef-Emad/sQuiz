@@ -8,18 +8,23 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 
 public class StudentsInGroupActivity extends ListActivity {
 	private List<String> students;
 	private ActionBar actionBar;
-	
+	private List<String> itemsToDelete;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,12 +37,63 @@ public class StudentsInGroupActivity extends ListActivity {
 		actionBar.setTitle(group);
 		
 		students = new ArrayList<>();
+		itemsToDelete = new ArrayList<>();
 		for (int i = 0; i < 5; i++) 
 			students.add("Student " + i);
 		
 		setListAdapter(new ArrayAdapter<>(this, 
 				R.layout.custom_list_item, students));
+		ListView listView = getListView();
+		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+
+			@Override
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				MenuInflater inflater = mode.getMenuInflater();
+		        inflater.inflate(R.menu.context_menu, menu);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				switch (item.getItemId()) {
+	            case R.id.action_delete:
+	                deleteSelectedItems();
+	                mode.finish(); // Action picked, so close the CAB
+	                return true;
+	            default:
+	                return false;
+				}
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				
+			}
+
+			@Override
+			public void onItemCheckedStateChanged(ActionMode mode,
+					int position, long id, boolean checked) {
+				if (checked) 
+					itemsToDelete.add(students.get(position));
+				else
+					itemsToDelete.remove(students.get(position));
+			}
+		});
 	}
+
+	
+	private void deleteSelectedItems() {
+		for (String s : itemsToDelete)
+			students.remove(s);
+	}
+	
+ 
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

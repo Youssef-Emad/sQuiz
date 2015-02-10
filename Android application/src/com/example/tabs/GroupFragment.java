@@ -166,11 +166,4 @@ public class GroupFragment extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = getActivity().getMenuInflater();
-	    inflater.inflate(R.menu.context_menu, menu);
-	}
 }
