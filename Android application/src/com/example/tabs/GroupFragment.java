@@ -21,6 +21,8 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.squiz.QuizzesInGroupActivity;
 import com.example.squiz.StudentsInGroupActivity;
 import com.example.squiz.R;
 
@@ -114,8 +116,8 @@ public class GroupFragment extends ListFragment {
 	                       startActivity(intent);
 	            	   }
 	            	   else {
-	            		   /*intent.setClass(getActivity(), QuizzesInGroupActivity.class);
-	            		   startActivity(intent);*/
+	            		   intent.setClass(getActivity(), QuizzesInGroupActivity.class);
+	            		   startActivity(intent);
 	            	   }
 	               }
 	           });
