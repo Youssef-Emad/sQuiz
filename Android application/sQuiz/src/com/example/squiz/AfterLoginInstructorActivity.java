@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.tabs.TabsPagerAdapter;
 
@@ -21,8 +22,8 @@ public class AfterLoginInstructorActivity extends FragmentActivity implements Ac
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_afterlogin);
+		Toast.makeText(AfterLoginInstructorActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
 		actionBar = getActionBar();
-		
 		actionBar.setTitle("sQuiz me!");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
