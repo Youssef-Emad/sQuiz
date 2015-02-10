@@ -36,7 +36,7 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
-	private String authToken=new String();
+	public static String authToken=new String();
 	private ProgressBar pb;
 	private SharedPreferences settings;
 	

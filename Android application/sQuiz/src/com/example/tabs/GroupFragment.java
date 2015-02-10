@@ -3,64 +3,76 @@ package com.example.tabs;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.ActionMode;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.Models.Group;
+import com.example.httpRequest.GroupApi;
 import com.example.squiz.GroupDetailsActivity;
 import com.example.squiz.R;
+import com.example.squiz.WelcomeActivity;
 
 public class GroupFragment extends ListFragment {
-	private List<String> groups;
-	private ArrayAdapter<String> ListAdapter;
+	private List<Group> groups;
+	private ArrayAdapter<Group> ListAdapter;
 	private List<String> itemsToDelete;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		groups = new ArrayList<String>();
+		RestAdapter restAdapter1= new RestAdapter.Builder()
+	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
+	    .setLogLevel(LogLevel.FULL)
+	    .build();
+		GroupApi task = restAdapter1.create(GroupApi.class);
+		String x="b@a.com";
+		SharedPreferences settings = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+		String auth_token_string = settings.getString("authToken", ""/*default value*/);
+		task.requestGroups(x,"VAmfAkkpLPq4PKeGhpaY","instructor", new Callback<List<Group>>() {
+		
+			@Override
+			public void success(List<Group> arg0, Response arg1) {
+				groups=arg0;
+				Toast.makeText(getActivity(), "Nice", Toast.LENGTH_LONG).show();
+			}
+			
+			@Override
+			public void failure(RetrofitError arg0) {
+				Toast.makeText(getActivity(), "bad", Toast.LENGTH_LONG).show();
+				
+			}
+		});
+		groups = new ArrayList<Group>();
 		itemsToDelete = new ArrayList<String>();
-		ListAdapter = new ArrayAdapter<String>(getActivity(), 
+		ListAdapter = new ArrayAdapter<Group>(getActivity(), 
 				R.layout.custom_list_item, groups);
 		
-		groups.add("Group 1");
-		groups.add("Group 2");
-		groups.add("Group 3");
-		groups.add("Group 4");
 		setListAdapter(ListAdapter);
 		return inflater.inflate(R.layout.fragment_groups, container, false);
 	}
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onViewCreated(view, savedInstanceState);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		groups.add("Haitham");
-		ListAdapter.notifyDataSetChanged();
-		Toast.makeText(getActivity(), "7omos", Toast.LENGTH_LONG).show();
-	}
-
 	
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -101,9 +113,9 @@ public class GroupFragment extends ListFragment {
 			public void onItemCheckedStateChanged(ActionMode mode,
 					int position, long id, boolean checked) {
 				if (checked) 
-					itemsToDelete.add(groups.get(position));
+					itemsToDelete.add(groups.get(position).getName());
 				else
-					itemsToDelete.remove(groups.get(position));
+					itemsToDelete.remove(groups.get(position).getName());
 			}
 			
 		});
@@ -116,7 +128,7 @@ public class GroupFragment extends ListFragment {
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(groups.get(position));
+		alert(groups.get(position).getName());
 	}
 	
 	private void alert(final String selectedGroup) {
@@ -153,7 +165,7 @@ public class GroupFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				groups.add(et.getText().toString());
+				
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -181,13 +193,5 @@ public class GroupFragment extends ListFragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = getActivity().getMenuInflater();
-	    inflater.inflate(R.menu.context_menu, menu);
 	}
 }
