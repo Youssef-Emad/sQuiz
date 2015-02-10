@@ -1,12 +1,16 @@
 package com.example.Models;
 
 public class Quiz {
+	private int id;
 	private String name;
 	private String subject;
 	private int duration;
 	private int no_of_MCQ;
 	private int no_of_rearrangeQ;
 	private int instrutor_id;
+	private String created_at;
+	private String updated_at;
+	private String expiry_date;
 	
 	
 	public String getName() {
@@ -44,6 +48,30 @@ public class Quiz {
 	}
 	public void setInstrutor_id(int instrutor_id) {
 		this.instrutor_id = instrutor_id;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+	public String getUpdated_at() {
+		return updated_at;
+	}
+	public void setUpdated_at(String updated_at) {
+		this.updated_at = updated_at;
+	}
+	public String getExpiry_date() {
+		return expiry_date;
+	}
+	public void setExpiry_date(String expiry_date) {
+		this.expiry_date = expiry_date;
 	}
 	
 
