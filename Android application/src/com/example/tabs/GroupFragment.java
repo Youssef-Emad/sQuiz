@@ -128,7 +128,7 @@ public class GroupFragment extends ListFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Enter group name: ");
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
-		View v = inflater.inflate(R.layout.activity_oncreategroup, null);
+		View v = inflater.inflate(R.layout.create_group_alert, null);
 		final EditText et = (EditText) v.findViewById(R.id.group_name);
 		builder.setView(v);
 		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
