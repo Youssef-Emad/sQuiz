@@ -2,6 +2,7 @@ package com.example.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,8 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.squiz.GroupDetailsActivity;
 import com.example.squiz.R;
 
@@ -43,6 +46,21 @@ public class GroupFragment extends ListFragment {
 		setListAdapter(ListAdapter);
 		return inflater.inflate(R.layout.fragment_groups, container, false);
 	}
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onViewCreated(view, savedInstanceState);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		groups.add("Haitham");
+		ListAdapter.notifyDataSetChanged();
+		Toast.makeText(getActivity(), "7omos", Toast.LENGTH_LONG).show();
+	}
+
 	
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {

@@ -23,6 +23,7 @@ public class AfterLoginInstructorActivity extends FragmentActivity implements Ac
 		
 		setContentView(R.layout.activity_afterlogin);
 		Toast.makeText(AfterLoginInstructorActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+		
 		actionBar = getActionBar();
 		actionBar.setTitle("sQuiz me!");
 		actionBar.setDisplayHomeAsUpEnabled(true);
