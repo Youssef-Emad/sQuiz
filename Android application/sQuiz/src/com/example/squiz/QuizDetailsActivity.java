@@ -19,6 +19,7 @@ public class QuizDetailsActivity extends FragmentActivity {
         questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nQuestions);
 
         final ActionBar actionBar = getActionBar();
+        actionBar.setTitle(getIntent().getExtras().getString("quizName"));
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 

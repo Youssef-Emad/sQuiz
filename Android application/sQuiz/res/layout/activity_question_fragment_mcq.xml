@@ -40,22 +40,48 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         tools:ignore="RtlHardcoded" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <RadioButton
+                android:id="@+id/radio0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="37dp" />
+
+            <RadioButton
+                android:id="@+id/radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="39dp" />
+
+            <RadioButton
+                android:id="@+id/radio3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp" />
+
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radio_first_choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
+            android:orientation="vertical" >
 
             <EditText
                 android:id="@+id/editTextFirstChoice"
@@ -65,20 +91,6 @@
                 android:ems="10"
                 android:hint="@string/first_choice" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radio_second_choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
-
             <EditText
                 android:id="@+id/editTextSecondChoice"
                 android:layout_width="match_parent"
@@ -86,19 +98,6 @@
                 android:layout_margin="10dp"
                 android:ems="10"
                 android:hint="@string/second_choice" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radio_third_choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
 
             <EditText
                 android:id="@+id/editTextThirdChoice"
@@ -107,19 +106,6 @@
                 android:layout_margin="10dp"
                 android:ems="10"
                 android:hint="@string/third_choice" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radio_fourth_choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/editTextFourthChoice"
@@ -129,6 +115,6 @@
                 android:ems="10"
                 android:hint="@string/fourth_choice" />
         </LinearLayout>
-    </RadioGroup>
+    </LinearLayout>
 
 </LinearLayout>
