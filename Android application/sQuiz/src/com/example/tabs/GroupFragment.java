@@ -2,6 +2,7 @@ package com.example.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,20 +10,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.ActionMode;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import com.example.squiz.GroupDetailsActivity;
+
+import com.example.squiz.QuizzesInGroupActivity;
 import com.example.squiz.R;
+import com.example.squiz.StudentsInGroupActivity;
 
 public class GroupFragment extends ListFragment {
 	private List<String> groups;
@@ -108,14 +109,13 @@ public class GroupFragment extends ListFragment {
 	           .setItems(R.array.items, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
-                       intent.setClass(getActivity(), GroupDetailsActivity.class);
                        intent.putExtra("Group", selectedGroup);
-	            	   if (which == 0) {
-	                       intent.putExtra("Choice", "Quizzes");
+	            	   if (which == 1) {
+	            		   intent.setClass(getActivity(), StudentsInGroupActivity.class);
 	                       startActivity(intent);
 	            	   }
 	            	   else {
-	            		   intent.putExtra("Choice", "Students");
+	            		   intent.setClass(getActivity(), QuizzesInGroupActivity.class);
 	            		   startActivity(intent);
 	            	   }
 	               }
@@ -128,7 +128,7 @@ public class GroupFragment extends ListFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Enter group name: ");
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
-		View v = inflater.inflate(R.layout.activity_oncreategroup, null);
+		View v = inflater.inflate(R.layout.create_group_alert, null);
 		final EditText et = (EditText) v.findViewById(R.id.group_name);
 		builder.setView(v);
 		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
@@ -165,11 +165,4 @@ public class GroupFragment extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = getActivity().getMenuInflater();
-	    inflater.inflate(R.menu.context_menu, menu);
-	}
 }

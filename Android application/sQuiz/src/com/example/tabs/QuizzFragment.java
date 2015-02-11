@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AbsListView.MultiChoiceModeListener;
 
+import com.example.squiz.QuizFormActivity;
 import com.example.squiz.R;
 
 public class QuizzFragment extends ListFragment {
@@ -99,6 +101,10 @@ public class QuizzFragment extends ListFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.action_add) {
+			startActivity(new Intent(getActivity(), QuizFormActivity.class));
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
