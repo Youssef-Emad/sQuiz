@@ -35,5 +35,14 @@
     <string name="duration">Duration</string>
     <string name="example_15">Example: 15</string>
     <string name="next">Next</string>
+    <string name="question_title">Question title</string>
+    <string name="example_arrange_in_ascending_order">Example: Arrange in ascending order</string>
+    <string name="re_arrangement_options">Re-arrangement options</string>
+    <string name="example_a_4">Example: a)4</string>
+    <string name="example_b_5">Example: b)5</string>
+    <string name="example_c_6">Example: c)6</string>
+    <string name="example_d_7">Example: d)7</string>
+    <string name="question_answer">Question answer</string>
+    <string name="example_b_c_d_a">Example: b-c-d-a</string>
 
 </resources>
