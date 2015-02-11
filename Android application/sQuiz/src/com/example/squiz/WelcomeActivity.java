@@ -3,6 +3,7 @@ package com.example.squiz;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
+import retrofit.RestAdapter.LogLevel;
 import retrofit.client.Response;
 import android.app.Activity;
 import android.content.Context;
@@ -98,6 +99,7 @@ public class WelcomeActivity extends Activity {
 
 		RestAdapter restAdapter = new RestAdapter.Builder()
 	    .setEndpoint(ENDPOINT)  //call base url
+	    .setLogLevel(LogLevel.FULL)
 	    .build();
 
 

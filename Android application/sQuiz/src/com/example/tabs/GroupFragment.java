@@ -56,7 +56,8 @@ public class GroupFragment extends ListFragment {
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
 				groups=arg0;
-				Toast.makeText(getActivity(), "Nice", Toast.LENGTH_LONG).show();
+				
+				Toast.makeText(getActivity(),groups.get(0).getName(), Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
