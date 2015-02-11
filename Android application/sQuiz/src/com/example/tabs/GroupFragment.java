@@ -45,10 +45,14 @@ public class GroupFragment extends ListFragment {
 			Bundle savedInstanceState) {
 		
 		setHasOptionsMenu(true);
+		groups = new ArrayList<Group>();
+		itemsToDelete = new ArrayList<Group>();
+		
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
 	    .setLogLevel(LogLevel.FULL)
 	    .build();
+		
 		GroupApi task = restAdapter1.create(GroupApi.class);
 		String x="b@a.com";
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -58,6 +62,10 @@ public class GroupFragment extends ListFragment {
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
 				groups=arg0;
+				GroupAdapter = new ListAdapter<Group>(getActivity(), 
+						R.layout.custom_list_item, groups);
+				setListAdapter(GroupAdapter);
+				Toast.makeText(getActivity(), groups.get(0).toString(), Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
@@ -66,11 +74,6 @@ public class GroupFragment extends ListFragment {
 				
 			}
 		});
-		groups = new ArrayList<Group>();
-		itemsToDelete = new ArrayList<Group>();
-		GroupAdapter = new ListAdapter<Group>(getActivity(), 
-				R.layout.custom_list_item, groups);
-		setListAdapter(GroupAdapter);
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
 	}
 	
@@ -191,6 +194,7 @@ public class GroupFragment extends ListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
 			alertCustom();
+			GroupAdapter.notifyDataSetChanged();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
