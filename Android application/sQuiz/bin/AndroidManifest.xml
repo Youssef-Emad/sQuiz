@@ -41,7 +41,7 @@
         <activity android:name=".QuizFormActivity" android:theme="@style/sQuizTheme">
         </activity>
         
-        <activity android:name=".QuizDetailsActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity android:name=".QuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
         </activity>
         
     </application>

@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class QuizFormActivity extends Activity {
 	private Button next;
-	private EditText numberOfMCQ, numberOfRearrangement;
+	private EditText numberOfMCQ, numberOfRearrangement, quizName;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,6 +17,7 @@ public class QuizFormActivity extends Activity {
 		
 		numberOfMCQ = (EditText) findViewById(R.id.editTextNumberOfMcq);
 		numberOfRearrangement = (EditText) findViewById(R.id.editTextNumberOfRearrangement);
+		quizName = (EditText) findViewById(R.id.editTextQuizName);
 		
 		next = (Button) findViewById(R.id.next);
 		next.setOnClickListener(new View.OnClickListener() {
@@ -25,9 +26,12 @@ public class QuizFormActivity extends Activity {
 			public void onClick(View v) {
 				int nMCQ = Integer.parseInt(numberOfMCQ.getText().toString());
 				int nRe = Integer.parseInt(numberOfRearrangement.getText().toString());
+				String QName = quizName.getText().toString();
 				Intent intent = new Intent(QuizFormActivity.this, QuizDetailsActivity.class);
 				intent.putExtra("nQuestions", nMCQ + nRe);
+				intent.putExtra("quizName", QName);
 				startActivity(intent);
+				
 			}
 		});
 	}
