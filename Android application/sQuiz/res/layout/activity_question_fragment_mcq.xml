@@ -50,16 +50,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-
             <RadioButton
-                android:id="@+id/radio0"
+                android:id="@+id/radio_first_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp" />
 
             <EditText
-                android:id="@+id/editTextQuestionAnswer"
+                android:id="@+id/editTextFirstChoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -74,14 +73,14 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radio1"
+                android:id="@+id/radio_second_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp" />
 
             <EditText
-                android:id="@+id/editTextQuestion1"
+                android:id="@+id/editTextSecondChoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -95,14 +94,14 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radio2"
+                android:id="@+id/radio_third_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp" />
 
             <EditText
-                android:id="@+id/editTextQuestionAswer"
+                android:id="@+id/editTextThirdChoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -117,13 +116,13 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radio3"
+                android:id="@+id/radio_fourth_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical" />
 
             <EditText
-                android:id="@+id/editTextQuestionswer"
+                android:id="@+id/editTextFourthChoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

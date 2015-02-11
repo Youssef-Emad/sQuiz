@@ -6,6 +6,15 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/next" />
+
     <TextView
         android:id="@+id/quizName"
         android:layout_width="wrap_content"
@@ -66,8 +75,26 @@
         android:ems="10"
         android:hint="@string/example_5"
         android:inputType="number" />
-    <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10dp" android:layout_marginLeft="10dp" android:layout_marginTop="10dp" tools:ignore="RtlHardcoded" android:text="@string/number_of_re_arrangement_questions" android:textAppearance="?android:attr/textAppearanceMedium"/>
-    <EditText android:ems="10" android:id="@+id/EditText01" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp" android:hint="@string/example_5" android:inputType="number"/>
+
+    <TextView
+        android:id="@+id/numberOfRearrangement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/number_of_re_arrangement_questions"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/editTextNumberOfRearrangement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_5"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/duration"
@@ -82,7 +109,7 @@
         tools:ignore="RtlHardcoded" />
 
     <EditText
-        android:id="@+id/editTextNumberOfRearrangement"
+        android:id="@+id/editTextDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -94,17 +121,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom" >
-
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/next" />
-
     </LinearLayout>
 
 </LinearLayout>
