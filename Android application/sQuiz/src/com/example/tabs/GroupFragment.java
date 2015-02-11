@@ -48,10 +48,9 @@ public class GroupFragment extends ListFragment {
 	    .build();
 		GroupApi task = restAdapter1.create(GroupApi.class);
 		String x="b@a.com";
-		SharedPreferences settings = PreferenceManager
-                .getDefaultSharedPreferences(getActivity());
-		String auth_token_string = settings.getString("authToken", ""/*default value*/);
-		task.requestGroups(x,"VAmfAkkpLPq4PKeGhpaY","instructor", new Callback<List<Group>>() {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			String auth_token_string = settings.getString("authToken", ""/*default value*/);
+		task.requestGroups(x,auth_token_string.replaceAll("\"", ""),"instructor", new Callback<List<Group>>() {
 		
 			@Override
 			public void success(List<Group> arg0, Response arg1) {

@@ -8,7 +8,9 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.ActionMode;
@@ -41,7 +43,9 @@ public class QuizzFragment extends ListFragment {
 	    .build();
 		QuizApi task = restAdapter1.create(QuizApi.class);
 		String x="b@a.com";
-		task.requestForm(x, "VAmfAkkpLPq4PKeGhpaY", "instructor", new Callback<List<Quiz>>(
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		String auth_token_string = settings.getString("authToken", ""/*default value*/);
+		task.requestForm(x, auth_token_string.replaceAll("\"", ""), "instructor", new Callback<List<Quiz>>(
 				) {
 			
 			@Override
