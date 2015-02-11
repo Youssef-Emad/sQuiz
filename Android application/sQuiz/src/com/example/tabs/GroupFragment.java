@@ -17,31 +17,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.Models.Group;
+import com.example.adapters.ListAdapter;
 import com.example.squiz.QuizzesInGroupActivity;
 import com.example.squiz.R;
 import com.example.squiz.StudentsInGroupActivity;
 
 public class GroupFragment extends ListFragment {
-	private List<String> groups;
-	private ArrayAdapter<String> ListAdapter;
-	private List<String> itemsToDelete;
+	private List<Group> groups;
+	private ListAdapter<Group> GroupAdapter;
+	private List<Group> itemsToDelete;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		groups = new ArrayList<String>();
-		itemsToDelete = new ArrayList<String>();
-		ListAdapter = new ArrayAdapter<String>(getActivity(), 
+		groups = new ArrayList<Group>();
+		itemsToDelete = new ArrayList<Group>();
+		GroupAdapter = new ListAdapter<Group>(getActivity(), 
 				R.layout.custom_list_item, groups);
-		
-		groups.add("Group 1");
-		groups.add("Group 2");
-		groups.add("Group 3");
-		groups.add("Group 4");
-		setListAdapter(ListAdapter);
+		Group myGroup = new Group();
+		myGroup.setName("My Name");
+		groups.add(myGroup);
+		setListAdapter(GroupAdapter);
 		return inflater.inflate(R.layout.fragment_groups, container, false);
 	}
 	
@@ -94,12 +93,12 @@ public class GroupFragment extends ListFragment {
 	}
 	
 	private void deleteSelectedItems() {
-		for (String s : itemsToDelete)
+		for (Group s : itemsToDelete)
 			groups.remove(s);
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(groups.get(position));
+		alert(groups.get(position).toString());
 	}
 	
 	private void alert(final String selectedGroup) {
@@ -135,7 +134,9 @@ public class GroupFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				groups.add(et.getText().toString());
+				Group g = new Group();
+				g.setName(et.getText().toString());
+				groups.add(g);
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
