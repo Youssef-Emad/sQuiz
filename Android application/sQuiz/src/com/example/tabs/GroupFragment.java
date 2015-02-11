@@ -24,23 +24,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.Models.Group;
+import com.example.adapters.ListAdapter;
 import com.example.httpRequest.GroupApi;
-import com.example.squiz.GroupDetailsActivity;
+import com.example.squiz.QuizzesInGroupActivity;
 import com.example.squiz.R;
+import com.example.squiz.StudentsInGroupActivity;
 import com.example.squiz.WelcomeActivity;
 
 public class GroupFragment extends ListFragment {
 	private List<Group> groups;
-	private ArrayAdapter<Group> ListAdapter;
-	private List<String> itemsToDelete;
+	private ListAdapter<Group> GroupAdapter;
+	private List<Group> itemsToDelete;
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
 		setHasOptionsMenu(true);
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -55,8 +58,6 @@ public class GroupFragment extends ListFragment {
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
 				groups=arg0;
-				
-				Toast.makeText(getActivity(),groups.get(0).getName(), Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
@@ -66,12 +67,11 @@ public class GroupFragment extends ListFragment {
 			}
 		});
 		groups = new ArrayList<Group>();
-		itemsToDelete = new ArrayList<String>();
-		ListAdapter = new ArrayAdapter<Group>(getActivity(), 
+		itemsToDelete = new ArrayList<Group>();
+		GroupAdapter = new ListAdapter<Group>(getActivity(), 
 				R.layout.custom_list_item, groups);
-		
-		setListAdapter(ListAdapter);
-		return inflater.inflate(R.layout.fragment_groups, container, false);
+		setListAdapter(GroupAdapter);
+		return inflater.inflate(R.layout.fragment_quizzes, container, false);
 	}
 	
 	@Override
@@ -113,9 +113,9 @@ public class GroupFragment extends ListFragment {
 			public void onItemCheckedStateChanged(ActionMode mode,
 					int position, long id, boolean checked) {
 				if (checked) 
-					itemsToDelete.add(groups.get(position).getName());
+					itemsToDelete.add(groups.get(position));
 				else
-					itemsToDelete.remove(groups.get(position).getName());
+					itemsToDelete.remove(groups.get(position));
 			}
 			
 		});
@@ -123,12 +123,12 @@ public class GroupFragment extends ListFragment {
 	}
 	
 	private void deleteSelectedItems() {
-		for (String s : itemsToDelete)
+		for (Group s : itemsToDelete)
 			groups.remove(s);
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(groups.get(position).getName());
+		alert(groups.get(position).toString());
 	}
 	
 	private void alert(final String selectedGroup) {
@@ -138,14 +138,13 @@ public class GroupFragment extends ListFragment {
 	           .setItems(R.array.items, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
-                       intent.setClass(getActivity(), GroupDetailsActivity.class);
                        intent.putExtra("Group", selectedGroup);
-	            	   if (which == 0) {
-	                       intent.putExtra("Choice", "Quizzes");
+	            	   if (which == 1) {
+	            		   intent.setClass(getActivity(), StudentsInGroupActivity.class);
 	                       startActivity(intent);
 	            	   }
 	            	   else {
-	            		   intent.putExtra("Choice", "Students");
+	            		   intent.setClass(getActivity(), QuizzesInGroupActivity.class);
 	            		   startActivity(intent);
 	            	   }
 	               }
@@ -158,14 +157,16 @@ public class GroupFragment extends ListFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Enter group name: ");
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
-		View v = inflater.inflate(R.layout.activity_oncreategroup, null);
+		View v = inflater.inflate(R.layout.create_group_alert, null);
 		final EditText et = (EditText) v.findViewById(R.id.group_name);
 		builder.setView(v);
 		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
+				Group g = new Group();
+				g.setName(et.getText().toString());
+				groups.add(g);
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

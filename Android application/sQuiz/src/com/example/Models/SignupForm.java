@@ -1,9 +1,6 @@
 package com.example.Models;
 
-import android.widget.Toast;
-
 import com.example.Helpers.validator;
-import com.example.squiz.SignupActivity;
 
 public class SignupForm {
 	

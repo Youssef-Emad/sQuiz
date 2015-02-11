@@ -8,6 +8,7 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.Models.Quiz;
 import com.example.httpRequest.QuizApi;
+import com.example.squiz.QuizFormActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 
@@ -52,8 +54,6 @@ public class QuizzFragment extends ListFragment {
 			public void success(List<Quiz> arg0, Response arg1) {
 				quizzes=arg0;
 				Toast.makeText(getActivity(),quizzes.get(0).getName(), Toast.LENGTH_SHORT).show();
-				
-				
 			}
 			
 			@Override
@@ -131,6 +131,10 @@ public class QuizzFragment extends ListFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.action_add) {
+			startActivity(new Intent(getActivity(), QuizFormActivity.class));
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
