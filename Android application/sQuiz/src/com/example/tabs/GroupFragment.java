@@ -65,7 +65,6 @@ public class GroupFragment extends ListFragment {
 				GroupAdapter = new ListAdapter<Group>(getActivity(), 
 						R.layout.custom_list_item, groups);
 				setListAdapter(GroupAdapter);
-				Toast.makeText(getActivity(), groups.get(0).toString(), Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override

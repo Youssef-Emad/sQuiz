@@ -22,11 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.Models.Quiz;
+import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
 import com.example.squiz.QuizFormActivity;
 import com.example.squiz.R;
@@ -34,11 +33,16 @@ import com.example.squiz.WelcomeActivity;
 
 public class QuizzFragment extends ListFragment {
 	private List<Quiz> quizzes;
+	private ListAdapter<Quiz> QuizAdapter;
 	private List<Quiz> itemsToDelete;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
+
+		quizzes=new ArrayList<Quiz>();
+		itemsToDelete = new ArrayList<Quiz>();
+		
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
 	    .setLogLevel(LogLevel.FULL)
@@ -53,7 +57,9 @@ public class QuizzFragment extends ListFragment {
 			@Override
 			public void success(List<Quiz> arg0, Response arg1) {
 				quizzes=arg0;
-				Toast.makeText(getActivity(),quizzes.get(0).getName(), Toast.LENGTH_SHORT).show();
+				QuizAdapter = new ListAdapter<Quiz>(getActivity(), 
+						R.layout.custom_list_item, quizzes);
+				setListAdapter(QuizAdapter);
 			}
 			
 			@Override
@@ -62,10 +68,6 @@ public class QuizzFragment extends ListFragment {
 				
 			}
 		});
-
-		quizzes=new ArrayList<Quiz>();
-		setListAdapter(new ArrayAdapter<Quiz>(getActivity(), 
-				R.layout.custom_list_item, quizzes));
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
 	}
 	
