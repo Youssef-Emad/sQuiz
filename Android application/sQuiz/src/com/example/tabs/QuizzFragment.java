@@ -48,10 +48,10 @@ public class QuizzFragment extends ListFragment {
 	    .setLogLevel(LogLevel.FULL)
 	    .build();
 		QuizApi task = restAdapter1.create(QuizApi.class);
-		String x="b@a.com";
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String auth_token_string = settings.getString("authToken", ""/*default value*/);
-		task.requestForm(x, auth_token_string.replaceAll("\"", ""), "instructor", new Callback<List<Quiz>>(
+		String email=settings.getString("email", "");
+		task.requestForm(email, auth_token_string.replaceAll("\"", ""), "instructor", new Callback<List<Quiz>>(
 				) {
 			
 			@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
@@ -54,10 +55,10 @@ public class GroupFragment extends ListFragment {
 	    .build();
 		
 		GroupApi task = restAdapter1.create(GroupApi.class);
-		String x="b@a.com";
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 			String auth_token_string = settings.getString("authToken", ""/*default value*/);
-		task.requestGroups(x,auth_token_string.replaceAll("\"", ""),"instructor", new Callback<List<Group>>() {
+			String email=settings.getString("email", "");
+		task.requestGroups(email,auth_token_string.replaceAll("\"", ""),"instructor", new Callback<List<Group>>() {
 		
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
@@ -166,9 +167,7 @@ public class GroupFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Group g = new Group();
-				g.setName(et.getText().toString());
-				groups.add(g);
+				
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -40,6 +40,7 @@ public class SignupActivity extends Activity {
 	private ProgressBar pb;
 	SharedPreferences settings; 
 	SharedPreferences.Editor prefEditor;
+	String emailField;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	
@@ -65,7 +66,7 @@ public class SignupActivity extends Activity {
 			public void onClick(View v) {
 				if(isOnline()){	
 					String nameField=name.getText().toString();
-					String emailField=email.getText().toString();
+					 emailField=email.getText().toString();
 					String passField =password.getText().toString();
 					String confirmPassField=confirmPassword.getText().toString();
 					int radioButton = accType.getCheckedRadioButtonId();
@@ -118,6 +119,7 @@ public class SignupActivity extends Activity {
 				 authToken=arg0.get("auth_token").toString();
 				 SharedPreferences.Editor editor = settings.edit();		
 				 editor.putString("authToken", authToken);
+				 editor.putString("email",emailField );
 				 editor.commit();
 				}
 				
@@ -165,6 +167,7 @@ public class SignupActivity extends Activity {
 					authToken=arg0.get("auth_token").toString();
 					SharedPreferences.Editor editor = settings.edit();		
 					editor.putString("authToken", authToken);
+					editor.putString("email",emailField );
 					editor.commit();
 					startActivity(new Intent(SignupActivity.this, AfterLoginInstructorActivity.class));
 				}

@@ -14,5 +14,9 @@ public interface GroupApi {
 	@Headers({"Accept: application/json",})
 	@GET("/{type}/groups")
 	public void requestGroups(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token ,@Path("type") String type,Callback<List<Group>> callback);	
-
+	
+	@Headers({"Accept: application/json",})
+	@GET("/groups/create")
+	public void addGroup(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token,Callback<Group> callback);
+	
 } 
