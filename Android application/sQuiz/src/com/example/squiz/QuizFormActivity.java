@@ -28,7 +28,8 @@ public class QuizFormActivity extends Activity {
 				int nRe = Integer.parseInt(numberOfRearrangement.getText().toString());
 				String QName = quizName.getText().toString();
 				Intent intent = new Intent(QuizFormActivity.this, QuizDetailsActivity.class);
-				intent.putExtra("nQuestions", nMCQ + nRe);
+				intent.putExtra("nMCQ", nMCQ);
+				intent.putExtra("nRe", nRe);
 				intent.putExtra("quizName", QName);
 				startActivity(intent);
 				

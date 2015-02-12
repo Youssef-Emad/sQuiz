@@ -17,7 +17,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         case 0:
             return new GroupFragment();
         case 1:
-            return new QuizzFragment();
+            return new QuizFragment();
         }
         
         return null;

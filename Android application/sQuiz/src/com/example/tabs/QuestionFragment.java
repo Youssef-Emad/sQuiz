@@ -10,11 +10,17 @@ import com.example.squiz.R;
 
 public class QuestionFragment extends Fragment {
     public static final String ARG_QUESTION = "question";
+    public static final String ARG_NMCQ = "nMCQ";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_question_mcq, container, false);
-        return rootView;
+    	
+    	Bundle args = getArguments();
+    	int questionNumber = args.getInt(ARG_QUESTION);
+    	int nMCQ = args.getInt(ARG_NMCQ);
+        View MCQView = inflater.inflate(R.layout.fragment_question_mcq, container, false);
+        View ReView = inflater.inflate(R.layout.fragment_question_rearrange, container, false);
+        return questionNumber > nMCQ ? ReView : MCQView;
     }
 }

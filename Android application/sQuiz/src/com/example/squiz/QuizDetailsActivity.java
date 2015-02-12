@@ -15,8 +15,9 @@ public class QuizDetailsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_details);
         
-        int nQuestions = getIntent().getExtras().getInt("nQuestions");
-        questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nQuestions);
+        int nMCQ = getIntent().getExtras().getInt("nMCQ");
+        int nRe = getIntent().getExtras().getInt("nRe");
+        questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
 
         final ActionBar actionBar = getActionBar();
         actionBar.setTitle(getIntent().getExtras().getString("quizName"));
