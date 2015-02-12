@@ -1,14 +1,9 @@
 package com.example.tabs;
 
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONTokener;
-
 import retrofit.Callback;
-import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
@@ -38,7 +33,6 @@ import com.example.adapters.ListAdapter;
 import com.example.httpRequest.GroupApi;
 import com.example.squiz.QuizzesInGroupActivity;
 import com.example.squiz.R;
-import com.example.squiz.SignupActivity;
 import com.example.squiz.StudentsInGroupActivity;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
@@ -50,6 +44,7 @@ public class GroupFragment extends ListFragment {
 	GroupApi task;
 	String email;
 	String auth_token_string;
+	Intent intent;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -112,13 +107,15 @@ public class GroupFragment extends ListFragment {
 						@Override
 						public void failure(RetrofitError arg0) {
 							JsonObject obj=(JsonObject) arg0.getBody();
-							String text=obj.get("info").toString() + "-";
+							String text=obj.get("error").toString() ;
 									text=text.replace(':', ' ').replaceAll("\"", "");
 							Toast.makeText(getActivity(),text, Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
 						public void success(JsonObject arg0, Response arg1) {
+							String text=arg0.get("info").toString().replaceAll("\"", "") ;
+						if(text.equals("deleted"))
 							deleteSelectedItems();							
 						}
 					});
@@ -150,9 +147,13 @@ public class GroupFragment extends ListFragment {
 	private void deleteSelectedItems() {
 		for (Group s : itemsToDelete)
 			groups.remove(s);
+		GroupAdapter.notifyDataSetChanged();
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
+		 intent = new Intent();
+		 intent.putExtra("groupID",groups.get(position).getId());
+
 		alert(groups.get(position).toString());
 	}
 
@@ -162,7 +163,7 @@ public class GroupFragment extends ListFragment {
 		builder.setTitle(R.string.dialog_title)
 		.setItems(R.array.items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent();
+				
 				intent.putExtra("Group", selectedGroup);
 				if (which == 1) {
 					intent.setClass(getActivity(), StudentsInGroupActivity.class);

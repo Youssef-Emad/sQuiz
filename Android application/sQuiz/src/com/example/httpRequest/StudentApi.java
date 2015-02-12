@@ -11,18 +11,18 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 
 import com.example.Models.Group;
+import com.example.Models.Quiz;
+import com.example.Models.Student;
 import com.google.gson.JsonObject;
 
-public interface GroupApi {
-	@Headers({"Accept: application/json"})
-	@GET("/{type}/groups")
-	public void requestGroups(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token ,@Path("type") String type,Callback<List<Group>> callback);	
+public interface StudentApi {
 	
 	@Headers({"Accept: application/json"})
-	@POST("/groups/create")
-	public void addGroup(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token,@Body  Group group,Callback<Group> callback);
-	
-	@Headers({"Accept: application/json"})
+	@GET("/instructor/groups/{id}")
+	public void requestStudents(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token ,@Path("id") int id,Callback<List<Student>> callback);
+
+
 	@POST("/groups/delete")
 	public void deleteGroups(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token,@Body List<Group> groups,Callback<JsonObject> callback);
-} 
+
+}
