@@ -164,7 +164,7 @@ public class SignupActivity extends Activity {
 				public void success(JsonObject arg0, Response arg1) {
 					pb.setVisibility(View.INVISIBLE);
 					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
-					authToken=arg0.get("auth_token").toString();
+					authToken=arg0.get("auth_token").toString().replaceAll("\"", "");
 					SharedPreferences.Editor editor = settings.edit();		
 					editor.putString("authToken", authToken);
 					editor.putString("email",emailField );

@@ -51,7 +51,7 @@ public class QuizzFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String auth_token_string = settings.getString("authToken", ""/*default value*/);
 		String email=settings.getString("email", "");
-		task.requestForm(email, auth_token_string.replaceAll("\"", ""), "instructor", new Callback<List<Quiz>>(
+		task.requestForm(email, auth_token_string, "instructor", new Callback<List<Quiz>>(
 				) {
 			
 			@Override

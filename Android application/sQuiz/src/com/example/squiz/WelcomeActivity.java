@@ -118,7 +118,7 @@ public class WelcomeActivity extends Activity {
 	        	pb.setVisibility(View.INVISIBLE);
 	        String	authToken=arg0.get("auth_token").toString();
 	        SharedPreferences.Editor editor = settings.edit();		
-			editor.putString("authToken", authToken);
+			editor.putString("authToken", authToken.replaceAll("\"", ""));
 			editor.putString("email", email);
 			editor.commit();
 	        	
