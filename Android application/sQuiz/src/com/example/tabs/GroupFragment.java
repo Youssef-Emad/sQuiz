@@ -74,8 +74,7 @@ public class GroupFragment extends ListFragment {
 
 			@Override
 			public void failure(RetrofitError arg0) {
-				Toast.makeText(getActivity(), "bad", Toast.LENGTH_LONG).show();
-
+			
 			}
 		});
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);

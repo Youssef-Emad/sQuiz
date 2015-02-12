@@ -26,10 +26,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.Models.Group;
 import com.example.Models.Student;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.StudentApi;
+import com.google.gson.JsonObject;
 
 public class StudentsInGroupActivity extends ListActivity {
 	private List<Student> students;
@@ -39,18 +39,19 @@ public class StudentsInGroupActivity extends ListActivity {
 	StudentApi task;
 	String email;
 	String auth_token_string;
+	int groupId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_groupdetails);
 		
-		String StudentName = getIntent().getExtras().getString("Student");
-		int groupId=getIntent().getExtras().getInt("groupID");
+		String groupName = getIntent().getExtras().getString("Group");
+		 groupId=getIntent().getExtras().getInt("groupID");
 		
 		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setTitle(StudentName);
+		actionBar.setTitle(groupName);
 		
 		students = new ArrayList<>();
 		itemsToDelete = new ArrayList<>();
@@ -75,7 +76,10 @@ public class StudentsInGroupActivity extends ListActivity {
 
 			@Override
 			public void failure(RetrofitError arg0) {
-				Toast.makeText(StudentsInGroupActivity.this, "bad", Toast.LENGTH_LONG).show();
+				JsonObject obj=(JsonObject) arg0.getBody();
+				String text=obj.get("error").toString() ;
+						text=text.replace(':', ' ').replaceAll("\"", "");
+				Toast.makeText(StudentsInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -99,6 +103,23 @@ public class StudentsInGroupActivity extends ListActivity {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 	            case R.id.action_delete:
+	            	task.deleteStudents(email, auth_token_string, itemsToDelete,groupId,new Callback<JsonObject>() {
+
+						@Override
+						public void failure(RetrofitError arg0) {
+							JsonObject obj=(JsonObject) arg0.getBody();
+							String text=obj.get("error").toString() ;
+									text=text.replace(':', ' ').replaceAll("\"", "");
+							Toast.makeText(StudentsInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
+						}
+
+						@Override
+						public void success(JsonObject arg0, Response arg1) {
+							String text=arg0.get("info").toString().replaceAll("\"", "") ;
+							if(text.equals("deleted"))
+								deleteSelectedItems();							
+						}
+					});
 	                deleteSelectedItems();
 	                mode.finish(); // Action picked, so close the CAB
 	                return true;
@@ -127,6 +148,7 @@ public class StudentsInGroupActivity extends ListActivity {
 	private void deleteSelectedItems() {
 		for (Student s : itemsToDelete)
 			students.remove(s);
+		StudentAdapter.notifyDataSetChanged();
 	}
 	
  
@@ -158,6 +180,26 @@ public class StudentsInGroupActivity extends ListActivity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				Student temp=new Student();
+				temp.setEmail(et.getText().toString());
+				task.addStudent(email, auth_token_string, groupId,temp, new Callback<Student>() {
+
+					@Override
+					public void failure(RetrofitError arg0) {
+						JsonObject type=new JsonObject() ;
+						JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
+						String text=obj.get("error").toString();
+						text=text.replace(':', ' ').replaceAll("\"", "");
+						Toast.makeText(StudentsInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void success(Student arg0, Response arg1) {
+						students.add(arg0);
+						StudentAdapter.notifyDataSetChanged();
+						
+					}
+				});
 				
 			}
 		});

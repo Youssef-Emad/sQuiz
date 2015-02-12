@@ -8,6 +8,7 @@ import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Headers;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 import com.example.Models.Quiz;
@@ -20,6 +21,8 @@ public interface QuizApi {
 	public void requestForm(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token,@Path("type") String typ,Callback<List<Quiz>> callback);	
 
 	@Headers({"Accept: application/json",})
-	@DELETE("/groups/delete")
+	@POST("/groups/delete")
 	public void deleteQuizzes(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token,@Body  List<Quiz> quiz,Callback<JsonObject> callback);
+
+	
 }

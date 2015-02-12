@@ -12,6 +12,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/example_add_student"
+        android:inputType="textEmailAddress"
         tools:ignore="TextFields" >
 
         <requestFocus />
