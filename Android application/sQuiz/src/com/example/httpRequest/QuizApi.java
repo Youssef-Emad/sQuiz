@@ -21,7 +21,7 @@ public interface QuizApi {
 			,@Path("type") String typ,Callback<List<Quiz>> callback);	
 
 	@Headers({"Accept: application/json",})
-	@POST("/groups/delete")
+	@POST("/quizzes/delete")
 	public void deleteQuizzes(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
 			,@Body  List<Quiz> quiz,Callback<JsonObject> callback);
 

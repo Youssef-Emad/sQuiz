@@ -139,6 +139,7 @@ public class QuizzFragment extends ListFragment {
 	private void deleteSelectedItems() {
 		for (Quiz s : itemsToDelete)
 			quizzes.remove(s);
+		QuizAdapter.notifyDataSetChanged();
 	}
 	
 	@Override
