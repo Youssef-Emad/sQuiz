@@ -108,7 +108,20 @@ public class GroupFragment extends ListFragment {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 				case R.id.action_delete:
-					deleteSelectedItems();
+					task.deleteGroups(email, auth_token_string, itemsToDelete, new Callback<JsonObject>() {
+						@Override
+						public void failure(RetrofitError arg0) {
+							JsonObject obj=(JsonObject) arg0.getBody();
+							String text=obj.get("info").toString() + "-";
+									text=text.replace(':', ' ').replaceAll("\"", "");
+							Toast.makeText(getActivity(),text, Toast.LENGTH_SHORT).show();
+						}
+
+						@Override
+						public void success(JsonObject arg0, Response arg1) {
+							deleteSelectedItems();							
+						}
+					});
 					mode.finish(); // Action picked, so close the CAB
 					return true;
 				default:
