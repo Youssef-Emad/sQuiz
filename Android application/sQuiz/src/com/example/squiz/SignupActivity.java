@@ -36,10 +36,10 @@ public class SignupActivity extends Activity {
 	private EditText confirmPassword;
 	private Button signUp;
 	public static final String ENDPOINT="https://sQuiz.herokuapp.com/api" ; 
-	private String authToken=new String();
+	public static String authToken=new String();
 	private ProgressBar pb;
-	private SharedPreferences settings;
-	
+	SharedPreferences settings; 
+	SharedPreferences.Editor prefEditor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	
@@ -55,8 +55,8 @@ public class SignupActivity extends Activity {
 		 accType=(RadioGroup)findViewById(R.id.accType);
 		 pb=(ProgressBar) findViewById(R.id.progressBar1);
 		 pb.setVisibility(View.INVISIBLE);
-		 settings= PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
-		 	
+		 settings = PreferenceManager.getDefaultSharedPreferences(SignupActivity.this);
+		 prefEditor = settings.edit();
 	   		
 		
 	  signUp.setOnClickListener(new OnClickListener() {
@@ -160,10 +160,13 @@ public class SignupActivity extends Activity {
 
 				@Override
 				public void success(JsonObject arg0, Response arg1) {
-					 pb.setVisibility(View.INVISIBLE);
+					pb.setVisibility(View.INVISIBLE);
 					Toast.makeText(SignupActivity.this, "Signup complete", Toast.LENGTH_SHORT).show();
+					authToken=arg0.get("auth_token").toString();
+					SharedPreferences.Editor editor = settings.edit();		
+					editor.putString("authToken", authToken);
+					editor.commit();
 					startActivity(new Intent(SignupActivity.this, AfterLoginInstructorActivity.class));
-		        	
 				}
 			});
    		 }

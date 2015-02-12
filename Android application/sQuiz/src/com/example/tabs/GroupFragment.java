@@ -3,10 +3,17 @@ package com.example.tabs;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.ActionMode;
@@ -19,29 +26,54 @@ import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.Models.Group;
 import com.example.adapters.ListAdapter;
+import com.example.httpRequest.GroupApi;
 import com.example.squiz.QuizzesInGroupActivity;
 import com.example.squiz.R;
 import com.example.squiz.StudentsInGroupActivity;
+import com.example.squiz.WelcomeActivity;
 
 public class GroupFragment extends ListFragment {
 	private List<Group> groups;
 	private ListAdapter<Group> GroupAdapter;
 	private List<Group> itemsToDelete;
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
 		itemsToDelete = new ArrayList<Group>();
-		GroupAdapter = new ListAdapter<Group>(getActivity(), 
-				R.layout.custom_list_item, groups);
-		Group myGroup = new Group();
-		myGroup.setName("My Name");
-		groups.add(myGroup);
-		setListAdapter(GroupAdapter);
-		return inflater.inflate(R.layout.fragment_groups, container, false);
+		
+		RestAdapter restAdapter1= new RestAdapter.Builder()
+	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
+	    .setLogLevel(LogLevel.FULL)
+	    .build();
+		
+		GroupApi task = restAdapter1.create(GroupApi.class);
+		String x="b@a.com";
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			String auth_token_string = settings.getString("authToken", ""/*default value*/);
+		task.requestGroups(x,auth_token_string.replaceAll("\"", ""),"instructor", new Callback<List<Group>>() {
+		
+			@Override
+			public void success(List<Group> arg0, Response arg1) {
+				groups=arg0;
+				GroupAdapter = new ListAdapter<Group>(getActivity(), 
+						R.layout.custom_list_item, groups);
+				setListAdapter(GroupAdapter);
+			}
+			
+			@Override
+			public void failure(RetrofitError arg0) {
+				Toast.makeText(getActivity(), "bad", Toast.LENGTH_LONG).show();
+				
+			}
+		});
+		return inflater.inflate(R.layout.fragment_quizzes, container, false);
 	}
 	
 	@Override
@@ -161,9 +193,9 @@ public class GroupFragment extends ListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
 			alertCustom();
+			GroupAdapter.notifyDataSetChanged();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 }

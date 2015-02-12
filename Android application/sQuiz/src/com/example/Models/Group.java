@@ -1,10 +1,11 @@
 package com.example.Models;
+
 public class Group {
 	private int id;
 	private String name;
-	private int instructor_id;
 	private String created_at;
 	private String updated_at;
+
 	public int getId() {
 		return id;
 	}
@@ -13,12 +14,6 @@ public class Group {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public int getInstructor_id() {
-		return instructor_id;
-	}
-	public void setInstructor_id(int instructor_id) {
-		this.instructor_id = instructor_id;
 	}
 	public String getCreated_at() {
 		return created_at;

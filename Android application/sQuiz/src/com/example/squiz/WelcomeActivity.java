@@ -2,14 +2,17 @@ package com.example.squiz;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -29,6 +32,8 @@ public class WelcomeActivity extends Activity {
 	 EditText Password;
 	 LoginForm user;
 	 ProgressBar pb ;
+	 SharedPreferences settings; 
+	SharedPreferences.Editor prefEditor;
 	
 	public static final String ENDPOINT = 
 			"https://sQuiz.herokuapp.com/api";
@@ -46,6 +51,8 @@ public class WelcomeActivity extends Activity {
 		logIn = (Button) findViewById(R.id.login);
 		pb = (ProgressBar) findViewById(R.id.progressBar1);
 		pb.setVisibility(View.INVISIBLE);
+		settings = PreferenceManager.getDefaultSharedPreferences(WelcomeActivity.this);
+		prefEditor = settings.edit();
     	
 		signUp.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
@@ -98,6 +105,7 @@ public class WelcomeActivity extends Activity {
 
 		RestAdapter restAdapter = new RestAdapter.Builder()
 	    .setEndpoint(ENDPOINT)  //call base url
+	    .setLogLevel(LogLevel.FULL)
 	    .build();
 
 
@@ -107,6 +115,11 @@ public class WelcomeActivity extends Activity {
 	        public void success(JsonObject arg0, Response arg1) {
 	        	
 	        	pb.setVisibility(View.INVISIBLE);
+	        String	authToken=arg0.get("auth_token").toString();
+	        SharedPreferences.Editor editor = settings.edit();		
+			editor.putString("authToken", authToken);
+			editor.commit();
+	        	
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
 	        	}
 
