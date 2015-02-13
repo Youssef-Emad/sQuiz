@@ -120,6 +120,25 @@ public class QuizDetailsActivity extends FragmentActivity {
 	}
 
 	private void collectReData(int pos) {
+		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
+		View v = qf.getView();
 
+		etText = (EditText) v.findViewById(R.id.QuestionTitleRearrangement);
+		text = etText.getText().toString();
+
+		etChoices[0] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption1);
+		etChoices[1] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption2);
+		etChoices[2] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption3);
+		etChoices[3] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption4);
+
+		choices[0] = etChoices[0].getText().toString();
+		choices[1] = etChoices[1].getText().toString();
+		choices[2] = etChoices[2].getText().toString();
+		choices[3] = etChoices[3].getText().toString();
+		
+		etRight_answer = (EditText) v.findViewById(R.id.editTextQuestionRearrangementAnswer);
+		right_answer = etRight_answer.getText().toString();
+		
+		questions[pos] = new Question(text, choices, right_answer);
 	}
 }
