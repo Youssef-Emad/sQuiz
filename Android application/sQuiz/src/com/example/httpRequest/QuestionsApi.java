@@ -8,6 +8,7 @@ import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
+import com.example.Models.PublishInfo;
 import com.example.Models.Question;
 import com.google.gson.JsonObject;
 
@@ -25,4 +26,10 @@ public interface QuestionsApi {
 	public void addQuestions(@Header("X-Instructor-Email") String email,
 			@Header("X-Instructor-Token") String token, @Path("id") int id
 			,@Body Question[] questions,Callback<JsonObject> callback);
+	
+	@Headers({"Accept: application/json",})
+	@POST("/quizzes/publish/{id}")
+	public void publishQuiz(@Header("X-Instructor-Email") String email,
+			@Header("X-Instructor-Token") String token, @Body PublishInfo pi,
+			@Path("id") int id, Callback<JsonObject> callback);
 }

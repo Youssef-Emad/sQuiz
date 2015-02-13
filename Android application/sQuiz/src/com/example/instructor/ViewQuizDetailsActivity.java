@@ -2,9 +2,11 @@ package com.example.instructor;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,9 +14,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.Models.PublishInfo;
 import com.example.Models.Question;
 import com.example.httpRequest.QuestionsApi;
+import com.example.instructor.tabs.InstructorGroupFragment;
 import com.example.instructor.tabs.ViewQuestionsPagerAdapter;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
@@ -25,7 +32,7 @@ public class ViewQuizDetailsActivity extends FragmentActivity {
 	private Button publish;
 	private int nQuestion;
 	private int quizID;
-	private Question[] questions;
+	private PublishInfo pi;
 	QuestionsApi task;
 	String auth_token_string, email;
 	
@@ -38,6 +45,8 @@ public class ViewQuizDetailsActivity extends FragmentActivity {
 		nQuestion = getIntent().getExtras().getInt("nQuestion");
 		
 		mViewPager = (ViewPager) findViewById(R.id.questions_pager);
+		
+		pi = new PublishInfo();
 		
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)
@@ -70,10 +79,75 @@ public class ViewQuizDetailsActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				alert();
 			}
 		});
+	}
+	
+	private void alert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(ViewQuizDetailsActivity.this);
+		
+		int n = InstructorGroupFragment.groups.size();
+		CharSequence[] items = new CharSequence[n];
+		
+		for (int i = 0; i < n; i++) {
+			items[i] = InstructorGroupFragment.groups.get(i).toString();
+		}
+		
+		builder.setTitle(R.string.publish_title)
+		.setItems(items, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				alertDate();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
+	
+	private void alertDate() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    final DatePicker picker = new DatePicker(this);
+	    picker.setCalendarViewShown(false);
+
+	    builder.setTitle("Pick expire date");
+	    builder.setView(picker);
+	    builder.setNegativeButton("Cancel", null);
+	    builder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String day   = Integer.toString(picker.getDayOfMonth());
+				String month = Integer.toString(picker.getMonth());
+				String year  = Integer.toString(picker.getYear());
+				String arg = year + "-" + month + "-" + day + " ";
+				alertTime(arg);
+			}
+		});
+
+	    builder.show();
+	}
+	
+	private void alertTime(final String date) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    final TimePicker picker = new TimePicker(this);
+	    picker.setIs24HourView(true);
+
+	    builder.setTitle("Pick expire time");
+	    builder.setView(picker);
+	    builder.setNegativeButton("Cancel", null);
+	    builder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String hour = picker.getCurrentHour().toString();
+				String min  = picker.getCurrentMinute().toString();
+				String expireDate = date + hour + ":" + min + ":00 +0200";
+				Toast.makeText(ViewQuizDetailsActivity.this, 
+						expireDate, Toast.LENGTH_LONG).show();
+			}
+		});
+
+	    builder.show();
 	}
 
 }

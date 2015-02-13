@@ -38,7 +38,7 @@ import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
 public class InstructorGroupFragment extends ListFragment {
-	private List<Group> groups;
+	public static List<Group> groups;
 	private ListAdapter<Group> GroupAdapter;
 	private List<Group> itemsToDelete;
 	GroupApi task;

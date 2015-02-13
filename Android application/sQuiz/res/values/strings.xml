@@ -59,5 +59,6 @@
     <string name="your_answer_">Your answer:</string>
     <string name="right_answer_">"Right answer: "</string>
     <string name="publish">Publish</string>
+    <string name="publish_title">Publish to</string>
 
 </resources>
