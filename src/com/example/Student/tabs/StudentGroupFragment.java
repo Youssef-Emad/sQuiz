@@ -148,13 +148,13 @@ public class StudentGroupFragment extends ListFragment {
 		GroupAdapter.notifyDataSetChanged();
 	} */
 	
-	@Override
+	/* @Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		 intent = new Intent();
 		 intent.putExtra("groupID",groups.get(position).getId());
 
 		alert(groups.get(position).toString());
-	}
+	} 
 
 	private void alert(final String selectedGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -176,7 +176,7 @@ public class StudentGroupFragment extends ListFragment {
 		});
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
-	}
+	} */
 
 	/*private void alertCustom() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

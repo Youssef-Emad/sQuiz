@@ -77,8 +77,8 @@ public class StudentQuizzFragment extends ListFragment {
 	
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		ListView listView = getListView();
-		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		//ListView listView = getListView();
+	//	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 	/*	listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 			@Override

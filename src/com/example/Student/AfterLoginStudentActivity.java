@@ -23,7 +23,7 @@ public class AfterLoginStudentActivity extends FragmentActivity implements Actio
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_afterlogin);
-		Toast.makeText(AfterLoginStudentActivity.this, "Welcome St", Toast.LENGTH_SHORT).show();
+		Toast.makeText(AfterLoginStudentActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
 		
 		actionBar = getActionBar();
 		actionBar.setTitle("sQuiz me!");
