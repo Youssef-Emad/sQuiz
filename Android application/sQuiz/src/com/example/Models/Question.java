@@ -7,6 +7,12 @@ public class Question {
 	private String[] choices;
 	private String right_answer;
 	int quiz_id;
+	
+	public Question(String text, String[] choices, String right_answer) {
+		this.text = text;
+		this.choices = choices;
+		this.right_answer = right_answer;
+	}
 	public int getId() {
 		return id;
 	}

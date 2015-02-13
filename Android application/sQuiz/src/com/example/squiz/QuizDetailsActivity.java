@@ -36,7 +36,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 		nRe = getIntent().getExtras().getInt("nRe");
 		nQuestion = nMCQ + nRe;
 		questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
-		
+
 		choices = new String[4];
 		questions = new Question[nQuestion];
 		etChoices = new EditText[4];
@@ -48,29 +48,28 @@ public class QuizDetailsActivity extends FragmentActivity {
 
 		mViewPager = (ViewPager) findViewById(R.id.questions_pager);
 		mViewPager.setAdapter(questionPagerAdapter);
-		
+
 		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			
+
 			@Override
 			public void onPageSelected(int position) {
 				if (position > 0 && position > prevPosition) {
-					QuestionFragment qf = questionPagerAdapter.getFragment(position - 1);
-					if (position > nMCQ)
-						collectReData();
+					if (position - 1 < nMCQ)
+						collectMCQData(position - 1);
 					else
-						collectMCQData();
+						collectReData(position - 1);
 				}
 				prevPosition = position;
 			}
-			
+
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				
+
 			}
-			
+
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				
+
 			}
 		});
 
@@ -87,5 +86,40 @@ public class QuizDetailsActivity extends FragmentActivity {
 				tv.setText("beep");
 			}
 		});
+	}
+
+	private void collectMCQData(int pos) {
+		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
+		View v = qf.getView();
+
+		etText = (EditText) v.findViewById(R.id.QuestionMcqTitle);
+		text = etText.getText().toString();
+
+		etChoices[0] = (EditText) v.findViewById(R.id.editTextFirstChoice);
+		etChoices[1] = (EditText) v.findViewById(R.id.editTextSecondChoice);
+		etChoices[2] = (EditText) v.findViewById(R.id.editTextThirdChoice);
+		etChoices[3] = (EditText) v.findViewById(R.id.editTextFourthChoice);
+
+		choices[0] = etChoices[0].getText().toString();
+		choices[1] = etChoices[1].getText().toString();
+		choices[2] = etChoices[2].getText().toString();
+		choices[3] = etChoices[3].getText().toString();
+
+		switch(rg.getCheckedRadioButtonId()) {
+		case R.id.radioFirstChoice:
+			right_answer = "a";
+		case R.id.radioSecondChoice:
+			right_answer = "b";
+		case R.id.radioThirdChoice:
+			right_answer = "c";
+		case R.id.radioFourthChoice:
+			right_answer = "d";
+		}
+		
+		questions[pos] = new Question(text, choices, right_answer);
+	}
+
+	private void collectReData(int pos) {
+
 	}
 }
