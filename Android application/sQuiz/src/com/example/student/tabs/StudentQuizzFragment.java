@@ -79,6 +79,7 @@ public class StudentQuizzFragment extends ListFragment {
 
 		intent.putExtra("quizID", q.getId());
 		intent.putExtra("nQuestion", q.getNQuestion());
+		intent.putExtra("nMCQ", q.getnMCQ());
 
 		startActivity(intent);
 
