@@ -33,7 +33,7 @@ import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
-public class QuizzFragment extends ListFragment {
+public class QuizFragment extends ListFragment {
 	private List<Quiz> quizzes;
 	private ListAdapter<Quiz> QuizAdapter;
 	private List<Quiz> itemsToDelete;
