@@ -185,8 +185,6 @@ public class SignupActivity extends Activity {
 			else
 				return false;
 
-	
-		
 	} 
 
 }

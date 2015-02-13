@@ -35,4 +35,8 @@ public interface QuizApi {
 	public void requestQuizzes(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
 			,@Path("id") int groupID,Callback<List<Quiz>> callback);
 	
+	@Headers({"Accept: application/json",})
+	@POST("/quizzes/create")
+	public void createQuiz(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
+			,@Body  Quiz quiz,Callback<JsonObject> callback);
 }
