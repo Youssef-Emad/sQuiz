@@ -6,8 +6,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.Models.Question;
 import com.example.tabs.QuestionFragment;
 import com.example.tabs.QuestionsPagerAdapter;
 
@@ -16,17 +19,27 @@ public class QuizDetailsActivity extends FragmentActivity {
 	ViewPager mViewPager;
 	private Button create;
 	private int prevPosition;
-	private int nQuestion;
+	private int nMCQ, nRe, nQuestion;
+	private String text, right_answer;
+	private String[] choices;
+	private Question[] questions;
+	private EditText etText, etRight_answer;
+	private EditText[] etChoices;
+	private RadioGroup rg;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_details);
 
-		int nMCQ = getIntent().getExtras().getInt("nMCQ");
-		int nRe = getIntent().getExtras().getInt("nRe");
+		nMCQ = getIntent().getExtras().getInt("nMCQ");
+		nRe = getIntent().getExtras().getInt("nRe");
 		nQuestion = nMCQ + nRe;
 		questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
+		
+		choices = new String[4];
+		questions = new Question[nQuestion];
+		etChoices = new EditText[4];
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle(getIntent().getExtras().getString("quizName"));
@@ -42,21 +55,21 @@ public class QuizDetailsActivity extends FragmentActivity {
 			public void onPageSelected(int position) {
 				if (position > 0 && position > prevPosition) {
 					QuestionFragment qf = questionPagerAdapter.getFragment(position - 1);
-					TextView tv = (TextView) qf.getView().findViewById(R.id.QuestionMcqTitle);
-					tv.setText("beep");
+					if (position > nMCQ)
+						collectReData();
+					else
+						collectMCQData();
 				}
 				prevPosition = position;
 			}
 			
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		});

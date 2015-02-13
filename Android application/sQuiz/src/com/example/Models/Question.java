@@ -6,7 +6,7 @@ public class Question {
 	private int mark;
 	private String[] choices;
 	private String right_answer;
-	int quiz_id;	
+	int quiz_id;
 	public int getId() {
 		return id;
 	}
