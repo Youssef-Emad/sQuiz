@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
@@ -30,11 +31,14 @@ import com.example.httpRequest.QuizApi;
 import com.example.squiz.QuizFormActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
+import com.google.gson.JsonObject;
 
 public class QuizzFragment extends ListFragment {
 	private List<Quiz> quizzes;
 	private ListAdapter<Quiz> QuizAdapter;
 	private List<Quiz> itemsToDelete;
+	QuizApi task;
+	String auth_token_string, email;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -47,11 +51,11 @@ public class QuizzFragment extends ListFragment {
 	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
 	    .setLogLevel(LogLevel.FULL)
 	    .build();
-		QuizApi task = restAdapter1.create(QuizApi.class);
-		String x="b@a.com";
+	    task = restAdapter1.create(QuizApi.class);
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		String auth_token_string = settings.getString("authToken", ""/*default value*/);
-		task.requestForm(x, auth_token_string.replaceAll("\"", ""), "instructor", new Callback<List<Quiz>>(
+		auth_token_string = settings.getString("authToken", ""/*default value*/);
+		email=settings.getString("email", "");
+		task.requestForm(email, auth_token_string, "instructor", new Callback<List<Quiz>>(
 				) {
 			
 			@Override
@@ -93,9 +97,22 @@ public class QuizzFragment extends ListFragment {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 	            case R.id.action_delete:
-	                deleteSelectedItems();
-	                mode.finish(); // Action picked, so close the CAB
-	                return true;
+	            	    task.deleteQuizzes(email, auth_token_string, itemsToDelete, new Callback<JsonObject>() {
+						@Override
+						public void failure(RetrofitError arg0) {
+							JsonObject obj=(JsonObject) arg0.getBody();
+							String text=obj.get("info").toString() + "-";
+									text=text.replace(':', ' ').replaceAll("\"", "");
+							Toast.makeText(getActivity(),text, Toast.LENGTH_SHORT).show();
+						}
+
+						@Override
+						public void success(JsonObject arg0, Response arg1) {
+							deleteSelectedItems();							
+						}
+					});
+					mode.finish(); // Action picked, so close the CAB
+					return true;
 	            default:
 	                return false;
 				}
@@ -122,6 +139,7 @@ public class QuizzFragment extends ListFragment {
 	private void deleteSelectedItems() {
 		for (Quiz s : itemsToDelete)
 			quizzes.remove(s);
+		QuizAdapter.notifyDataSetChanged();
 	}
 	
 	@Override

@@ -3,11 +3,18 @@ package com.example.squiz;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,33 +22,67 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.Models.Student;
+import com.example.adapters.ListAdapter;
+import com.example.httpRequest.StudentApi;
+import com.google.gson.JsonObject;
 
 public class StudentsInGroupActivity extends ListActivity {
-	private List<String> students;
+	private List<Student> students;
 	private ActionBar actionBar;
-	private List<String> itemsToDelete;
+	private List<Student> itemsToDelete;
+	private ListAdapter<Student> StudentAdapter;
+	StudentApi task;
+	String email;
+	String auth_token_string;
+	int groupId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_groupdetails);
 		
-		String group = getIntent().getExtras().getString("Group");
+		String groupName = getIntent().getExtras().getString("Group");
+		 groupId=getIntent().getExtras().getInt("groupID");
 		
 		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setTitle(group);
+		actionBar.setTitle(groupName);
 		
 		students = new ArrayList<>();
 		itemsToDelete = new ArrayList<>();
-		for (int i = 0; i < 5; i++) 
-			students.add("Student " + i);
-		
-		setListAdapter(new ArrayAdapter<>(this, 
-				R.layout.custom_list_item, students));
+		RestAdapter restAdapter1= new RestAdapter.Builder()
+		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
+		.setLogLevel(LogLevel.FULL)
+		.build();
+
+		task = restAdapter1.create(StudentApi.class);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(StudentsInGroupActivity.this);
+		auth_token_string = settings.getString("authToken", "");
+		email=settings.getString("email", "");
+		task.requestStudents(email,auth_token_string,groupId,new Callback<List<Student>>() {
+
+			@Override
+			public void success(List<Student> arg0, Response arg1) {
+				students=arg0;
+				StudentAdapter = new ListAdapter<Student>(StudentsInGroupActivity.this, 
+						R.layout.custom_list_item, students);
+				setListAdapter(StudentAdapter);
+			}
+
+			@Override
+			public void failure(RetrofitError arg0) {
+				JsonObject obj=(JsonObject) arg0.getBody();
+				String text=obj.get("error").toString() ;
+						text=text.replace(':', ' ').replaceAll("\"", "");
+				Toast.makeText(StudentsInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
+
+			}
+		});
 		ListView listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
@@ -62,6 +103,23 @@ public class StudentsInGroupActivity extends ListActivity {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 	            case R.id.action_delete:
+	            	task.deleteStudents(email, auth_token_string, itemsToDelete,groupId,new Callback<JsonObject>() {
+
+						@Override
+						public void failure(RetrofitError arg0) {
+							JsonObject obj=(JsonObject) arg0.getBody();
+							String text=obj.get("error").toString() ;
+									text=text.replace(':', ' ').replaceAll("\"", "");
+							Toast.makeText(StudentsInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
+						}
+
+						@Override
+						public void success(JsonObject arg0, Response arg1) {
+							String text=arg0.get("info").toString().replaceAll("\"", "") ;
+							if(text.equals("deleted"))
+								deleteSelectedItems();							
+						}
+					});
 	                deleteSelectedItems();
 	                mode.finish(); // Action picked, so close the CAB
 	                return true;
@@ -88,8 +146,9 @@ public class StudentsInGroupActivity extends ListActivity {
 
 	
 	private void deleteSelectedItems() {
-		for (String s : itemsToDelete)
+		for (Student s : itemsToDelete)
 			students.remove(s);
+		StudentAdapter.notifyDataSetChanged();
 	}
 	
  
@@ -121,7 +180,27 @@ public class StudentsInGroupActivity extends ListActivity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				students.add(et.getText().toString());
+				Student temp=new Student();
+				temp.setEmail(et.getText().toString());
+				task.addStudent(email, auth_token_string, groupId,temp, new Callback<Student>() {
+
+					@Override
+					public void failure(RetrofitError arg0) {
+						JsonObject type=new JsonObject() ;
+						JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
+						String text=obj.get("error").toString();
+						text=text.replace(':', ' ').replaceAll("\"", "");
+						Toast.makeText(StudentsInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void success(Student arg0, Response arg1) {
+						students.add(arg0);
+						StudentAdapter.notifyDataSetChanged();
+						
+					}
+				});
+				
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

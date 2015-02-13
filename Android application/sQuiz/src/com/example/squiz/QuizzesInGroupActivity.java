@@ -2,21 +2,40 @@ package com.example.squiz;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.Models.Quiz;
+import com.example.adapters.ListAdapter;
+import com.example.httpRequest.QuizApi;
+import com.google.gson.JsonObject;
 
 public class QuizzesInGroupActivity extends ListActivity {
-	private List<String> quizzes;
+	private List<Quiz> quizzes;
 	private ActionBar actionBar;
+	QuizApi task;
+	String email;
+	String auth_token_string;
+	int groupId;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +43,42 @@ public class QuizzesInGroupActivity extends ListActivity {
 		setContentView(R.layout.activity_groupdetails);
 		
 		String group = getIntent().getExtras().getString("Group");
+		groupId=getIntent().getExtras().getInt("groupID");
 		
 		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(group);
-		
 		quizzes = new ArrayList<>();
-		for (int i = 0; i < 5; i++) 
-			quizzes.add("Quiz " + i);
 		
+		RestAdapter restAdapter1= new RestAdapter.Builder()
+		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
+		.setLogLevel(LogLevel.FULL)
+		.build();
+
+		task = restAdapter1.create(QuizApi.class);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(QuizzesInGroupActivity.this);
+		auth_token_string = settings.getString("authToken", "");
+		email=settings.getString("email", "");
+		
+		task.requestQuizzes(email, auth_token_string, groupId, new Callback<List<Quiz>>() {
+			
+			@Override
+			public void success(List<Quiz> arg0, Response arg1) {
+				quizzes = arg0;
+				setListAdapter(new ListAdapter<Quiz>(QuizzesInGroupActivity.this, R.layout.custom_list_item, quizzes));
+				
+			}
+			
+			@Override
+			public void failure(RetrofitError arg0) {
+				JsonObject type=new JsonObject() ;
+				JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
+				String text=obj.get("error").toString();
+				text=text.replace(':', ' ').replaceAll("\"", "");
+				Toast.makeText(QuizzesInGroupActivity.this,text, Toast.LENGTH_SHORT).show();
+			
+			}
+		});
 		setListAdapter(new ArrayAdapter<>(this, 
 				R.layout.custom_list_item, quizzes));		
 				
@@ -47,7 +93,7 @@ public class QuizzesInGroupActivity extends ListActivity {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(quizzes.get(position));
+		alert(quizzes.get(position).toString());
 	}
 	
 	private  void alert(final String selectedQuiz) {

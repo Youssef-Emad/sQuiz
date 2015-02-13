@@ -5,11 +5,8 @@ public class Question {
 	private String text;
 	private int mark;
 	private String[] choices;
-	private char right_answer;
-	int quiz_id;
-	String created_at;
-	
-	
+	private String right_answer;
+	int quiz_id;	
 	public int getId() {
 		return id;
 	}
@@ -34,10 +31,10 @@ public class Question {
 	public void setChoices(String[] choices) {
 		this.choices = choices;
 	}
-	public char getRight_answer() {
+	public String getRight_answer() {
 		return right_answer;
 	}
-	public void setRight_answer(char right_answer) {
+	public void setRight_answer(String right_answer) {
 		this.right_answer = right_answer;
 	}
 	public int getQuiz_id() {
@@ -46,12 +43,7 @@ public class Question {
 	public void setQuiz_id(int quiz_id) {
 		this.quiz_id = quiz_id;
 	}
-	public String getCreated_at() {
-		return created_at;
-	}
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
-	}
+	
 	
 
 }

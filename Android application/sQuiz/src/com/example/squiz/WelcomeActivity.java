@@ -34,6 +34,7 @@ public class WelcomeActivity extends Activity {
 	 ProgressBar pb ;
 	 SharedPreferences settings; 
 	SharedPreferences.Editor prefEditor;
+	String email;
 	
 	public static final String ENDPOINT = 
 			"https://sQuiz.herokuapp.com/api";
@@ -69,7 +70,7 @@ public class WelcomeActivity extends Activity {
 				if(isOnline()){	
 					Email = (EditText) findViewById(R.id.editTextEmail);
 					Password = (EditText) findViewById(R.id.editTextPassword);
-					String email = Email.getText().toString();
+					 email = Email.getText().toString();
 					String password = Password.getText().toString();
 					
 					try{
@@ -117,7 +118,8 @@ public class WelcomeActivity extends Activity {
 	        	pb.setVisibility(View.INVISIBLE);
 	        String	authToken=arg0.get("auth_token").toString();
 	        SharedPreferences.Editor editor = settings.edit();		
-			editor.putString("authToken", authToken);
+			editor.putString("authToken", authToken.replaceAll("\"", ""));
+			editor.putString("email", email);
 			editor.commit();
 	        	
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
