@@ -31,9 +31,6 @@ import com.example.adapters.ListAdapter;
 import com.example.httpRequest.StudentApi;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
-import com.example.squiz.R.id;
-import com.example.squiz.R.layout;
-import com.example.squiz.R.menu;
 import com.google.gson.JsonObject;
 
 public class StudentsInGroupActivity extends ListActivity {

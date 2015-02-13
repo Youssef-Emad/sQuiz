@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.example.instructor.tabs.TabsPagerAdapter;
 import com.example.squiz.R;
-import com.example.squiz.R.id;
-import com.example.squiz.R.layout;
 
 
 @SuppressWarnings("deprecation")

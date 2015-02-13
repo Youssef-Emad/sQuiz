@@ -8,30 +8,23 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
-import com.example.instructor.QuizFormActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
-import com.google.gson.JsonObject;
 
 public class StudentQuizzFragment extends ListFragment {
 	private List<Quiz> quizzes;

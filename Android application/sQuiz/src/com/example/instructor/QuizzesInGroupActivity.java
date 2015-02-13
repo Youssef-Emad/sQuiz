@@ -28,10 +28,6 @@ import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
-import com.example.squiz.R.array;
-import com.example.squiz.R.layout;
-import com.example.squiz.R.menu;
-import com.example.squiz.R.string;
 import com.google.gson.JsonObject;
 
 public class QuizzesInGroupActivity extends ListActivity {

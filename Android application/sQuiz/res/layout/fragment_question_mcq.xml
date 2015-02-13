@@ -42,36 +42,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/radioGroupChoices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            tools:ignore="RtlHardcoded" >
 
             <RadioButton
-                android:id="@+id/radio0"
+                android:id="@+id/radioFirstChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="15dp" />
 
             <RadioButton
-                android:id="@+id/radio1"
+                android:id="@+id/radioSecondChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="37dp" />
 
             <RadioButton
-                android:id="@+id/radio2"
+                android:id="@+id/radioThirdChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="39dp" />
 
             <RadioButton
-                android:id="@+id/radio3"
+                android:id="@+id/radioFourthChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="38dp" />
@@ -115,6 +116,24 @@
                 android:ems="10"
                 android:hint="@string/fourth_choice" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/create"
+            android:visibility="invisible" />
+
     </LinearLayout>
 
 </LinearLayout>
