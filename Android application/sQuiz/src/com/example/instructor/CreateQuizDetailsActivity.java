@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.Models.Question;
 import com.example.httpRequest.QuestionsApi;
@@ -113,12 +114,18 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 
 					@Override
 					public void success(JsonObject arg0, Response arg1) {
-
+						Toast.makeText(CreateQuizDetailsActivity.this, 
+								"Created successfully", Toast.LENGTH_LONG).show();
 					}
 
 					@Override
 					public void failure(RetrofitError arg0) {
-
+						JsonObject type=new JsonObject() ;
+						JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
+						String text=obj.get("error").toString();
+						text=text.replace(':', ' ').replaceAll("\"", "");
+						Toast.makeText(CreateQuizDetailsActivity.this,
+								text, Toast.LENGTH_SHORT).show();
 					}
 				});
 			}

@@ -58,7 +58,8 @@ public class ViewQuizDetailsActivity extends FragmentActivity {
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
 
-		task.getQuestions(email, auth_token_string, quizID, "instructor", new Callback<Question[]>() {
+		task.instructorGetQuestions(email, auth_token_string, quizID,
+				"instructor", new Callback<Question[]>() {
 
 			@Override
 			public void success(Question[] arg0, Response arg1) {

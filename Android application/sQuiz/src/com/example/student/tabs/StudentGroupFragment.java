@@ -1,4 +1,4 @@
-package com.example.Student.tabs;
+package com.example.student.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
