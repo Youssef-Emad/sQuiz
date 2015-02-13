@@ -22,4 +22,9 @@ public static final String EMAIL_PATTERN =
 	public static boolean isValidEmail(String string){
 		return Pattern.matches(EMAIL_PATTERN, string);
 	}
+	public static boolean isNumber(String string){
+		String regex="\\d+";
+		return string.matches(regex);
+		
+	}
 }
