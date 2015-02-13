@@ -1,14 +1,17 @@
 package com.example.squiz;
 
-import com.example.tabs.QuestionsPagerAdapter;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.widget.Button;
+
+import com.example.tabs.QuestionsPagerAdapter;
 
 public class QuizDetailsActivity extends FragmentActivity {
 	QuestionsPagerAdapter questionPagerAdapter;
 	ViewPager mViewPager;
+	Button create;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {

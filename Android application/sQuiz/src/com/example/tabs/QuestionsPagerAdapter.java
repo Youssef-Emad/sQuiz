@@ -22,6 +22,7 @@ public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
 		Bundle args = new Bundle();
 		args.putInt(QuestionFragment.ARG_QUESTION, i + 1);
 		args.putInt(QuestionFragment.ARG_NMCQ, nMCQ);
+		args.putInt(QuestionFragment.ARG_NQuestion, nMCQ + nRe);
 		fragment.setArguments(args);
 		return fragment;
 	}
