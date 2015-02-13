@@ -51,5 +51,11 @@
     <string name="example_who_is_the_first_programmer">Example: Who is the first programmer?</string>
     <string name="multiple_choices">Multiple choices</string>
     <string name="create">Create</string>
+    <string name="submit">Submit</string>
+    <string name="_a_">"(a) "</string>
+    <string name="_b_">"(b) "</string>
+    <string name="_c_">"(c) "</string>
+    <string name="_d_">"(d) "</string>
+    <string name="your_answer_">Your answer:</string>
 
 </resources>
