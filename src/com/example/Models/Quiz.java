@@ -5,9 +5,9 @@ import com.example.Helpers.validator;
 public class Quiz {
 	private int id;
 	private String name;
-	private int nMCQ;
-	private int nRearrangeQ;
-	private String qSubject;
+	private int no_of_MCQ;
+	private int no_of_rearrangeQ;
+	private String subject;
 	private int duration;
 	
 	public String toString() {
@@ -34,14 +34,14 @@ public class Quiz {
 	
 	
 	public int getnMCQ() {
-		return nMCQ;
+		return no_of_MCQ;
 	}
 	
 	public void setnMCQ(String nMCQ)throws Exception {
 		
 		if(!nMCQ.matches("")){
 			if(validator.isNumber(nMCQ))       
-				this.nMCQ=Integer.parseInt(nMCQ);		 
+				this.no_of_MCQ=Integer.parseInt(nMCQ);		 
 			else 
 				throw new Exception("You should Enter a Number in MCQ Number");
 		}
@@ -51,14 +51,14 @@ public class Quiz {
 	}
 
 	public int getnRearrangeQ() {
-		return nRearrangeQ;
+		return no_of_rearrangeQ;
 	}
 	
 	public void setnRearrangeQ(String nRearrangeQ) throws Exception {
 	
 		if(!nRearrangeQ.matches("")){
 			if(validator.isNumber(nRearrangeQ))      
-				this.nRearrangeQ=Integer.parseInt(nRearrangeQ);		 
+				this.no_of_rearrangeQ=Integer.parseInt(nRearrangeQ);		 
 			else 
 				throw new Exception("You should Enter a Number in RAQ Number");
 		}
@@ -69,13 +69,13 @@ public class Quiz {
 	
 	}
 	public String getqSubject() {
-		return qSubject;
+		return subject;
 	}
 	public void setqSubject(String qSubject) throws Exception {
 		
 		if(!qSubject.matches("")){
 			if(validator.isAlpha(qSubject))       
-				this.qSubject= qSubject;		 
+				this.subject= qSubject;		 
 			else 
 				throw new Exception("You should Enter only letters Quiz subject");
 		}
