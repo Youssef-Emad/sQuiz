@@ -74,7 +74,7 @@ public class InstructorGroupFragment extends ListFragment {
 
 			@Override
 			public void failure(RetrofitError arg0) {
-			
+
 			}
 		});
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
@@ -107,15 +107,15 @@ public class InstructorGroupFragment extends ListFragment {
 						public void failure(RetrofitError arg0) {
 							JsonObject obj=(JsonObject) arg0.getBody();
 							String text=obj.get("error").toString() ;
-									text=text.replace(':', ' ').replaceAll("\"", "");
+							text=text.replace(':', ' ').replaceAll("\"", "");
 							Toast.makeText(getActivity(),text, Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
 						public void success(JsonObject arg0, Response arg1) {
 							String text=arg0.get("info").toString().replaceAll("\"", "") ;
-						if(text.equals("deleted"))
-							deleteSelectedItems();							
+							if(text.equals("deleted"))
+								deleteSelectedItems();							
 						}
 					});
 					mode.finish(); // Action picked, so close the CAB
@@ -150,8 +150,8 @@ public class InstructorGroupFragment extends ListFragment {
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		 intent = new Intent();
-		 intent.putExtra("groupID",groups.get(position).getId());
+		intent = new Intent();
+		intent.putExtra("groupID",groups.get(position).getId());
 
 		alert(groups.get(position).toString());
 	}
@@ -162,7 +162,7 @@ public class InstructorGroupFragment extends ListFragment {
 		builder.setTitle(R.string.dialog_title)
 		.setItems(R.array.items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 				intent.putExtra("Group", selectedGroup);
 				if (which == 1) {
 					intent.setClass(getActivity(), StudentsInGroupActivity.class);
