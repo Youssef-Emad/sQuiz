@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg4"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+    
+    <TextView
+        android:id="@+id/QuestionTitleRearrangement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/question_title"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/editTextQuestionTitleRearrangement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_arrange_in_ascending_order"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/QuestionRearrangementOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/re_arrangement_options"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/editTextQuestionRearrangementOption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_a_4"
+        android:inputType="textMultiLine" />
+    
+    <EditText
+        android:id="@+id/editTextQuestionRearrangementOption2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_b_5"
+        android:inputType="textMultiLine" />
+    
+    <EditText
+        android:id="@+id/editTextQuestionRearrangementOption3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_c_6"
+        android:inputType="textMultiLine" />
+    
+    <EditText
+        android:id="@+id/editTextQuestionRearrangementOption4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_d_7"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/QuestionRearrangementAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/question_answer"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:ignore="RtlHardcoded" />
+    
+    <EditText
+        android:id="@+id/editTextQuestionRearrangementAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/example_b_c_d_a" />
+    
+</LinearLayout>
