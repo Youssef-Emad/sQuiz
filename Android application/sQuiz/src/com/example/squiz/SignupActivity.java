@@ -22,10 +22,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.Models.SignupForm;
+import com.example.Student.AfterLoginStudentActivity;
 import com.example.httpRequest.FormContainer;
 import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
 import com.example.httpRequest.StudentFormContainer;
+import com.example.instructor.AfterLoginInstructorActivity;
 import com.google.gson.JsonObject;
 
 public class SignupActivity extends Activity {
@@ -121,6 +123,8 @@ public class SignupActivity extends Activity {
 				 editor.putString("authToken", authToken);
 				 editor.putString("email",emailField );
 				 editor.commit();
+				 startActivity(new Intent(SignupActivity.this, AfterLoginStudentActivity.class));
+					
 				}
 				
 				Toast.makeText(SignupActivity.this, "signup Complete", Toast.LENGTH_SHORT).show();
@@ -129,16 +133,14 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void failure(RetrofitError arg0) {
-				try {
+			
 					 pb.setVisibility(View.INVISIBLE);
 					JsonObject obj=(JsonObject) arg0.getBody();
-					String text=obj.get("info").toString() + "-";
-							text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
-					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();
-				} catch (Exception e) {
-					
+					String text=obj.get("error").toString();
+							text=text.replace(':', ' ').replaceAll("\""	, "");
+					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();	
 					Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
-				}	
+				
 			}
 		});
    		 } 		 
@@ -183,8 +185,6 @@ public class SignupActivity extends Activity {
 			else
 				return false;
 
-	
-		
 	} 
 
 }

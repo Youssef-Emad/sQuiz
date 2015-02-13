@@ -1,4 +1,4 @@
-package com.example.tabs;
+package com.example.instructor.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,12 @@ import android.widget.Toast;
 import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
-import com.example.squiz.QuizFormActivity;
+import com.example.instructor.QuizFormActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
-public class QuizFragment extends ListFragment {
+public class QuizzFragment extends ListFragment {
 	private List<Quiz> quizzes;
 	private ListAdapter<Quiz> QuizAdapter;
 	private List<Quiz> itemsToDelete;
@@ -55,7 +55,7 @@ public class QuizFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		auth_token_string = settings.getString("authToken", ""/*default value*/);
 		email=settings.getString("email", "");
-		task.requestForm(email, auth_token_string, "instructor", new Callback<List<Quiz>>(
+		task.instructorRequestQuiz(email, auth_token_string, "instructor", new Callback<List<Quiz>>(
 				) {
 			
 			@Override

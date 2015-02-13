@@ -14,6 +14,6 @@ public interface QuestionsApi {
 	@Headers({"Accept: application/json",})
 	@POST("/api/quizzes/addquestion/{id}")
 	public void addQuestions(@Header("X-Instructor-Email") String email,
-			@Header("X-Instructor-Token") String token
+			@Header("X-Instructor-Token") String token, int id
 			,@Body Question[] questions,Callback<JsonObject> callback);
 }

@@ -1,4 +1,4 @@
-package com.example.tabs;
+package com.example.instructor.tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.squiz.QuizDetailsActivity;
+import com.example.instructor.QuizDetailsActivity;
 import com.example.squiz.R;
 
 public class QuestionFragment extends Fragment {

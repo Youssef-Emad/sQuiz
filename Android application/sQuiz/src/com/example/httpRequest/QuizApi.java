@@ -16,18 +16,27 @@ import com.google.gson.JsonObject;
 
 public interface QuizApi {
 	@Headers({"Accept: application/json",})
-	@GET("/{type}/quizzes")
-	public void requestForm(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
+	@GET("/{type}/quizzes") //request list of global quizzes for instructor
+	public void instructorRequestQuiz(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
 			,@Path("type") String typ,Callback<List<Quiz>> callback);	
 
+	@Headers({"Accept: application/json",})
+	@GET("/{type}/quizzes") //request list of global quizzes for instructor
+	public void studentRequestQuiz(@Header("X-Student-Email") String email,@Header("X-Student-Token") String token
+			,@Path("type") String typ,Callback<List<Quiz>> callback);	
+	
 	@Headers({"Accept: application/json",})
 	@POST("/quizzes/delete")
 	public void deleteQuizzes(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
 			,@Body  List<Quiz> quiz,Callback<JsonObject> callback);
 
 	@Headers({"Accept: application/json",})
-	@GET("/groups/{id}/quizzes")
+	@GET("/groups/{id}/quizzes")   //instructor request Quizzes in a group
 	public void requestQuizzes(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
 			,@Path("id") int groupID,Callback<List<Quiz>> callback);
 	
+	@Headers({"Accept: application/json",})
+	@POST("/quizzes/create")
+	public void createQuiz(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
+			,@Body  Quiz quiz,Callback<JsonObject> callback);
 }

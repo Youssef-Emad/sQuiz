@@ -1,4 +1,4 @@
-package com.example.squiz;
+package com.example.instructor;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -18,8 +18,10 @@ import android.widget.RadioGroup;
 
 import com.example.Models.Question;
 import com.example.httpRequest.QuestionsApi;
-import com.example.tabs.QuestionFragment;
-import com.example.tabs.QuestionsPagerAdapter;
+import com.example.instructor.tabs.QuestionFragment;
+import com.example.instructor.tabs.QuestionsPagerAdapter;
+import com.example.squiz.R;
+import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
 public class QuizDetailsActivity extends FragmentActivity {
@@ -28,6 +30,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 	private Button create;
 	private int prevPosition;
 	private int nMCQ, nRe, nQuestion;
+	private int id;
 	private String text, right_answer;
 	private String[] choices;
 	private Question[] questions;
@@ -42,6 +45,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_details);
 
+		id = getIntent().getExtras().getInt("quizID");
 		nMCQ = getIntent().getExtras().getInt("nMCQ");
 		nRe = getIntent().getExtras().getInt("nRe");
 		nQuestion = nMCQ + nRe;
@@ -53,7 +57,6 @@ public class QuizDetailsActivity extends FragmentActivity {
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle(getIntent().getExtras().getString("quizName"));
-
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		mViewPager = (ViewPager) findViewById(R.id.questions_pager);
@@ -106,7 +109,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 				else
 					collectReData(nQuestion - 1);
 				
-				task.addQuestions(email, auth_token_string, questions, new Callback<JsonObject>() {
+				task.addQuestions(email, auth_token_string, id, questions, new Callback<JsonObject>() {
 
 					@Override
 					public void success(JsonObject arg0, Response arg1) {

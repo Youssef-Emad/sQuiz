@@ -1,13 +1,13 @@
-package com.example.tabs;
+package com.example.Student.tabs;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 
  
-public class TabsPagerAdapter extends FragmentPagerAdapter {
+public class StudentTabsPagerAdapter extends FragmentPagerAdapter {
  
-    public TabsPagerAdapter(FragmentManager fm) {
+    public StudentTabsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
  
@@ -15,9 +15,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public ListFragment getItem(int index) {
         switch (index) {
         case 0:
-            return new GroupFragment();
+            return new StudentGroupFragment();
         case 1:
-            return new QuizFragment();
+            return new StudentQuizzFragment();
         }
         
         return null;

@@ -15,8 +15,14 @@ import com.google.gson.JsonObject;
 
 public interface GroupApi {
 	@Headers({"Accept: application/json"})
-	@GET("/{type}/groups")
-	public void requestGroups(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token ,@Path("type") String type,Callback<List<Group>> callback);	
+	@GET("/{type}/groups") 
+	public void instructorRequestGroups(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token ,@Path("type") String type,Callback<List<Group>> callback);		
+	
+	
+	@Headers({"Accept: application/json"})
+	@GET("/{type}/groups") //request groups list for  student
+	public void studentRequestGroups(@Header("X-Student-Email") String email,@Header("X-Student-Token") String token ,@Path("type") String type,Callback<List<Group>> callback);	
+
 	
 	@Headers({"Accept: application/json"})
 	@POST("/groups/create")

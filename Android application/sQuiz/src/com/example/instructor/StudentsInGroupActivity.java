@@ -1,4 +1,4 @@
-package com.example.squiz;
+package com.example.instructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,8 @@ import android.widget.Toast;
 import com.example.Models.Student;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.StudentApi;
+import com.example.squiz.R;
+import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
 public class StudentsInGroupActivity extends ListActivity {

@@ -1,4 +1,4 @@
-package com.example.squiz;
+package com.example.instructor;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -10,7 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.tabs.TabsPagerAdapter;
+import com.example.instructor.tabs.TabsPagerAdapter;
+import com.example.squiz.R;
 
 
 @SuppressWarnings("deprecation")
@@ -27,7 +28,7 @@ public class AfterLoginInstructorActivity extends FragmentActivity implements Ac
 		actionBar = getActionBar();
 		actionBar.setTitle("sQuiz me!");
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
+			
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		viewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
 		

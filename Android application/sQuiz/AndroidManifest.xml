@@ -29,19 +29,22 @@
         <activity android:name=".SignupActivity" >
         </activity>
         
-        <activity android:name=".AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity android:name="com.example.instructor.AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name=".StudentsInGroupActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity android:name="com.example.Student.AfterLoginStudentActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name=".QuizzesInGroupActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity android:name="com.example.instructor.StudentsInGroupActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name=".QuizFormActivity" android:theme="@style/sQuizTheme">
+        <activity android:name="com.example.instructor.QuizzesInGroupActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name=".QuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
+        <activity android:name="com.example.instructor.QuizFormActivity" android:theme="@style/sQuizTheme">
+        </activity>
+        
+        <activity android:name="com.example.instructor.QuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
         </activity>
         
     </application>

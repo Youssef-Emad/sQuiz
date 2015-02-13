@@ -1,4 +1,4 @@
-package com.example.tabs;
+package com.example.instructor.tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

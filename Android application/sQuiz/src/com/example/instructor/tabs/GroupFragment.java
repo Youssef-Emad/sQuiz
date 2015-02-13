@@ -1,4 +1,4 @@
-package com.example.tabs;
+package com.example.instructor.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +31,9 @@ import android.widget.Toast;
 import com.example.Models.Group;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.GroupApi;
-import com.example.squiz.QuizzesInGroupActivity;
+import com.example.instructor.QuizzesInGroupActivity;
+import com.example.instructor.StudentsInGroupActivity;
 import com.example.squiz.R;
-import com.example.squiz.StudentsInGroupActivity;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
@@ -62,7 +62,7 @@ public class GroupFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
-		task.requestGroups(email,auth_token_string,"instructor", new Callback<List<Group>>() {
+		task.instructorRequestGroups(email,auth_token_string,"instructor", new Callback<List<Group>>() {
 
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
