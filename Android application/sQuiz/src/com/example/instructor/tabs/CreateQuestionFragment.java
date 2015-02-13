@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.example.instructor.CreateQuizDetailsActivity;
 import com.example.squiz.R;
 
-public class QuestionFragment extends Fragment {
+public class CreateQuestionFragment extends Fragment {
     public static final String ARG_QUESTION = "question";
     public static final String ARG_NMCQ = "nMCQ";
     public static final String ARG_NQuestion = "nQuestion";

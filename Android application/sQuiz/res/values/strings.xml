@@ -58,5 +58,6 @@
     <string name="_d_">"(d) "</string>
     <string name="your_answer_">Your answer:</string>
     <string name="right_answer_">"Right answer: "</string>
+    <string name="publish">Publish</string>
 
 </resources>

@@ -18,14 +18,14 @@ import android.widget.RadioGroup;
 
 import com.example.Models.Question;
 import com.example.httpRequest.QuestionsApi;
-import com.example.instructor.tabs.QuestionFragment;
-import com.example.instructor.tabs.QuestionsPagerAdapter;
+import com.example.instructor.tabs.CreateQuestionFragment;
+import com.example.instructor.tabs.CreateQuestionsPagerAdapter;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
 public class CreateQuizDetailsActivity extends FragmentActivity {
-	QuestionsPagerAdapter questionPagerAdapter;
+	CreateQuestionsPagerAdapter questionPagerAdapter;
 	ViewPager mViewPager;
 	private Button create;
 	private int prevPosition;
@@ -49,7 +49,7 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 		nMCQ = getIntent().getExtras().getInt("nMCQ");
 		nRe = getIntent().getExtras().getInt("nRe");
 		nQuestion = nMCQ + nRe;
-		questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
+		questionPagerAdapter = new CreateQuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
 
 		choices = new String[4];
 		questions = new Question[nQuestion];
@@ -126,7 +126,7 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 	}
 
 	private void collectMCQData(int pos) {
-		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
+		CreateQuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
 		etText = (EditText) v.findViewById(R.id.editTextQuestionMcqTitle);
@@ -167,7 +167,7 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 	}
 
 	private void collectReData(int pos) {
-		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
+		CreateQuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
 		etText = (EditText) v.findViewById(R.id.editTextQuestionTitleRearrangement);
