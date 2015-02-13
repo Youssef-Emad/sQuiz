@@ -1,18 +1,26 @@
 package com.example.squiz;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import android.app.ActionBar;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.example.Models.Question;
+import com.example.httpRequest.QuestionsApi;
 import com.example.tabs.QuestionFragment;
 import com.example.tabs.QuestionsPagerAdapter;
+import com.google.gson.JsonObject;
 
 public class QuizDetailsActivity extends FragmentActivity {
 	QuestionsPagerAdapter questionPagerAdapter;
@@ -26,6 +34,8 @@ public class QuizDetailsActivity extends FragmentActivity {
 	private EditText etText, etRight_answer;
 	private EditText[] etChoices;
 	private RadioGroup rg;
+	QuestionsApi task;
+	String auth_token_string, email;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,16 @@ public class QuizDetailsActivity extends FragmentActivity {
 
 		mViewPager = (ViewPager) findViewById(R.id.questions_pager);
 		mViewPager.setAdapter(questionPagerAdapter);
+
+		RestAdapter restAdapter1= new RestAdapter.Builder()
+		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
+		.setLogLevel(LogLevel.FULL)
+		.build();
+
+		task = restAdapter1.create(QuestionsApi.class);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(QuizDetailsActivity.this);
+		auth_token_string = settings.getString("authToken", "");
+		email=settings.getString("email", "");
 
 		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -81,9 +101,23 @@ public class QuizDetailsActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				QuestionFragment qf = questionPagerAdapter.getFragment(nQuestion - 1);
-				TextView tv = (TextView) qf.getView().findViewById(R.id.QuestionMcqTitle);
-				tv.setText("beep");
+				if (nMCQ == nQuestion)
+					collectMCQData(nQuestion - 1);
+				else
+					collectReData(nQuestion - 1);
+				
+				task.addQuestions(email, auth_token_string, questions, new Callback<JsonObject>() {
+
+					@Override
+					public void success(JsonObject arg0, Response arg1) {
+
+					}
+
+					@Override
+					public void failure(RetrofitError arg0) {
+
+					}
+				});
 			}
 		});
 	}
@@ -92,8 +126,10 @@ public class QuizDetailsActivity extends FragmentActivity {
 		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
-		etText = (EditText) v.findViewById(R.id.QuestionMcqTitle);
+		etText = (EditText) v.findViewById(R.id.editTextQuestionMcqTitle);
 		text = etText.getText().toString();
+		
+		choices = new String[4];
 
 		etChoices[0] = (EditText) v.findViewById(R.id.editTextFirstChoice);
 		etChoices[1] = (EditText) v.findViewById(R.id.editTextSecondChoice);
@@ -105,17 +141,25 @@ public class QuizDetailsActivity extends FragmentActivity {
 		choices[2] = etChoices[2].getText().toString();
 		choices[3] = etChoices[3].getText().toString();
 
+		rg = (RadioGroup) v.findViewById(R.id.radioGroupChoices);
+
 		switch(rg.getCheckedRadioButtonId()) {
 		case R.id.radioFirstChoice:
 			right_answer = "a";
+			break;
 		case R.id.radioSecondChoice:
 			right_answer = "b";
+			break;
 		case R.id.radioThirdChoice:
 			right_answer = "c";
+			break;
 		case R.id.radioFourthChoice:
 			right_answer = "d";
+			break;
+		default:
+			right_answer = "";
 		}
-		
+
 		questions[pos] = new Question(text, choices, right_answer);
 	}
 
@@ -123,8 +167,10 @@ public class QuizDetailsActivity extends FragmentActivity {
 		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
-		etText = (EditText) v.findViewById(R.id.QuestionTitleRearrangement);
+		etText = (EditText) v.findViewById(R.id.editTextQuestionTitleRearrangement);
 		text = etText.getText().toString();
+		
+		choices = new String[4];
 
 		etChoices[0] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption1);
 		etChoices[1] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption2);
@@ -135,10 +181,10 @@ public class QuizDetailsActivity extends FragmentActivity {
 		choices[1] = etChoices[1].getText().toString();
 		choices[2] = etChoices[2].getText().toString();
 		choices[3] = etChoices[3].getText().toString();
-		
+
 		etRight_answer = (EditText) v.findViewById(R.id.editTextQuestionRearrangementAnswer);
 		right_answer = etRight_answer.getText().toString();
-		
+
 		questions[pos] = new Question(text, choices, right_answer);
 	}
 }
