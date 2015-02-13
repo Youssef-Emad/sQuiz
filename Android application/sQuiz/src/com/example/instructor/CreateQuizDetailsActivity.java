@@ -24,7 +24,7 @@ import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
-public class QuizDetailsActivity extends FragmentActivity {
+public class CreateQuizDetailsActivity extends FragmentActivity {
 	QuestionsPagerAdapter questionPagerAdapter;
 	ViewPager mViewPager;
 	private Button create;
@@ -68,7 +68,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 		.build();
 
 		task = restAdapter1.create(QuestionsApi.class);
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(QuizDetailsActivity.this);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(CreateQuizDetailsActivity.this);
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
 

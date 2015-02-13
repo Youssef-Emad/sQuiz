@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.instructor.QuizDetailsActivity;
+import com.example.instructor.CreateQuizDetailsActivity;
 import com.example.squiz.R;
 
 public class QuestionFragment extends Fragment {
@@ -30,7 +30,7 @@ public class QuestionFragment extends Fragment {
         
         if (questionNumber == nQuestion) {
         	create = (Button) rootView.findViewById(R.id.create);
-        	((QuizDetailsActivity) getActivity()).setCreateButton(create);
+        	((CreateQuizDetailsActivity) getActivity()).setCreateButton(create);
         	create.setVisibility(View.VISIBLE);
         }
         return rootView;

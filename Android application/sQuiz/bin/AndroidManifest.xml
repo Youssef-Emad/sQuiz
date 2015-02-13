@@ -41,10 +41,10 @@
         <activity android:name="com.example.instructor.QuizzesInGroupActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name="com.example.instructor.QuizFormActivity" android:theme="@style/sQuizTheme">
+        <activity android:name="com.example.instructor.CreateQuizFormActivity" android:theme="@style/sQuizTheme">
         </activity>
         
-        <activity android:name="com.example.instructor.QuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
+        <activity android:name="com.example.instructor.CreateQuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
         </activity>
         
     </application>

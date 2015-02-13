@@ -28,7 +28,7 @@ import android.widget.Toast;
 import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
-import com.example.instructor.QuizFormActivity;
+import com.example.instructor.CreateQuizFormActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
@@ -152,7 +152,7 @@ public class QuizzFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
-			startActivity(new Intent(getActivity(), QuizFormActivity.class));
+			startActivity(new Intent(getActivity(), CreateQuizFormActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
