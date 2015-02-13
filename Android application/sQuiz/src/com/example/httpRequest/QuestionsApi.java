@@ -2,6 +2,7 @@ package com.example.httpRequest;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
@@ -12,6 +13,13 @@ import com.google.gson.JsonObject;
 
 
 public interface QuestionsApi {
+	@Headers({"Accept: application/json",})
+	@GET("/{type}/quizzes/{id}")
+	public void getQuestions(@Header("X-Instructor-Email") String email,
+			@Header("X-Instructor-Token") String token, @Path("id") int id, 
+			@Path("type") String type
+			,Callback<Question[]> callback);
+	
 	@Headers({"Accept: application/json",})
 	@POST("/quizzes/addquestion/{id}")
 	public void addQuestions(@Header("X-Instructor-Email") String email,

@@ -25,8 +25,8 @@ import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
 public class CreateQuizDetailsActivity extends FragmentActivity {
-	CreateQuestionsPagerAdapter questionPagerAdapter;
-	ViewPager mViewPager;
+	private CreateQuestionsPagerAdapter questionPagerAdapter;
+	private ViewPager mViewPager;
 	private Button create;
 	private int prevPosition;
 	private int nMCQ, nRe, nQuestion;

@@ -9,21 +9,22 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class ViewQuestionsPagerAdapter extends FragmentStatePagerAdapter {
 
-	private int nMCQ;
-	private int nRe;
+	private int nQuestion;
 	private Question[] questions;
 
-	public ViewQuestionsPagerAdapter(FragmentManager fm, Question[] questions) {
+	public ViewQuestionsPagerAdapter(FragmentManager fm, int nQuestion, 
+			Question[] questions) {
 		super(fm);
 		this.questions = questions;
+		this.nQuestion = nQuestion;
 	}
 
 	@Override
 	public Fragment getItem(int i) {
-		CreateQuestionFragment fragment = new CreateQuestionFragment();
+		ViewQuestionFragment fragment = new ViewQuestionFragment();
 		Bundle args = new Bundle();
-		args.putInt(CreateQuestionFragment.ARG_QUESTION, i + 1);
-		args.putInt(CreateQuestionFragment.ARG_NMCQ, nMCQ);
+		args.putInt(ViewQuestionFragment.ARG_QUESTION, i + 1);
+		args.putInt(ViewQuestionFragment.ARG_NQUESTION, nQuestion);
 		args.putString("text", questions[i].getText());
 		args.putStringArray("choices", questions[i].getChoices());
 		args.putString("right_answer", questions[i].getRight_answer());
@@ -33,7 +34,7 @@ public class ViewQuestionsPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public int getCount() {
-		return nMCQ + nRe;
+		return nQuestion;
 	}
 
 	@Override

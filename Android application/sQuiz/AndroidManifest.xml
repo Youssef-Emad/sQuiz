@@ -47,6 +47,9 @@
         <activity android:name="com.example.instructor.CreateQuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
         </activity>
         
+        <activity android:name="com.example.instructor.ViewQuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
+        </activity>
+        
     </application>
 
 </manifest>
