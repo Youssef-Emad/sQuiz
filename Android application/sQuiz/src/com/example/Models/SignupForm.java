@@ -44,8 +44,8 @@ public class SignupForm {
 	private void setName(String name)throws Exception {
 		
 		if(!name.matches("")){
-			if(validator.isAlpha(name))       //check if the Name is only letters
-				this.name=name.trim();		  //populate form
+			if(validator.isAlpha(name))       
+				this.name=name.trim();		  
 			else 
 				throw new Exception("Your name should contain only letters");
 		}
