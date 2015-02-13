@@ -62,7 +62,7 @@ public class GroupFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
-		task.requestGroups(email,auth_token_string,"instructor", new Callback<List<Group>>() {
+		task.instructorRequestGroups(email,auth_token_string,"instructor", new Callback<List<Group>>() {
 
 			@Override
 			public void success(List<Group> arg0, Response arg1) {

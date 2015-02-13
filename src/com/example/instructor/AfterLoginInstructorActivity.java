@@ -25,7 +25,7 @@ public class AfterLoginInstructorActivity extends FragmentActivity implements Ac
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_afterlogin);
-		Toast.makeText(AfterLoginInstructorActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+		Toast.makeText(AfterLoginInstructorActivity.this, "Welcome IN", Toast.LENGTH_SHORT).show();
 		
 		actionBar = getActionBar();
 		actionBar.setTitle("sQuiz me!");

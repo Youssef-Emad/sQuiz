@@ -36,7 +36,7 @@ import com.google.gson.JsonObject;
 public class StudentQuizzFragment extends ListFragment {
 	private List<Quiz> quizzes;
 	private ListAdapter<Quiz> QuizAdapter;
-	private List<Quiz> itemsToDelete;
+//	private List<Quiz> itemsToDelete;
 	QuizApi task;
 	String auth_token_string, email;
 	@Override
@@ -45,7 +45,7 @@ public class StudentQuizzFragment extends ListFragment {
 		setHasOptionsMenu(true);
 
 		quizzes=new ArrayList<Quiz>();
-		itemsToDelete = new ArrayList<Quiz>();
+		//itemsToDelete = new ArrayList<Quiz>();
 		
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 	    .setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -55,7 +55,7 @@ public class StudentQuizzFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		auth_token_string = settings.getString("authToken", ""/*default value*/);
 		email=settings.getString("email", "");
-		task.requestForm(email, auth_token_string, "instructor", new Callback<List<Quiz>>(
+		task.studentRequestQuiz(email, auth_token_string, "student", new Callback<List<Quiz>>(
 				) {
 			
 			@Override
@@ -68,7 +68,7 @@ public class StudentQuizzFragment extends ListFragment {
 			
 			@Override
 			public void failure(RetrofitError arg0) {
-				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "Failed for a reason", Toast.LENGTH_SHORT).show();
 				
 			}
 		});
@@ -79,7 +79,7 @@ public class StudentQuizzFragment extends ListFragment {
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		ListView listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+	/*	listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -93,7 +93,7 @@ public class StudentQuizzFragment extends ListFragment {
 				return false;
 			}
 
-			@Override
+			/*		@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 	            case R.id.action_delete:
@@ -116,7 +116,7 @@ public class StudentQuizzFragment extends ListFragment {
 	            default:
 	                return false;
 				}
-			}
+			} 
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
@@ -132,30 +132,30 @@ public class StudentQuizzFragment extends ListFragment {
 					itemsToDelete.remove(quizzes.get(position));
 			}
 			
-		});
+		});  */
 		super.onActivityCreated(savedInstanceState);
 	}
 	
-	private void deleteSelectedItems() {
+/*	private void deleteSelectedItems() {
 		for (Quiz s : itemsToDelete)
 			quizzes.remove(s);
 		QuizAdapter.notifyDataSetChanged();
-	}
+	} */
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.action_bar_menu, menu);
+		inflater.inflate(R.menu.action_bar_quizzes, menu);
 		getActivity().getActionBar().setTitle("Quizzes");
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 	
-	@Override
+	/* @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
 			startActivity(new Intent(getActivity(), QuizFormActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	} */
 
 }

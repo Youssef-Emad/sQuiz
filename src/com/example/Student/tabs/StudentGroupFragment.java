@@ -40,7 +40,7 @@ import com.google.gson.JsonObject;
 public class StudentGroupFragment extends ListFragment {
 	private List<Group> groups;
 	private ListAdapter<Group> GroupAdapter;
-	private List<Group> itemsToDelete;
+	//private List<Group> itemsToDelete;
 	GroupApi task;
 	String email;
 	String auth_token_string;
@@ -51,7 +51,7 @@ public class StudentGroupFragment extends ListFragment {
 
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
-		itemsToDelete = new ArrayList<Group>();
+	//	itemsToDelete = new ArrayList<Group>();
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -62,7 +62,7 @@ public class StudentGroupFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
-		task.requestGroups(email,auth_token_string,"instructor", new Callback<List<Group>>() {
+		task.studentRequestGroups(email,auth_token_string,"student", new Callback<List<Group>>() {
 
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
@@ -74,7 +74,7 @@ public class StudentGroupFragment extends ListFragment {
 
 			@Override
 			public void failure(RetrofitError arg0) {
-			
+			Toast.makeText(getActivity(), "Failed for a reason", Toast.LENGTH_SHORT).show();
 			}
 		});
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
@@ -82,9 +82,9 @@ public class StudentGroupFragment extends ListFragment {
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		ListView listView = getListView();
-		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+	//	ListView listView = getListView();
+	//	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL) ;
+		/* listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -123,31 +123,31 @@ public class StudentGroupFragment extends ListFragment {
 				default:
 					return false;
 				}
-			}
+			}  
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 
 			}
 
-			@Override
+		/*	@Override
 			public void onItemCheckedStateChanged(ActionMode mode,
 					int position, long id, boolean checked) {
 				if (checked) 
 					itemsToDelete.add(groups.get(position));
 				else
 					itemsToDelete.remove(groups.get(position));
-			}
+			}  
 
-		});
+		}); */
 		super.onActivityCreated(savedInstanceState);
 	}
-
-	private void deleteSelectedItems() {
+ 
+/*	private void deleteSelectedItems() {
 		for (Group s : itemsToDelete)
-			groups.remove(s);
 		GroupAdapter.notifyDataSetChanged();
-	}
+	} */
+	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		 intent = new Intent();
@@ -178,7 +178,7 @@ public class StudentGroupFragment extends ListFragment {
 		alertDialog.show();
 	}
 
-	private void alertCustom() {
+	/*private void alertCustom() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Enter group name: ");
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -221,16 +221,18 @@ public class StudentGroupFragment extends ListFragment {
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
-	}
-
+	}  */
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.action_bar_menu, menu);
-		getActivity().getActionBar().setTitle("Groups");
+	
+		inflater.inflate(R.menu.action_bar_quizzes, menu);
+		getActivity().getActionBar().setTitle("Groups");	
 		super.onCreateOptionsMenu(menu, inflater);
+
 	}
 
-	@Override
+	/*@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
 			alertCustom();
@@ -238,5 +240,5 @@ public class StudentGroupFragment extends ListFragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	} */
 }

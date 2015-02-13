@@ -29,7 +29,7 @@
         <activity android:name=".SignupActivity" >
         </activity>
         
-        <activity android:name=".AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity android:name="com.example.instructor.AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
         <activity android:name="com.example.Student.AfterLoginStudentActivity" android:theme="@style/sQuizThemeActionBar">

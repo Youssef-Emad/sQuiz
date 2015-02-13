@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.Models.LoginForm;
+import com.example.Student.AfterLoginStudentActivity;
 import com.example.httpRequest.LoginAPI;
 import com.example.instructor.AfterLoginInstructorActivity;
 import com.example.squiz.R;
@@ -118,13 +119,18 @@ public class WelcomeActivity extends Activity {
 	        public void success(JsonObject arg0, Response arg1) {
 	        	
 	        	pb.setVisibility(View.INVISIBLE);
-	        String	authToken=arg0.get("auth_token").toString();
+	        String	authToken=arg0.get("auth_token").toString().replaceAll("\"", "");
+	        String  accType  =arg0.get("type").toString().replaceAll("\"", "");
 	        SharedPreferences.Editor editor = settings.edit();		
-			editor.putString("authToken", authToken.replaceAll("\"", ""));
+			editor.putString("authToken", authToken);
 			editor.putString("email", email);
 			editor.commit();
-	        	
+			
+			if(accType.equals("instructor"))
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
+			else if(accType.equals("student"))
+				startActivity(new Intent(WelcomeActivity.this, AfterLoginStudentActivity.class));
+			
 	        	}
 
 	        @Override

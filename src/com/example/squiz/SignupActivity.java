@@ -133,16 +133,14 @@ public class SignupActivity extends Activity {
 			
 			@Override
 			public void failure(RetrofitError arg0) {
-				try {
+			
 					 pb.setVisibility(View.INVISIBLE);
 					JsonObject obj=(JsonObject) arg0.getBody();
-					String text=obj.get("info").toString() + "-";
-							text=text.replace(':', ' ').replaceAll("[^a-zA-Z0-9_ ,]", "").replace(',', '\n');
-					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();
-				} catch (Exception e) {
-					
+					String text=obj.get("error").toString();
+							text=text.replace(':', ' ').replaceAll("\""	, "");
+					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();	
 					Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
-				}	
+				
 			}
 		});
    		 } 		 

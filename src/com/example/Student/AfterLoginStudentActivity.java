@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.instructor.tabs.TabsPagerAdapter;
+import com.example.Student.tabs.StudentTabsPagerAdapter;
 import com.example.squiz.R;
 
 
@@ -23,14 +23,14 @@ public class AfterLoginStudentActivity extends FragmentActivity implements Actio
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_afterlogin);
-		Toast.makeText(AfterLoginStudentActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+		Toast.makeText(AfterLoginStudentActivity.this, "Welcome St", Toast.LENGTH_SHORT).show();
 		
 		actionBar = getActionBar();
 		actionBar.setTitle("sQuiz me!");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		viewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
+		viewPager.setAdapter(new StudentTabsPagerAdapter(getSupportFragmentManager()));
 		
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.addTab(actionBar.newTab().setText("Groups").setTabListener(this));
