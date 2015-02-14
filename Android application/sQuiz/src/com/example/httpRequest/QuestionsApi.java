@@ -39,4 +39,10 @@ public interface QuestionsApi {
 	public void publishQuiz(@Header("X-Instructor-Email") String email,
 			@Header("X-Instructor-Token") String token, @Body PublishInfo pi,
 			@Path("id") int id, Callback<JsonObject> callback);
+	
+	@Headers({"Accept: application/json",})
+	@POST("/student/markquiz/{id}")
+	public void mark(@Header("X-Student-Email") String email,
+			@Header("X-Student-Token") String token, @Body JsonObject answers,
+			@Path("id") int id, Callback<JsonObject> callback);
 }

@@ -41,7 +41,7 @@ public class StudentGroupFragment extends ListFragment {
 
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
-	//	itemsToDelete = new ArrayList<Group>();
+		//	itemsToDelete = new ArrayList<Group>();
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -64,7 +64,7 @@ public class StudentGroupFragment extends ListFragment {
 
 			@Override
 			public void failure(RetrofitError arg0) {
-			Toast.makeText(getActivity(), "Failed for a reason", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "Failed for a reason", Toast.LENGTH_SHORT).show();
 			}
 		});
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
@@ -72,8 +72,8 @@ public class StudentGroupFragment extends ListFragment {
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-	//	ListView listView = getListView();
-	//	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL) ;
+		//	ListView listView = getListView();
+		//	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL) ;
 		/* listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 			@Override
@@ -132,12 +132,12 @@ public class StudentGroupFragment extends ListFragment {
 		}); */
 		super.onActivityCreated(savedInstanceState);
 	}
- 
-/*	private void deleteSelectedItems() {
+
+	/*	private void deleteSelectedItems() {
 		for (Group s : itemsToDelete)
 		GroupAdapter.notifyDataSetChanged();
 	} */
-	
+
 	/* @Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		 intent = new Intent();
@@ -152,7 +152,7 @@ public class StudentGroupFragment extends ListFragment {
 		builder.setTitle(R.string.dialog_title)
 		.setItems(R.array.items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 				intent.putExtra("Group", selectedGroup);
 				if (which == 1) {
 					intent.setClass(getActivity(), StudentsInGroupActivity.class);
@@ -212,10 +212,10 @@ public class StudentGroupFragment extends ListFragment {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}  */
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-	
+
 		inflater.inflate(R.menu.action_bar_quizzes, menu);
 		getActivity().getActionBar().setTitle("Groups");	
 		super.onCreateOptionsMenu(menu, inflater);

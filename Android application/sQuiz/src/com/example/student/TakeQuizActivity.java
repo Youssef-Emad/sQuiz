@@ -22,7 +22,9 @@ import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.example.student.tabs.TakeQuestionFragment;
 import com.example.student.tabs.TakeQuizPagerAdapter;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class TakeQuizActivity extends FragmentActivity {
 
@@ -142,8 +144,31 @@ public class TakeQuizActivity extends FragmentActivity {
 					collectMCQData(nQuestion - 1);
 				else
 					collectReData(nQuestion - 1);
-				Toast.makeText(TakeQuizActivity.this, 
-						answers[0], Toast.LENGTH_LONG).show();
+				
+				Gson gson = new Gson();
+				String ans = gson.toJson(answers);
+				
+				JsonParser jp = new JsonParser();
+				JsonObject jo = new JsonObject();
+				jo.add("answers", jp.parse(ans));
+				
+				task.mark(email, auth_token_string, jo, quizID, new Callback<JsonObject>() {
+
+					@Override
+					public void failure(RetrofitError arg0) {
+						JsonObject obj=(JsonObject) arg0.getBody();
+						String text=obj.get("error").toString() ;
+						text=text.replace(':', ' ').replaceAll("\"", "");
+						Toast.makeText(TakeQuizActivity.this,
+								text, Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void success(JsonObject arg0, Response arg1) {
+						Toast.makeText(TakeQuizActivity.this, 
+								"Submitted successfully", Toast.LENGTH_LONG).show();
+					}
+				});
 			}
 		});
 	}
