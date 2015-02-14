@@ -105,4 +105,8 @@ public class Quiz {
 		setDuration(duration);
 	}
 	
+	public int getNQuestion() {
+		return no_of_MCQ + no_of_rearrangeQ;
+	}
+	
 }

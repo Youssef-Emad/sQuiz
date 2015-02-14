@@ -23,7 +23,7 @@
     </style>
     
     <style name="ActionBarsQuizTheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
-        <item name="android:background">@drawable/bg4</item>
+        <item name="android:background">@drawable/action_bar</item>
         <item name="android:titleTextStyle">@style/ActionBarTextStyle</item>
     </style>
     
@@ -33,6 +33,10 @@
     
     <style name="ListViewStyle" parent="@android:style/Widget.ListView.White">
         <item name="android:textStyle">@style/ActionBarTextStyle</item>
+    </style>
+    
+    <style name="TextViewStyle" parent="@android:style/Widget.TextView" >
+        <item name="android:textColor">#ffffffff</item>
     </style>
 
 </resources>

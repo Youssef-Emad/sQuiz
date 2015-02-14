@@ -21,10 +21,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.Models.LoginForm;
-import com.example.Student.AfterLoginStudentActivity;
 import com.example.httpRequest.LoginAPI;
 import com.example.instructor.AfterLoginInstructorActivity;
 import com.example.squiz.R;
+import com.example.student.AfterLoginStudentActivity;
 import com.google.gson.JsonObject;
 
 public class WelcomeActivity extends Activity {

@@ -15,18 +15,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.Models.Question;
 import com.example.httpRequest.QuestionsApi;
-import com.example.instructor.tabs.QuestionFragment;
-import com.example.instructor.tabs.QuestionsPagerAdapter;
+import com.example.instructor.tabs.CreateQuestionFragment;
+import com.example.instructor.tabs.CreateQuestionsPagerAdapter;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
-public class QuizDetailsActivity extends FragmentActivity {
-	QuestionsPagerAdapter questionPagerAdapter;
-	ViewPager mViewPager;
+public class CreateQuizDetailsActivity extends FragmentActivity {
+	private CreateQuestionsPagerAdapter questionPagerAdapter;
+	private ViewPager mViewPager;
 	private Button create;
 	private int prevPosition;
 	private int nMCQ, nRe, nQuestion;
@@ -49,7 +50,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 		nMCQ = getIntent().getExtras().getInt("nMCQ");
 		nRe = getIntent().getExtras().getInt("nRe");
 		nQuestion = nMCQ + nRe;
-		questionPagerAdapter = new QuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
+		questionPagerAdapter = new CreateQuestionsPagerAdapter(getSupportFragmentManager(), nMCQ, nRe);
 
 		choices = new String[4];
 		questions = new Question[nQuestion];
@@ -68,7 +69,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 		.build();
 
 		task = restAdapter1.create(QuestionsApi.class);
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(QuizDetailsActivity.this);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(CreateQuizDetailsActivity.this);
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
 
@@ -113,12 +114,19 @@ public class QuizDetailsActivity extends FragmentActivity {
 
 					@Override
 					public void success(JsonObject arg0, Response arg1) {
-
+						Toast.makeText(CreateQuizDetailsActivity.this, 
+								"Created successfully", Toast.LENGTH_LONG).show();
+						finish();
 					}
 
 					@Override
 					public void failure(RetrofitError arg0) {
-
+						JsonObject type=new JsonObject() ;
+						JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
+						String text=obj.get("error").toString();
+						text=text.replace(':', ' ').replaceAll("\"", "");
+						Toast.makeText(CreateQuizDetailsActivity.this,
+								text, Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
@@ -126,7 +134,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 	}
 
 	private void collectMCQData(int pos) {
-		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
+		CreateQuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
 		etText = (EditText) v.findViewById(R.id.editTextQuestionMcqTitle);
@@ -167,7 +175,7 @@ public class QuizDetailsActivity extends FragmentActivity {
 	}
 
 	private void collectReData(int pos) {
-		QuestionFragment qf = questionPagerAdapter.getFragment(pos);
+		CreateQuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
 		etText = (EditText) v.findViewById(R.id.editTextQuestionTitleRearrangement);

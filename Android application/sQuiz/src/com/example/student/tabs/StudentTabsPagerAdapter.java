@@ -1,4 +1,4 @@
-package com.example.Student.tabs;
+package com.example.student.tabs;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

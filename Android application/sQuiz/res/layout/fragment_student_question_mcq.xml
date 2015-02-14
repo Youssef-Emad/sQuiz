@@ -7,37 +7,14 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/QuestionMcqTitle"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/question_title"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:ignore="RtlHardcoded" />
-
-    <EditText
-        android:id="@+id/editTextQuestionMcqTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="@string/example_who_is_the_first_programmer"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/QuestionMultipleChoices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/multiple_choices"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         tools:ignore="RtlHardcoded" />
 
     <LinearLayout
@@ -76,7 +53,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="38dp" />
-
         </RadioGroup>
 
         <LinearLayout
@@ -84,41 +60,49 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <EditText
-                android:id="@+id/editTextFirstChoice"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/TextViewFirstChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/first_choice"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/first_choice"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:ignore="RtlHardcoded" />
 
-            <EditText
-                android:id="@+id/editTextSecondChoice"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/TextViewSecondChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/second_choice"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/second_choice"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:ignore="RtlHardcoded" />
 
-            <EditText
-                android:id="@+id/editTextThirdChoice"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/TextViewThirdChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/third_choice"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/third_choice"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:ignore="RtlHardcoded" />
 
-            <EditText
-                android:id="@+id/editTextFourthChoice"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/TextViewFourthChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/fourth_choice"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:text="@string/fourth_choice"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:ignore="RtlHardcoded" />
 
         </LinearLayout>
     </LinearLayout>
@@ -128,7 +112,7 @@
         android:layout_height="match_parent" >
 
         <Button
-            android:id="@+id/create"
+            android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -136,9 +120,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/create"
+            android:text="@string/submit"
             android:visibility="invisible" />
-
     </LinearLayout>
 
 </LinearLayout>

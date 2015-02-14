@@ -1,4 +1,4 @@
-package com.example.Student.tabs;
+package com.example.instructor.tabs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,29 +8,39 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.Models.Group;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.GroupApi;
+import com.example.instructor.QuizzesInGroupActivity;
+import com.example.instructor.StudentsInGroupActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
+import com.google.gson.JsonObject;
 
-public class StudentGroupFragment extends ListFragment {
-	private List<Group> groups;
+public class InstructorGroupFragment extends ListFragment {
+	public static List<Group> groups;
 	private ListAdapter<Group> GroupAdapter;
-	//private List<Group> itemsToDelete;
+	private List<Group> itemsToDelete;
 	GroupApi task;
 	String email;
 	String auth_token_string;
@@ -41,7 +51,7 @@ public class StudentGroupFragment extends ListFragment {
 
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
-	//	itemsToDelete = new ArrayList<Group>();
+		itemsToDelete = new ArrayList<Group>();
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -52,7 +62,7 @@ public class StudentGroupFragment extends ListFragment {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
-		task.studentRequestGroups(email,auth_token_string,"student", new Callback<List<Group>>() {
+		task.instructorRequestGroups(email,auth_token_string,"instructor", new Callback<List<Group>>() {
 
 			@Override
 			public void success(List<Group> arg0, Response arg1) {
@@ -64,7 +74,7 @@ public class StudentGroupFragment extends ListFragment {
 
 			@Override
 			public void failure(RetrofitError arg0) {
-			Toast.makeText(getActivity(), "Failed for a reason", Toast.LENGTH_SHORT).show();
+
 			}
 		});
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
@@ -72,9 +82,10 @@ public class StudentGroupFragment extends ListFragment {
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-	//	ListView listView = getListView();
-	//	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL) ;
-		/* listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+		ListView listView = getListView();
+		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		listView.setSelector(R.drawable.list_selector);
+		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -97,15 +108,15 @@ public class StudentGroupFragment extends ListFragment {
 						public void failure(RetrofitError arg0) {
 							JsonObject obj=(JsonObject) arg0.getBody();
 							String text=obj.get("error").toString() ;
-									text=text.replace(':', ' ').replaceAll("\"", "");
+							text=text.replace(':', ' ').replaceAll("\"", "");
 							Toast.makeText(getActivity(),text, Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
 						public void success(JsonObject arg0, Response arg1) {
 							String text=arg0.get("info").toString().replaceAll("\"", "") ;
-						if(text.equals("deleted"))
-							deleteSelectedItems();							
+							if(text.equals("deleted"))
+								deleteSelectedItems();							
 						}
 					});
 					mode.finish(); // Action picked, so close the CAB
@@ -113,38 +124,38 @@ public class StudentGroupFragment extends ListFragment {
 				default:
 					return false;
 				}
-			}  
+			}
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 
 			}
 
-		/*	@Override
+			@Override
 			public void onItemCheckedStateChanged(ActionMode mode,
 					int position, long id, boolean checked) {
 				if (checked) 
 					itemsToDelete.add(groups.get(position));
 				else
 					itemsToDelete.remove(groups.get(position));
-			}  
+			}
 
-		}); */
+		});
 		super.onActivityCreated(savedInstanceState);
 	}
- 
-/*	private void deleteSelectedItems() {
+
+	private void deleteSelectedItems() {
 		for (Group s : itemsToDelete)
+			groups.remove(s);
 		GroupAdapter.notifyDataSetChanged();
-	} */
-	
-	/* @Override
+	}
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		 intent = new Intent();
-		 intent.putExtra("groupID",groups.get(position).getId());
+		intent = new Intent();
+		intent.putExtra("groupID",groups.get(position).getId());
 
 		alert(groups.get(position).toString());
-	} 
+	}
 
 	private void alert(final String selectedGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -152,7 +163,7 @@ public class StudentGroupFragment extends ListFragment {
 		builder.setTitle(R.string.dialog_title)
 		.setItems(R.array.items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 				intent.putExtra("Group", selectedGroup);
 				if (which == 1) {
 					intent.setClass(getActivity(), StudentsInGroupActivity.class);
@@ -166,9 +177,9 @@ public class StudentGroupFragment extends ListFragment {
 		});
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
-	} */
+	}
 
-	/*private void alertCustom() {
+	private void alertCustom() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Enter group name: ");
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -211,18 +222,16 @@ public class StudentGroupFragment extends ListFragment {
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
-	}  */
-	
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-	
-		inflater.inflate(R.menu.action_bar_quizzes, menu);
-		getActivity().getActionBar().setTitle("Groups");	
-		super.onCreateOptionsMenu(menu, inflater);
-
 	}
 
-	/*@Override
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.action_bar_menu, menu);
+		getActivity().getActionBar().setTitle("Groups");
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
 			alertCustom();
@@ -230,5 +239,5 @@ public class StudentGroupFragment extends ListFragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	} */
+	}
 }

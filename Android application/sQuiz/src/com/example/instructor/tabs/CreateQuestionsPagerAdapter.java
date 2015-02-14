@@ -5,27 +5,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
+public class CreateQuestionsPagerAdapter extends FragmentStatePagerAdapter {
 
 	private int nMCQ;
 	private int nRe;
-	private QuestionFragment questionFragments[];
+	private CreateQuestionFragment questionFragments[];
 
-	public QuestionsPagerAdapter(FragmentManager fm, int nMCQ, int nRe) {
+	public CreateQuestionsPagerAdapter(FragmentManager fm, int nMCQ, int nRe) {
 		super(fm);
 		this.nMCQ = nMCQ;
 		this.nRe  = nRe;
-		questionFragments = new QuestionFragment[nMCQ + nRe];
+		questionFragments = new CreateQuestionFragment[nMCQ + nRe];
 	}
 
 	@Override
 	public Fragment getItem(int i) {
 		if (questionFragments[i] == null) {
-			QuestionFragment fragment = new QuestionFragment();
+			CreateQuestionFragment fragment = new CreateQuestionFragment();
 			Bundle args = new Bundle();
-			args.putInt(QuestionFragment.ARG_QUESTION, i + 1);
-			args.putInt(QuestionFragment.ARG_NMCQ, nMCQ);
-			args.putInt(QuestionFragment.ARG_NQuestion, nMCQ + nRe);
+			args.putInt(CreateQuestionFragment.ARG_QUESTION, i + 1);
+			args.putInt(CreateQuestionFragment.ARG_NMCQ, nMCQ);
+			args.putInt(CreateQuestionFragment.ARG_NQuestion, nMCQ + nRe);
 			fragment.setArguments(args);
 			questionFragments[i] = fragment;
 		}
@@ -42,7 +42,7 @@ public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
 		return "Question " + (position + 1);
 	}
 
-	public QuestionFragment getFragment(int position) {
+	public CreateQuestionFragment getFragment(int position) {
 		return questionFragments[position];
 	}
 }

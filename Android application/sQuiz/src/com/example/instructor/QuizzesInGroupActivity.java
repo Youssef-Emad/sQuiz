@@ -44,6 +44,9 @@ public class QuizzesInGroupActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_groupdetails);
 		
+		ListView listView = getListView();
+		listView.setSelector(R.drawable.list_selector);
+		
 		String group = getIntent().getExtras().getString("Group");
 		groupId=getIntent().getExtras().getInt("groupID");
 		
