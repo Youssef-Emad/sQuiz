@@ -22,12 +22,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.Models.SignupForm;
-import com.example.Student.AfterLoginStudentActivity;
 import com.example.httpRequest.FormContainer;
 import com.example.httpRequest.InstructorFormContainer;
 import com.example.httpRequest.SignUpApi;
 import com.example.httpRequest.StudentFormContainer;
 import com.example.instructor.AfterLoginInstructorActivity;
+import com.example.student.AfterLoginStudentActivity;
 import com.google.gson.JsonObject;
 
 public class SignupActivity extends Activity {

@@ -28,12 +28,13 @@ import android.widget.Toast;
 import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
-import com.example.instructor.QuizFormActivity;
+import com.example.instructor.CreateQuizFormActivity;
+import com.example.instructor.ViewQuizDetailsActivity;
 import com.example.squiz.R;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
-public class QuizzFragment extends ListFragment {
+public class InstructorQuizzFragment extends ListFragment {
 	private List<Quiz> quizzes;
 	private ListAdapter<Quiz> QuizAdapter;
 	private List<Quiz> itemsToDelete;
@@ -73,6 +74,20 @@ public class QuizzFragment extends ListFragment {
 			}
 		});
 		return inflater.inflate(R.layout.fragment_quizzes, container, false);
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int pos, long id) {
+		Intent intent = new Intent(getActivity(), ViewQuizDetailsActivity.class);
+		
+		Quiz q = quizzes.get(pos);
+		
+		intent.putExtra("quizID", q.getId());
+		intent.putExtra("nQuestion", q.getNQuestion());
+		
+		startActivity(intent);
+		
+		super.onListItemClick(l, v, pos, id);
 	}
 	
 	@Override
@@ -152,7 +167,7 @@ public class QuizzFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_add) {
-			startActivity(new Intent(getActivity(), QuizFormActivity.class));
+			startActivity(new Intent(getActivity(), CreateQuizFormActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

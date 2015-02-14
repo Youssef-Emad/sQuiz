@@ -15,9 +15,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public ListFragment getItem(int index) {
         switch (index) {
         case 0:
-            return new GroupFragment();
+            return new InstructorGroupFragment();
         case 1:
-            return new QuizzFragment();
+            return new InstructorQuizzFragment();
         }
         
         return null;

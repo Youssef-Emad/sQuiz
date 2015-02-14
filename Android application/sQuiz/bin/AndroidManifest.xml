@@ -32,7 +32,7 @@
         <activity android:name="com.example.instructor.AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name="com.example.Student.AfterLoginStudentActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity android:name="com.example.student.AfterLoginStudentActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
         <activity android:name="com.example.instructor.StudentsInGroupActivity" android:theme="@style/sQuizThemeActionBar">
@@ -41,10 +41,16 @@
         <activity android:name="com.example.instructor.QuizzesInGroupActivity" android:theme="@style/sQuizThemeActionBar">
         </activity>
         
-        <activity android:name="com.example.instructor.QuizFormActivity" android:theme="@style/sQuizTheme">
+        <activity android:name="com.example.instructor.CreateQuizFormActivity" android:theme="@style/sQuizTheme">
         </activity>
         
-        <activity android:name="com.example.instructor.QuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
+        <activity android:name="com.example.instructor.CreateQuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
+        </activity>
+        
+        <activity android:name="com.example.instructor.ViewQuizDetailsActivity" android:theme="@style/sQuizThemeViewQuiz">
+        </activity>
+        
+        <activity android:name="com.example.student.TakeQuizActivity" android:theme="@style/sQuizThemeViewQuiz">
         </activity>
         
     </application>

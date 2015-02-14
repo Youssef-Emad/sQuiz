@@ -1,4 +1,4 @@
-package com.example.Student;
+package com.example.student;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.Student.tabs.StudentTabsPagerAdapter;
 import com.example.squiz.R;
+import com.example.student.tabs.StudentTabsPagerAdapter;
 
 
 @SuppressWarnings("deprecation")
