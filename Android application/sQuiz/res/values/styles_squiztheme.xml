@@ -34,5 +34,9 @@
     <style name="ListViewStyle" parent="@android:style/Widget.ListView.White">
         <item name="android:textStyle">@style/ActionBarTextStyle</item>
     </style>
+    
+    <style name="TextViewStyle" parent="@android:style/Widget.TextView" >
+        <item name="android:textColor">#ffffffff</item>
+    </style>
 
 </resources>
