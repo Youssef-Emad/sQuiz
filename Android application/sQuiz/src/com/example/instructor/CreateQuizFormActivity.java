@@ -106,6 +106,12 @@ public class CreateQuizFormActivity extends Activity {
 		else
 			return false;
 
-	} 
+	}
+	
+	@Override
+	protected void onRestart() {
+		finish();
+		super.onRestart();
+	}
 
 }
