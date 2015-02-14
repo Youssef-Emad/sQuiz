@@ -9,13 +9,14 @@ public class Quiz {
 	private int no_of_rearrangeQ;
 	private String subject;
 	private int duration;
+	private int state;
 	
 	public String toString() {
 		return name;
 	}
 	public void setName(String name)throws Exception {
 		if(!name.matches("")){
-			if(validator.isAlpha(name))       
+			if(validator.isLetterOrNum(name))       
 				this.name=name.trim();		 
 			else 
 				throw new Exception("Quiz name must contain only letters");
@@ -107,6 +108,12 @@ public class Quiz {
 	
 	public int getNQuestion() {
 		return no_of_MCQ + no_of_rearrangeQ;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 	
 }

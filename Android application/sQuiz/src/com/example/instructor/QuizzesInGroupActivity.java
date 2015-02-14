@@ -27,6 +27,7 @@ import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
 import com.example.squiz.R;
+import com.example.squiz.Statistics;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
@@ -98,17 +99,27 @@ public class QuizzesInGroupActivity extends ListActivity {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(quizzes.get(position).toString());
+		alert(quizzes.get(position).getId());
 	}
 	
-	private  void alert(final String selectedQuiz) {
+	private  void alert(final int selectedQuiz) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
 	    builder.setTitle(R.string.dialog_title)
 	           .setItems(R.array.items_quiz_in_group, new DialogInterface.OnClickListener() {
-	               public void onClick(DialogInterface dialog, int which) {
+	             
+	        	   public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
                        intent.putExtra("Quiz", selectedQuiz);
+                       intent.putExtra("groupID", groupId);
+                   	if (which == 0) {
+    					intent.setClass(QuizzesInGroupActivity.this, Statistics.class);
+    					startActivity(intent);
+    				}
+    				else {
+    					intent.setClass(QuizzesInGroupActivity.this, QuizzesInGroupActivity.class);
+    					startActivity(intent);
+    				}
 	               }
 	           });
 	    AlertDialog alertDialog = builder.create();

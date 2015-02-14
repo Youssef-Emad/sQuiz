@@ -78,6 +78,7 @@ public class CreateQuizFormActivity extends Activity {
 								intent.putExtra("nMCQ", Integer.parseInt(nMCQ));
 								intent.putExtra("nRe", Integer.parseInt(nRe));
 								intent.putExtra("quizName", QName);
+								quiz.setId(Integer.parseInt(quizID));
 								InstructorQuizzFragment.addQuiz(quiz);
 								startActivity(intent);
 							}
