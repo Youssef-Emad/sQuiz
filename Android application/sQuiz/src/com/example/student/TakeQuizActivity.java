@@ -174,10 +174,6 @@ public class TakeQuizActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				if (nMCQ == nQuestion)
-					collectMCQData(nQuestion - 1);
-				else
-					collectReData(nQuestion - 1);
 				submitSolution();
 			}
 		});
@@ -199,6 +195,11 @@ public class TakeQuizActivity extends FragmentActivity {
 	}
 	
 	private void submitSolution() {
+		if (nMCQ == nQuestion)
+			collectMCQData(nQuestion - 1);
+		else
+			collectReData(nQuestion - 1);
+		
 		Gson gson = new Gson();
 		String ans = gson.toJson(answers);
 		
@@ -215,6 +216,7 @@ public class TakeQuizActivity extends FragmentActivity {
 				text=text.replace(':', ' ').replaceAll("\"", "");
 				Toast.makeText(TakeQuizActivity.this,
 						text, Toast.LENGTH_SHORT).show();
+				finish();
 			}
 
 			@Override
