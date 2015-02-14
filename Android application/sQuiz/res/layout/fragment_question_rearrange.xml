@@ -24,7 +24,7 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:hint="@string/example_arrange_in_ascending_order"
-        android:inputType="textMultiLine" >
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
@@ -47,7 +47,7 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:hint="@string/example_a_4"
-        android:inputType="textMultiLine" />
+        android:inputType="text" />
     
     <EditText
         android:id="@+id/editTextQuestionRearrangementOption2"
@@ -56,7 +56,7 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:hint="@string/example_b_5"
-        android:inputType="textMultiLine" />
+        android:inputType="text" />
     
     <EditText
         android:id="@+id/editTextQuestionRearrangementOption3"
@@ -65,7 +65,7 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:hint="@string/example_c_6"
-        android:inputType="textMultiLine" />
+        android:inputType="text" />
     
     <EditText
         android:id="@+id/editTextQuestionRearrangementOption4"
@@ -74,7 +74,7 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:hint="@string/example_d_7"
-        android:inputType="textMultiLine" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/QuestionRearrangementAnswer"
@@ -93,7 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="@string/example_b_c_d_a" />
+        android:hint="@string/example_b_c_d_a"
+        android:inputType="text" />
     
         <LinearLayout
         android:layout_width="match_parent"

@@ -116,6 +116,7 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 					public void success(JsonObject arg0, Response arg1) {
 						Toast.makeText(CreateQuizDetailsActivity.this, 
 								"Created successfully", Toast.LENGTH_LONG).show();
+						finish();
 					}
 
 					@Override

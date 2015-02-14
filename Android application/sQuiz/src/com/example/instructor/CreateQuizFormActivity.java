@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.Models.Quiz;
 import com.example.httpRequest.QuizApi;
+import com.example.instructor.tabs.InstructorQuizzFragment;
 import com.example.squiz.R;
 import com.example.squiz.SignupActivity;
 import com.google.gson.JsonObject;
@@ -77,6 +78,7 @@ public class CreateQuizFormActivity extends Activity {
 								intent.putExtra("nMCQ", Integer.parseInt(nMCQ));
 								intent.putExtra("nRe", Integer.parseInt(nRe));
 								intent.putExtra("quizName", QName);
+								InstructorQuizzFragment.addQuiz(quiz);
 								startActivity(intent);
 							}
 
@@ -106,6 +108,11 @@ public class CreateQuizFormActivity extends Activity {
 		else
 			return false;
 
-	} 
+	}
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		finish();
+	}
 
 }

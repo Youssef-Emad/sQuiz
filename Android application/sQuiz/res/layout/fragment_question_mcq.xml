@@ -90,7 +90,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
-                android:hint="@string/first_choice" />
+                android:hint="@string/first_choice"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextSecondChoice"
@@ -98,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
-                android:hint="@string/second_choice" />
+                android:hint="@string/second_choice"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextThirdChoice"
@@ -106,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
-                android:hint="@string/third_choice" />
+                android:hint="@string/third_choice"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextFourthChoice"
@@ -114,7 +117,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
-                android:hint="@string/fourth_choice" />
+                android:hint="@string/fourth_choice"
+                android:inputType="textPersonName" />
+
         </LinearLayout>
     </LinearLayout>
 

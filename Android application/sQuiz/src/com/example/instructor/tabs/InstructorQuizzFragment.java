@@ -35,8 +35,8 @@ import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
 public class InstructorQuizzFragment extends ListFragment {
-	private List<Quiz> quizzes;
-	private ListAdapter<Quiz> QuizAdapter;
+	private static List<Quiz> quizzes;
+	private static ListAdapter<Quiz> QuizAdapter;
 	private List<Quiz> itemsToDelete;
 	QuizApi task;
 	String auth_token_string, email;
@@ -172,6 +172,10 @@ public class InstructorQuizzFragment extends ListFragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	public static void addQuiz(Quiz quiz){
+		quizzes.add(quiz);
+		QuizAdapter.notifyDataSetChanged();
 	}
 
 }
