@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.Models.Group;
@@ -42,6 +43,8 @@ public class StudentGroupFragment extends ListFragment {
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
 		//	itemsToDelete = new ArrayList<Group>();
+		ListView listView = getListView();
+		listView.setSelector(R.drawable.list_selector);
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url

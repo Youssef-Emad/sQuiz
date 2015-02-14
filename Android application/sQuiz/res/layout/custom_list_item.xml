@@ -2,7 +2,7 @@
     android:id="@+id/list_text"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightSmall"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:textAppearance="?android:attr/textAppearanceLarge"
     android:paddingLeft="10dp"
     android:gravity="center_vertical"
     android:textColor="#FFFFFFFF"

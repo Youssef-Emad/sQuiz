@@ -44,6 +44,9 @@ public class StudentQuizzFragment extends ListFragment {
 
 		quizzes=new ArrayList<Quiz>();
 		//itemsToDelete = new ArrayList<Quiz>();
+		
+		ListView listView = getListView();
+		listView.setSelector(R.drawable.list_selector);
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url

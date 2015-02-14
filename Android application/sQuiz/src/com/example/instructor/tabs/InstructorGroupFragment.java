@@ -84,6 +84,7 @@ public class InstructorGroupFragment extends ListFragment {
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		ListView listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		listView.setSelector(R.drawable.list_selector);
 		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 			@Override
