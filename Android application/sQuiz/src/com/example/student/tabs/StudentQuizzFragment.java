@@ -8,6 +8,8 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -73,7 +75,7 @@ public class StudentQuizzFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int pos, long id) {
-		Intent intent = new Intent(getActivity(), TakeQuizActivity.class);
+		final Intent intent = new Intent(getActivity(), TakeQuizActivity.class);
 
 		Quiz q = quizzes.get(pos);
 
@@ -82,8 +84,23 @@ public class StudentQuizzFragment extends ListFragment {
 		intent.putExtra("nMCQ", q.getnMCQ());
 		intent.putExtra("duration", q.getDuration());
 		intent.putExtra("quizName", q.toString());
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("You have " + q.getDuration() + 
+				" minutes to solve this quiz.\n\n" + "Do you want to solve it now?")
+		.setTitle("Alert Message")
+		.setPositiveButton("Solve", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				startActivity(intent);
+			}
+		});
+		
+		builder.setNegativeButton("Cancel", null);
 
-		startActivity(intent);
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
 
 		super.onListItemClick(l, v, pos, id);
 	}
