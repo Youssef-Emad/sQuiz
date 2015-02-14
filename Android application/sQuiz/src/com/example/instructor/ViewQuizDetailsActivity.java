@@ -148,29 +148,36 @@ public class ViewQuizDetailsActivity extends FragmentActivity {
 				String min  = picker.getCurrentMinute().toString();
 				String expiryDate = date + hour + ":" + min + ":00 +0200";
 				pi.setExpiry_date(expiryDate);
-
-				task.publishQuiz(email, auth_token_string, pi, quizID, 
-						new Callback<JsonObject>() {
-
-					@Override
-					public void failure(RetrofitError arg0) {
-						JsonObject obj=(JsonObject) arg0.getBody();
-						String text=obj.get("error").toString();
-						text=text.replace(':', ' ').replaceAll("\"", "");
-						Toast.makeText(ViewQuizDetailsActivity.this, 
-								text, Toast.LENGTH_SHORT).show();
-					}
-
-					@Override
-					public void success(JsonObject arg0, Response arg1) {
-						Toast.makeText(ViewQuizDetailsActivity.this, 
-								"Published successfully", Toast.LENGTH_SHORT).show();
-					}
-				});
+				publishQuiz();
 			}
+
 		});
 
 		builder.show();
 	}
 
+	private void publishQuiz() {
+		task.publishQuiz(email, auth_token_string, pi, quizID, 
+				new Callback<JsonObject>() {
+			
+			@Override
+			public void failure(RetrofitError arg0) {
+				try {
+					JsonObject obj=(JsonObject) arg0.getBody();
+					String text=obj.get("error").toString();
+					text=text.replace(':', ' ').replaceAll("\"", "");
+					Toast.makeText(ViewQuizDetailsActivity.this, 
+							text, Toast.LENGTH_SHORT).show();
+				} catch (Exception e) {
+					publishQuiz();
+				}
+			}
+			
+			@Override
+			public void success(JsonObject arg0, Response arg1) {
+				Toast.makeText(ViewQuizDetailsActivity.this, 
+						"Published successfully", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 }

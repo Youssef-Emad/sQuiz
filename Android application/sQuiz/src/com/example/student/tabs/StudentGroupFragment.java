@@ -43,8 +43,6 @@ public class StudentGroupFragment extends ListFragment {
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
 		//	itemsToDelete = new ArrayList<Group>();
-		ListView listView = getListView();
-		listView.setSelector(R.drawable.list_selector);
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -63,6 +61,8 @@ public class StudentGroupFragment extends ListFragment {
 				GroupAdapter = new ListAdapter<Group>(getActivity(), 
 						R.layout.custom_list_item, groups);
 				setListAdapter(GroupAdapter);
+				ListView listView = getListView();
+				listView.setSelector(R.drawable.list_selector);
 			}
 
 			@Override

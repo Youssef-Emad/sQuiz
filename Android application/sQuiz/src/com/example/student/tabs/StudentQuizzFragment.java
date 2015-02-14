@@ -45,8 +45,6 @@ public class StudentQuizzFragment extends ListFragment {
 		quizzes=new ArrayList<Quiz>();
 		//itemsToDelete = new ArrayList<Quiz>();
 		
-		ListView listView = getListView();
-		listView.setSelector(R.drawable.list_selector);
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -65,6 +63,8 @@ public class StudentQuizzFragment extends ListFragment {
 				QuizAdapter = new ListAdapter<Quiz>(getActivity(), 
 						R.layout.custom_list_item, quizzes);
 				setListAdapter(QuizAdapter);
+				ListView listView = getListView();
+				listView.setSelector(R.drawable.list_selector);
 			}
 
 			@Override
@@ -190,5 +190,4 @@ public class StudentQuizzFragment extends ListFragment {
 		}
 		return super.onOptionsItemSelected(item);
 	} */
-
 }
