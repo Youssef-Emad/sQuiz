@@ -5,8 +5,12 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Models.Question;
@@ -31,25 +36,38 @@ public class TakeQuizActivity extends FragmentActivity {
 	private TakeQuizPagerAdapter questionPagerAdapter;
 	private ViewPager mViewPager;
 	private Button submit;
-	private int nQuestion, nMCQ, prevPosition;
+	private int nQuestion, nMCQ, prevPosition, duration;
 	private int quizID;
 	QuestionsApi task;
 	String auth_token_string, email;
 	private String[] answers;
+	private TextView timer;
+	private String quizName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_take_quiz);
 
-
 		quizID    = getIntent().getExtras().getInt("quizID");
 		nQuestion = getIntent().getExtras().getInt("nQuestion");
 		nMCQ      = getIntent().getExtras().getInt("nMCQ");
+		duration  = getIntent().getExtras().getInt("duration");
+		quizName  = getIntent().getExtras().getString("quizName");
+		
+		duration = 1;
+		
+		ActionBar actionBar = getActionBar();
+		
+		actionBar.setTitle(quizName);
 
 		answers = new String[nQuestion];
 
 		mViewPager = (ViewPager) findViewById(R.id.questions_pager);
+		timer = (TextView) findViewById(R.id.timer);
+		
+		String time = (duration < 10 ? "0" : "") + Integer.toString(duration) + ":00";
+		timer.setText(time);
 
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)
@@ -69,6 +87,22 @@ public class TakeQuizActivity extends FragmentActivity {
 						questionPagerAdapter = new TakeQuizPagerAdapter
 								(getSupportFragmentManager(), nQuestion, nMCQ, arg0);
 						mViewPager.setAdapter(questionPagerAdapter);
+						
+						new CountDownTimer(duration * 60 * 1000, 1000) {
+
+						     public void onTick(long millisUntilFinished) {
+						         long sec = millisUntilFinished / 1000;
+						         long min = sec / 60;
+						         sec %= 60;
+						         String s = (sec < 10 ? "0" : "") + Integer.toString((int) sec);
+						         String m = (min < 10 ? "0" : "") + Integer.toString((int) min);
+						         timer.setText(m + ":" + s);
+						     }
+
+						     public void onFinish() {
+						         alertTimeOut();
+						     }
+						  }.start();
 					}
 					@Override
 					public void failure(RetrofitError arg0) {
@@ -171,6 +205,21 @@ public class TakeQuizActivity extends FragmentActivity {
 				});
 			}
 		});
+	}
+	
+	private void alertTimeOut() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(TakeQuizActivity.this);
+		builder.setMessage("Time Out!")
+		.setTitle("Alert Message")
+		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
 	}
 
 }
