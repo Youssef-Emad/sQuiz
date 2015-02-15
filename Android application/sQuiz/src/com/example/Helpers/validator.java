@@ -27,4 +27,8 @@ public static final String EMAIL_PATTERN =
 		return string.matches(regex);
 		
 	}
+	public static boolean isLetterOrNum(String string){
+		String regex ="[A-Za-z0-9 /n]+";
+		return string.matches(regex);
+	}
 }

@@ -54,9 +54,7 @@ public class TakeQuizActivity extends FragmentActivity {
 		nMCQ      = getIntent().getExtras().getInt("nMCQ");
 		duration  = getIntent().getExtras().getInt("duration");
 		quizName  = getIntent().getExtras().getString("quizName");
-		
-		duration = 1;
-		
+
 		ActionBar actionBar = getActionBar();
 		
 		actionBar.setTitle(quizName);

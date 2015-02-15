@@ -7,9 +7,9 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-    
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,34 +25,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".SignupActivity" >
         </activity>
-        
-        <activity android:name="com.example.instructor.AfterLoginInstructorActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity
+            android:name="com.example.instructor.AfterLoginInstructorActivity"
+            android:theme="@style/sQuizThemeActionBar" >
         </activity>
-        
-        <activity android:name="com.example.student.AfterLoginStudentActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity
+            android:name="com.example.student.AfterLoginStudentActivity"
+            android:theme="@style/sQuizThemeActionBar" >
         </activity>
-        
-        <activity android:name="com.example.instructor.StudentsInGroupActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity
+            android:name="com.example.instructor.StudentsInGroupActivity"
+            android:theme="@style/sQuizThemeActionBar" >
         </activity>
-        
-        <activity android:name="com.example.instructor.QuizzesInGroupActivity" android:theme="@style/sQuizThemeActionBar">
+        <activity
+            android:name="com.example.instructor.QuizzesInGroupActivity"
+            android:theme="@style/sQuizThemeActionBar" >
         </activity>
-        
-        <activity android:name="com.example.instructor.CreateQuizFormActivity" android:theme="@style/sQuizTheme">
+        <activity
+            android:name="com.example.instructor.CreateQuizFormActivity"
+            android:theme="@style/sQuizTheme" >
         </activity>
-        
-        <activity android:name="com.example.instructor.CreateQuizDetailsActivity" android:theme="@style/sQuizThemeQuestionForm">
+        <activity
+            android:name="com.example.instructor.CreateQuizDetailsActivity"
+            android:theme="@style/sQuizThemeQuestionForm" >
         </activity>
-        
-        <activity android:name="com.example.instructor.ViewQuizDetailsActivity" android:theme="@style/sQuizThemeViewQuiz">
+        <activity
+            android:name="com.example.instructor.ViewQuizDetailsActivity"
+            android:theme="@style/sQuizThemeViewQuiz" >
         </activity>
-        
-        <activity android:name="com.example.student.TakeQuizActivity" android:theme="@style/sQuizThemeViewQuiz">
+        <activity
+            android:name="com.example.student.TakeQuizActivity"
+            android:theme="@style/sQuizThemeViewQuiz" >
         </activity>
-        
+        <activity
+            android:name=".Statistics"
+            android:label="@style/sQuizTheme" >
+        </activity>
+        <activity
+            android:name=".ViewQuizQuestions"
+            android:label="@string/title_activity_view_quiz_questions" >
+        </activity>
     </application>
 
 </manifest>

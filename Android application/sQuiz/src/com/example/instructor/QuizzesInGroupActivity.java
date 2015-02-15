@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ import com.example.Models.Quiz;
 import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
 import com.example.squiz.R;
+import com.example.squiz.Statistics;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
@@ -36,7 +38,7 @@ public class QuizzesInGroupActivity extends ListActivity {
 	QuizApi task;
 	String email;
 	String auth_token_string;
-	int groupId;
+	int groupId,nQuestions;
 
 	
 	@Override
@@ -93,26 +95,48 @@ public class QuizzesInGroupActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		 MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.action_bar_quizzes, menu);
+	    
 		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(quizzes.get(position).toString());
+		alert(quizzes.get(position).getId(),quizzes.get(position).getNQuestion());
 	}
 	
-	private  void alert(final String selectedQuiz) {
+	private  void alert(final int selectedQuiz,final int nQuestions) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
 	    builder.setTitle(R.string.dialog_title)
 	           .setItems(R.array.items_quiz_in_group, new DialogInterface.OnClickListener() {
-	               public void onClick(DialogInterface dialog, int which) {
+	             
+	        	   public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
-                       intent.putExtra("Quiz", selectedQuiz);
+                       intent.putExtra("quizID", selectedQuiz);
+                       intent.putExtra("groupID", groupId);
+                       intent.putExtra("nQuestion", nQuestions );
+                   	if (which == 0) {
+    					intent.setClass(QuizzesInGroupActivity.this, Statistics.class);
+    					startActivity(intent);
+    				}
+    				else {
+    					intent.setClass(QuizzesInGroupActivity.this, ViewQuizDetailsActivity.class);
+    					startActivity(intent);
+    				}
 	               }
 	           });
 	    AlertDialog alertDialog = builder.create();
 	    alertDialog.show();
 	}
+
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 

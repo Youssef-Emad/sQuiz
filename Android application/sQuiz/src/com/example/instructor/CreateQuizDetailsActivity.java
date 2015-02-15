@@ -12,11 +12,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.Helpers.validator;
 import com.example.Models.Question;
 import com.example.httpRequest.QuestionsApi;
 import com.example.instructor.tabs.CreateQuestionFragment;
@@ -40,10 +42,12 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 	private RadioGroup rg;
 	QuestionsApi task;
 	String auth_token_string, email;
+	boolean addQ=true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_quiz_details);
 
 		id = getIntent().getExtras().getInt("quizID");
@@ -79,9 +83,18 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 			public void onPageSelected(int position) {
 				if (position > 0 && position > prevPosition) {
 					if (position - 1 < nMCQ)
-						collectMCQData(position - 1);
+						try {
+							collectMCQData(position - 1);
+						} catch (Exception e) {
+							Toast.makeText(CreateQuizDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+						}
 					else
-						collectReData(position - 1);
+						try {
+							collectReData(position - 1);
+						} catch (Exception e) {
+							Toast.makeText(CreateQuizDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+						}
 				}
 				prevPosition = position;
 			}
@@ -99,46 +112,73 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 
 	}
 	public void setCreateButton(Button create) {
-		this.create = create;
+		
+		try {
+		
+			this.create = create;
 
-		this.create.setOnClickListener(new View.OnClickListener() {
+			this.create.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				if (nMCQ == nQuestion)
-					collectMCQData(nQuestion - 1);
-				else
-					collectReData(nQuestion - 1);
-				
-				task.addQuestions(email, auth_token_string, id, questions, new Callback<JsonObject>() {
+				@Override
+				public void onClick(View v) {
+					addQ=true;
+					if (nMCQ == nQuestion)
+						try {
+							collectMCQData(nQuestion - 1);
+						} catch (Exception e) {
+							Toast.makeText(CreateQuizDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+							addQ=false;
+							
+						}
+					else
+						try {
+							collectReData(nQuestion - 1);
+						} catch (Exception e) {
+							Toast.makeText(CreateQuizDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+							addQ=false;
+						}
+					
+					if(addQ)
+					task.addQuestions(email, auth_token_string,id, questions, new Callback<JsonObject>() {
 
-					@Override
-					public void success(JsonObject arg0, Response arg1) {
-						Toast.makeText(CreateQuizDetailsActivity.this, 
-								"Created successfully", Toast.LENGTH_LONG).show();
-						finish();
-					}
+						@Override
+						public void success(JsonObject arg0, Response arg1) {
+							Toast.makeText(CreateQuizDetailsActivity.this, 
+									"Created successfully", Toast.LENGTH_LONG).show();
+							finish();
+						}
 
-					@Override
-					public void failure(RetrofitError arg0) {
-						JsonObject type=new JsonObject() ;
-						JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
-						String text=obj.get("error").toString();
-						text=text.replace(':', ' ').replaceAll("\"", "");
-						Toast.makeText(CreateQuizDetailsActivity.this,
-								text, Toast.LENGTH_SHORT).show();
-					}
-				});
-			}
-		});
+						@Override
+						public void failure(RetrofitError arg0) {
+							JsonObject type=new JsonObject() ;
+							JsonObject obj=(JsonObject) arg0.getBodyAs(type.getClass());
+							String text=obj.get("error").toString();
+							text=text.replace(':', ' ').replaceAll("\"", "");
+							Toast.makeText(CreateQuizDetailsActivity.this,
+									text, Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+			});
+		} catch (Exception e) {
+			Toast.makeText(CreateQuizDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
 	}
 
-	private void collectMCQData(int pos) {
+	private void collectMCQData(int pos) throws Exception {
 		CreateQuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
 		etText = (EditText) v.findViewById(R.id.editTextQuestionMcqTitle);
-		text = etText.getText().toString();
+		if(!etText.getText().toString().matches("")){
+				if(validator.isLetterOrNum(etText.getText().toString()))  {     
+					text=etText.getText().toString();	
+				}
+				else 
+					throw new Exception("Invalid Question title Format");
+			}
+			else 
+				throw new Exception("Please fill in missing Data");
 		
 		choices = new String[4];
 
@@ -146,11 +186,27 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 		etChoices[1] = (EditText) v.findViewById(R.id.editTextSecondChoice);
 		etChoices[2] = (EditText) v.findViewById(R.id.editTextThirdChoice);
 		etChoices[3] = (EditText) v.findViewById(R.id.editTextFourthChoice);
-
-		choices[0] = etChoices[0].getText().toString();
+		
+		int i=0;
+		for (EditText element : etChoices) {
+			String in=element.getText().toString();
+			if(!in.matches("")){
+				if(validator.isLetterOrNum(in))  {     
+					choices[i]=in;	
+					i++;
+					
+				}
+				else 
+					throw new Exception("Invalid Format");
+			}
+			else 
+				throw new Exception("Please fill in missing Data");
+			
+		}
+	/*	choices[0] = etChoices[0].getText().toString();
 		choices[1] = etChoices[1].getText().toString();
 		choices[2] = etChoices[2].getText().toString();
-		choices[3] = etChoices[3].getText().toString();
+		choices[3] = etChoices[3].getText().toString(); */
 
 		rg = (RadioGroup) v.findViewById(R.id.radioGroupChoices);
 
@@ -174,28 +230,62 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 		questions[pos] = new Question(text, choices, right_answer);
 	}
 
-	private void collectReData(int pos) {
+	private void collectReData(int pos) throws Exception {
 		CreateQuestionFragment qf = questionPagerAdapter.getFragment(pos);
 		View v = qf.getView();
 
 		etText = (EditText) v.findViewById(R.id.editTextQuestionTitleRearrangement);
-		text = etText.getText().toString();
+		if(!etText.getText().toString().matches("")){
+			if(validator.isLetterOrNum(etText.getText().toString()))  {     
+				text=etText.getText().toString();	
+			}
+			else 
+				throw new Exception("Invalid Format");
+		}
+		else 
+			throw new Exception("Please fill in missing Data");
+		
 		
 		choices = new String[4];
 
+		
 		etChoices[0] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption1);
 		etChoices[1] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption2);
 		etChoices[2] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption3);
 		etChoices[3] = (EditText) v.findViewById(R.id.editTextQuestionRearrangementOption4);
+		
+		int i=0;
+		for (EditText element : etChoices) {
+			String in=element.getText().toString();
+			if(!in.matches("")){
+				if(validator.isLetterOrNum(in))  {     
+					choices[i]=in;	
+					i++;					
+				}
+				else 
+					throw new Exception("Invalid Format");
+			}
+			else 
+				throw new Exception("Please fill in missing Data");
 
-		choices[0] = etChoices[0].getText().toString();
+	/*	choices[0] = etChoices[0].getText().toString();
 		choices[1] = etChoices[1].getText().toString();
 		choices[2] = etChoices[2].getText().toString();
-		choices[3] = etChoices[3].getText().toString();
+		choices[3] = etChoices[3].getText().toString();  */
 
 		etRight_answer = (EditText) v.findViewById(R.id.editTextQuestionRearrangementAnswer);
-		right_answer = etRight_answer.getText().toString();
+		if(!etRight_answer.getText().toString().matches("")){
+			if(validator.isLetterOrNum(etRight_answer.getText().toString()))  {     
+				right_answer = etRight_answer.getText().toString();
+			}
+			else 
+				throw new Exception("Invalid Format");
+		}
+		else 
+			throw new Exception("Please fill in missing Data");
+		
 
 		questions[pos] = new Question(text, choices, right_answer);
+		}
 	}
 }
