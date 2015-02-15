@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -94,6 +95,7 @@ public class QuizzesInGroupActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		 MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.action_bar_quizzes, menu);
+	    
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -125,5 +127,15 @@ public class QuizzesInGroupActivity extends ListActivity {
 	    AlertDialog alertDialog = builder.create();
 	    alertDialog.show();
 	}
+
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 

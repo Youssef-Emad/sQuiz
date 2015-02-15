@@ -132,7 +132,7 @@ public class WelcomeActivity extends Activity {
 	        }
 			else if(accType.equals("student"))
 				startActivity(new Intent(WelcomeActivity.this, AfterLoginStudentActivity.class));
-			
+			finish();
 	        	}
 
 	        @Override

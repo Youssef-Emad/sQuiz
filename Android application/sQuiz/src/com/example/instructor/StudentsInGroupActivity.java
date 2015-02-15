@@ -169,6 +169,11 @@ public class StudentsInGroupActivity extends ListActivity {
 			alertCustom();
 			return true;
 		}
+		else if(item.getItemId()==R.id.home){
+			    StudentsInGroupActivity.this.finish();
+	            return true;
+	        }
+	        
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -216,5 +221,6 @@ public class StudentsInGroupActivity extends ListActivity {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
+	
 	
 }
