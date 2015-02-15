@@ -29,6 +29,7 @@ import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
 import com.example.squiz.R;
 import com.example.squiz.Statistics;
+import com.example.squiz.ViewQuizQuestions;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
@@ -119,7 +120,7 @@ public class QuizzesInGroupActivity extends ListActivity {
     					startActivity(intent);
     				}
     				else {
-    					intent.setClass(QuizzesInGroupActivity.this, QuizzesInGroupActivity.class);
+    					intent.setClass(QuizzesInGroupActivity.this, ViewQuizQuestions.class);
     					startActivity(intent);
     				}
 	               }
