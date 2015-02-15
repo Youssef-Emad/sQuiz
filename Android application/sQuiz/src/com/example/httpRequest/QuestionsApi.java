@@ -34,7 +34,7 @@ public interface QuestionsApi {
 			@Header("X-Instructor-Token") String token, @Path("id") int id
 			,@Body Question[] questions,Callback<JsonObject> callback);
 	
-	@Headers({"Accept: application/json",})
+	@Headers({"Accept: application/json"})
 	@POST("/quizzes/publish/{id}")
 	public void publishQuiz(@Header("X-Instructor-Email") String email,
 			@Header("X-Instructor-Token") String token, @Body PublishInfo pi,

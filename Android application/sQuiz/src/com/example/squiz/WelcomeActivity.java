@@ -126,8 +126,10 @@ public class WelcomeActivity extends Activity {
 			editor.putString("email", email);
 			editor.commit();
 			
-			if(accType.equals("instructor"))
+			if(accType.equals("instructor")){
 	        	startActivity(new Intent(WelcomeActivity.this, AfterLoginInstructorActivity.class));
+				finish();
+	        }
 			else if(accType.equals("student"))
 				startActivity(new Intent(WelcomeActivity.this, AfterLoginStudentActivity.class));
 			

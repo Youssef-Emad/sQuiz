@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,7 +38,9 @@ public class CreateQuizFormActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_quiz_form);
+		
 
 		numberOfMCQ = (EditText) findViewById(R.id.editTextNumberOfMcq);
 		numberOfRearrangement = (EditText) findViewById(R.id.editTextNumberOfRearrangement);

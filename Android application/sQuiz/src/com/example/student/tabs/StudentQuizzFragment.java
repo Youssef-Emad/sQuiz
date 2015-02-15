@@ -37,6 +37,7 @@ public class StudentQuizzFragment extends ListFragment {
 	//	private List<Quiz> itemsToDelete;
 	QuizApi task;
 	String auth_token_string, email;
+	Quiz q;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class StudentQuizzFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int pos, long id) {
 		final Intent intent = new Intent(getActivity(), TakeQuizActivity.class);
 
-		Quiz q = quizzes.get(pos);
+		 q = quizzes.get(pos);
 
 		intent.putExtra("quizID", q.getId());
 		intent.putExtra("nQuestion", q.getNQuestion());
@@ -96,7 +97,12 @@ public class StudentQuizzFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(q.isTaken()==0){
 				startActivity(intent);
+				q.setTaken(1);
+				}
+				else
+					Toast.makeText(getActivity(), "Quiz already taken", Toast.LENGTH_SHORT).show();
 			}
 		});
 		

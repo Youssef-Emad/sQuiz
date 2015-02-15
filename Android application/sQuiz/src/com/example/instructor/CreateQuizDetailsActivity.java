@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -46,6 +47,7 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_quiz_details);
 
 		id = getIntent().getExtras().getInt("quizID");
@@ -119,13 +121,14 @@ public class CreateQuizDetailsActivity extends FragmentActivity {
 
 				@Override
 				public void onClick(View v) {
-					
+					addQ=true;
 					if (nMCQ == nQuestion)
 						try {
 							collectMCQData(nQuestion - 1);
 						} catch (Exception e) {
 							Toast.makeText(CreateQuizDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 							addQ=false;
+							
 						}
 					else
 						try {

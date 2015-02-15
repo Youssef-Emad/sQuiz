@@ -9,7 +9,7 @@ public class Quiz {
 	private int no_of_rearrangeQ;
 	private String subject;
 	private int duration;
-	private int state;
+	private int taken;
 	
 	public String toString() {
 		return name;
@@ -109,11 +109,11 @@ public class Quiz {
 	public int getNQuestion() {
 		return no_of_MCQ + no_of_rearrangeQ;
 	}
-	public int getState() {
-		return state;
+	public int isTaken() {
+		return taken;
 	}
-	public void setState(int state) {
-		this.state = state;
+	public void setTaken(int taken) {
+		this.taken = taken;
 	}
 	
 }

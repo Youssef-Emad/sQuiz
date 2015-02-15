@@ -30,6 +30,14 @@ public class Statistics extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_statistics);
+		
+		TableLayout table = new TableLayout(this);
+
+        table.setStretchAllColumns(true);
+        table.setShrinkAllColumns(true);
+
+        TableRow rowTitle = new TableRow(this);
+        rowTitle.setGravity(Gravity.CENTER_HORIZONTAL);
 
 		quizID=getIntent().getExtras().getInt("Quiz");
 		groupId=getIntent().getExtras().getInt("groupID");
@@ -61,5 +69,9 @@ public class Statistics extends Activity {
 			}
 		});
 		
+		for (Map<String, Integer> item : results) {	
+			
+			
+		}
 	}
 }
