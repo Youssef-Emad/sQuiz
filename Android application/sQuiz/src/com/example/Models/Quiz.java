@@ -9,7 +9,7 @@ public class Quiz {
 	private int no_of_rearrangeQ;
 	private String subject;
 	private int duration;
-	private int taken;
+	private transient int taken;
 	
 	public String toString() {
 		return name;

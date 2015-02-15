@@ -29,7 +29,6 @@ import com.example.adapters.ListAdapter;
 import com.example.httpRequest.QuizApi;
 import com.example.squiz.R;
 import com.example.squiz.Statistics;
-import com.example.squiz.ViewQuizQuestions;
 import com.example.squiz.WelcomeActivity;
 import com.google.gson.JsonObject;
 
@@ -39,7 +38,7 @@ public class QuizzesInGroupActivity extends ListActivity {
 	QuizApi task;
 	String email;
 	String auth_token_string;
-	int groupId;
+	int groupId,nQuestions;
 
 	
 	@Override
@@ -102,10 +101,10 @@ public class QuizzesInGroupActivity extends ListActivity {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		alert(quizzes.get(position).getId());
+		alert(quizzes.get(position).getId(),quizzes.get(position).getNQuestion());
 	}
 	
-	private  void alert(final int selectedQuiz) {
+	private  void alert(final int selectedQuiz,final int nQuestions) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
 	    builder.setTitle(R.string.dialog_title)
@@ -113,14 +112,15 @@ public class QuizzesInGroupActivity extends ListActivity {
 	             
 	        	   public void onClick(DialogInterface dialog, int which) {
 	            	   Intent intent = new Intent();
-                       intent.putExtra("Quiz", selectedQuiz);
+                       intent.putExtra("quizID", selectedQuiz);
                        intent.putExtra("groupID", groupId);
+                       intent.putExtra("nQuestion", nQuestions );
                    	if (which == 0) {
     					intent.setClass(QuizzesInGroupActivity.this, Statistics.class);
     					startActivity(intent);
     				}
     				else {
-    					intent.setClass(QuizzesInGroupActivity.this, ViewQuizQuestions.class);
+    					intent.setClass(QuizzesInGroupActivity.this, ViewQuizDetailsActivity.class);
     					startActivity(intent);
     				}
 	               }

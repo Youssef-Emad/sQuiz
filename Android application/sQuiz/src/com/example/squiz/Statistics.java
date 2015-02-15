@@ -1,6 +1,7 @@
 package com.example.squiz;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,9 @@ public class Statistics extends Activity {
 	String auth_token_string;
 	int quizID,groupId;
 	QuizApi task;
-	List<Map<String,Integer>> results;
-	String[] students ;
-	int[] marks;
+	Map<String,Integer> results;
+	String[] students={"haitham"} ;
+	Integer[] marks={20};
 	TableLayout tl;
     TableRow tr;
     TextView studentTv,valueTV;
@@ -45,7 +46,7 @@ public class Statistics extends Activity {
 
 		quizID=getIntent().getExtras().getInt("Quiz");
 		groupId=getIntent().getExtras().getInt("groupID");
-		results =new ArrayList<>();
+		results =new HashMap<>();
 		
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
@@ -57,12 +58,22 @@ public class Statistics extends Activity {
 		auth_token_string = settings.getString("authToken", "");
 		email=settings.getString("email", "");
 		
-		task.getResults(email, auth_token_string, quizID, groupId, new Callback<List<Map<String,Integer>>>() {
+		task.getResults(email, auth_token_string, quizID, groupId, new Callback<Map<String,Integer>>() {
 			
 			@Override
-			public void success(List<Map<String,Integer>> arg0, Response arg1) {
+			public void success(Map<String,Integer> arg0, Response arg1) {
 				results =arg0;
 				Toast.makeText(Statistics.this, "tmam", Toast.LENGTH_SHORT).show();
+				/* int i=0;
+				for (Object obj : results.keySet().toArray(marks)) {
+					students[i]=obj.toString();
+					i++;
+				} 
+				i=0;
+				for (Object obj : results.values().toArray(marks)) {
+					marks[i]=Integer.parseInt(obj.toString());
+					i++;
+				}  */
 				addHeaders();
 		        addData();
 			}
@@ -73,14 +84,11 @@ public class Statistics extends Activity {
 				
 			}
 		});
-		for (int i=0;i<results.size();i++) {	
-			students[i]=results.get(i).keySet().toString();  
+	
+	
 			
-		}
-		for (int i=0;i<results.size();i++) {	
-			marks[i]=Integer.parseInt(results.get(i).values().toString());  
+		
 			
-		}
 		  
 		
 	}

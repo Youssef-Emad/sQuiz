@@ -44,7 +44,7 @@ public interface QuizApi {
 	@Headers({"Accept: application/json",})
 	@GET("/quizzes/{quiz_id}/group/{group_id}") //request list of global quizzes for instructor
 	public void getResults(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
-			,@Path("quiz_id") int quizID,@Path("group_id") int grpID,Callback<List<Map<String, Integer>>> callback);	
+			,@Path("quiz_id") int quizID,@Path("group_id") int grpID,Callback<Map<String, Integer>> callback);	
 
 }
 
