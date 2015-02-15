@@ -1,6 +1,7 @@
 package com.example.httpRequest;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -39,4 +40,11 @@ public interface QuizApi {
 	@POST("/quizzes/create")
 	public void createQuiz(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
 			,@Body  Quiz quiz,Callback<JsonObject> callback);
+	
+	@Headers({"Accept: application/json",})
+	@GET("/quizzes/{quiz_id}/group/{group_id}") //request list of global quizzes for instructor
+	public void getResults(@Header("X-Instructor-Email") String email,@Header("X-Instructor-Token") String token
+			,@Path("quiz_id") int quizID,@Path("group_id") int grpID,Callback<Map<String, Integer>> callback);	
+
 }
+

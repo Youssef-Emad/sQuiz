@@ -124,7 +124,7 @@ public class SignupActivity extends Activity {
 				 editor.putString("email",emailField );
 				 editor.commit();
 				 startActivity(new Intent(SignupActivity.this, AfterLoginStudentActivity.class));
-					
+				 finish();
 				}
 				
 				Toast.makeText(SignupActivity.this, "signup Complete", Toast.LENGTH_SHORT).show();
@@ -172,6 +172,7 @@ public class SignupActivity extends Activity {
 					editor.putString("email",emailField );
 					editor.commit();
 					startActivity(new Intent(SignupActivity.this, AfterLoginInstructorActivity.class));
+					finish();
 				}
 			});
    		 }

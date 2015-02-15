@@ -52,7 +52,7 @@ public class InstructorGroupFragment extends ListFragment {
 		setHasOptionsMenu(true);
 		groups = new ArrayList<Group>();
 		itemsToDelete = new ArrayList<Group>();
-
+	
 		RestAdapter restAdapter1= new RestAdapter.Builder()
 		.setEndpoint(WelcomeActivity.ENDPOINT)  //call base url
 		.setLogLevel(LogLevel.FULL)
@@ -154,10 +154,10 @@ public class InstructorGroupFragment extends ListFragment {
 		intent = new Intent();
 		intent.putExtra("groupID",groups.get(position).getId());
 
-		alert(groups.get(position).toString());
+		alert(groups.get(position).getId());
 	}
 
-	private void alert(final String selectedGroup) {
+	private void alert(final int selectedGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		builder.setTitle(R.string.dialog_title)
