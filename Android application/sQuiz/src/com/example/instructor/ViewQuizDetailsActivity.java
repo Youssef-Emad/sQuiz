@@ -178,6 +178,7 @@ public class ViewQuizDetailsActivity extends FragmentActivity {
 			public void success(JsonObject arg0, Response arg1) {
 				Toast.makeText(ViewQuizDetailsActivity.this, 
 						"Published successfully", Toast.LENGTH_SHORT).show();
+				finish();
 			}
 		});
 	}

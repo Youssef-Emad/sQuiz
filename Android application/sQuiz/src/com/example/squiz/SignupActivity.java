@@ -139,7 +139,6 @@ public class SignupActivity extends Activity {
 					String text=obj.get("error").toString();
 							text=text.replace(':', ' ').replaceAll("\""	, "");
 					Toast.makeText(SignupActivity.this,text, Toast.LENGTH_SHORT).show();	
-					Toast.makeText(SignupActivity.this,"Internal Server Error", Toast.LENGTH_LONG).show();
 				
 			}
 		});
